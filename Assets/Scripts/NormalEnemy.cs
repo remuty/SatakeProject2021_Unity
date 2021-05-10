@@ -38,6 +38,10 @@ public class NormalEnemy : MonoBehaviour
             transform.position = Vector2.Lerp(_initialPosition[_lane], _endPosition[_lane], rate);
             transform.localScale = Vector2.Lerp(_initialScale, _endScale, rate);
         }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void SetInitialPosition()
