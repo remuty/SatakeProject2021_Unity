@@ -7,8 +7,10 @@ public class NormalEnemy : MonoBehaviour
     [SerializeField] private EnemyData _enemyData;
     private Vector2[] _initialPosition;
     private Vector2[] _endPosition;
+    private Vector2 _initialScale;
     private Vector2 _endScale;
-    private int _lane;
+    [SerializeField] private int _lane;
+    private float _time;
 
     public int Lane
     {
@@ -20,23 +22,31 @@ public class NormalEnemy : MonoBehaviour
     {
         SetInitialPosition();
         SetEndPosition();
+        _initialScale = new Vector2(1, 1);
         _endScale = new Vector2(2, 2);
         transform.position = _initialPosition[_lane];
+        transform.localScale = _initialScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (_time < _enemyData.speed)
+        {
+            _time += Time.deltaTime;
+            var rate = _time / _enemyData.speed;
+            transform.position = Vector2.Lerp(_initialPosition[_lane], _endPosition[_lane], rate);
+            transform.localScale = Vector2.Lerp(_initialScale, _endScale, rate);
+        }
     }
 
     void SetInitialPosition()
     {
         _initialPosition = new Vector2[3]
         {
-            new Vector2(-1.5f,0),
             new Vector2(0,0),
-            new Vector2(1.5f,0)
+            new Vector2(-2f,0),
+            new Vector2(2f,0)
         };
     }
 
@@ -44,8 +54,8 @@ public class NormalEnemy : MonoBehaviour
     {
         _endPosition = new Vector2[3]
         {
-            new Vector2(-4,-2),
             new Vector2(0,-2),
+            new Vector2(-4,-2),
             new Vector2(4,-2)
         };
     }
