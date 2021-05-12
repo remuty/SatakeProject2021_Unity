@@ -18,9 +18,8 @@ public class NormalEnemy : MonoBehaviour
         SetInitialPosition();
         SetEndPosition();
         _initialScale = new Vector2(1, 1);
-        _endScale = new Vector2(2, 2);
+        _endScale = new Vector2(4, 4);
         _lane = Random.Range(0, 3);
-        Debug.Log(_lane);
         transform.position = _initialPosition[_lane];
         transform.localScale = _initialScale;
     }
@@ -46,9 +45,9 @@ public class NormalEnemy : MonoBehaviour
     {
         _initialPosition = new Vector2[3]
         {
-            new Vector2(0,0),
-            new Vector2(-2f,0),
-            new Vector2(2f,0)
+            new Vector2(0,1),
+            new Vector2(-1,1),
+            new Vector2(1,1)
         };
     }
 
@@ -57,8 +56,8 @@ public class NormalEnemy : MonoBehaviour
         _endPosition = new Vector2[3]
         {
             new Vector2(0,-2),
-            new Vector2(-4,-2),
-            new Vector2(4,-2)
+            new Vector2(-5,-2),
+            new Vector2(5,-2)
         };
     }
 }
