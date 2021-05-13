@@ -5,11 +5,8 @@ using UnityEngine;
 public class NormalEnemy : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
+    [SerializeField] private TransformData transformData;
     private EnemyGenerator _enemyGenerator;
-    private Vector2[] _initialPosition;
-    private Vector2[] _endPosition;
-    private Vector2 _initialScale;
-    private Vector2 _endScale;
     private int _lane;
     public int Lane
     {
@@ -21,12 +18,8 @@ public class NormalEnemy : MonoBehaviour
     void Start()
     {
         _enemyGenerator = GameObject.FindWithTag("EnemyGenerator").GetComponent<EnemyGenerator>();
-        SetInitialPosition();
-        SetEndPosition();
-        _initialScale = new Vector2(1, 1);
-        _endScale = new Vector2(4, 4);
-        transform.position = _initialPosition[_lane];
-        transform.localScale = _initialScale;
+        transform.position = transformData.initialPosition[_lane];
+        transform.localScale = transformData.initialScale;
     }
 
     // Update is called once per frame
@@ -36,8 +29,10 @@ public class NormalEnemy : MonoBehaviour
         {
             _time += Time.deltaTime;
             var rate = _time / enemyData.speed;
-            transform.position = Vector2.Lerp(_initialPosition[_lane], _endPosition[_lane], rate);
-            transform.localScale = Vector2.Lerp(_initialScale, _endScale, rate);
+            transform.position = Vector2.Lerp(transformData.initialPosition[_lane],
+                transformData.endPosition[_lane], rate);
+            transform.localScale = 
+                Vector2.Lerp(transformData.initialScale, transformData.endScale, rate);
         }
         else
         {
@@ -45,25 +40,5 @@ public class NormalEnemy : MonoBehaviour
             _enemyGenerator.AddLane(_lane);
             Destroy(this.gameObject);
         }
-    }
-
-    void SetInitialPosition()
-    {
-        _initialPosition = new Vector2[3]
-        {
-            new Vector2(0,1),
-            new Vector2(-1,1),
-            new Vector2(1,1)
-        };
-    }
-
-    void SetEndPosition()
-    {
-        _endPosition = new Vector2[3]
-        {
-            new Vector2(0,-2),
-            new Vector2(-5,-2),
-            new Vector2(5,-2)
-        };
     }
 }
