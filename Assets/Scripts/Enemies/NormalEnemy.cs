@@ -7,6 +7,7 @@ public class NormalEnemy : MonoBehaviour
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private TransformData transformData;
     private EnemyGenerator _enemyGenerator;
+    private Player _player;
     private int _lane;
     public int Lane
     {
@@ -19,6 +20,7 @@ public class NormalEnemy : MonoBehaviour
     void Start()
     {
         _enemyGenerator = GameObject.FindWithTag("EnemyGenerator").GetComponent<EnemyGenerator>();
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         transform.position = transformData.initialPosition[_lane];
         transform.localScale = transformData.initialScale;
         _hp = enemyData.maxHp;
@@ -38,7 +40,7 @@ public class NormalEnemy : MonoBehaviour
         }
         else
         {
-            Debug.Log(enemyData.atk + "ダメージ");//TODO:ダメージを与える処理
+            _player.AddDamage(enemyData.atk);
             _enemyGenerator.AddLane(_lane);
             Destroy(this.gameObject);
         }
