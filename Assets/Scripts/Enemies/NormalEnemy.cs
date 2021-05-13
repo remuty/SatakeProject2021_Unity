@@ -13,6 +13,7 @@ public class NormalEnemy : MonoBehaviour
         set { _lane = value; }
     }
     private float _time;
+    private int _hp;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class NormalEnemy : MonoBehaviour
         _enemyGenerator = GameObject.FindWithTag("EnemyGenerator").GetComponent<EnemyGenerator>();
         transform.position = transformData.initialPosition[_lane];
         transform.localScale = transformData.initialScale;
+        _hp = enemyData.maxHp;
     }
 
     // Update is called once per frame
@@ -36,9 +38,20 @@ public class NormalEnemy : MonoBehaviour
         }
         else
         {
-            Debug.Log(enemyData.atk + "ダメージ");//TODO:ダメージ処理
+            Debug.Log(enemyData.atk + "ダメージ");//TODO:ダメージを与える処理
             _enemyGenerator.AddLane(_lane);
             Destroy(this.gameObject);
         }
+
+        if (_hp <= 0)
+        {
+            _enemyGenerator.AddLane(_lane);
+            Destroy(this.gameObject);
+        }
+    }
+
+    void AddDamage(int damage)  //TODO:ダメージを受ける処理
+    {
+        _hp -= damage;
     }
 }
