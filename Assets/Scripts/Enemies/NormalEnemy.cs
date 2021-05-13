@@ -5,21 +5,26 @@ using UnityEngine;
 public class NormalEnemy : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
+    private EnemyGenerator _enemyGenerator;
     private Vector2[] _initialPosition;
     private Vector2[] _endPosition;
     private Vector2 _initialScale;
     private Vector2 _endScale;
     private int _lane;
+    public int Lane
+    {
+        set { _lane = value; }
+    }
     private float _time;
 
     // Start is called before the first frame update
     void Start()
     {
+        _enemyGenerator = GameObject.FindWithTag("EnemyGenerator").GetComponent<EnemyGenerator>();
         SetInitialPosition();
         SetEndPosition();
         _initialScale = new Vector2(1, 1);
         _endScale = new Vector2(4, 4);
-        _lane = Random.Range(0, 3);
         transform.position = _initialPosition[_lane];
         transform.localScale = _initialScale;
     }
@@ -37,6 +42,7 @@ public class NormalEnemy : MonoBehaviour
         else
         {
             Debug.Log(enemyData.atk + "ダメージ");//TODO:ダメージ処理
+            _enemyGenerator.AddLane(_lane);
             Destroy(this.gameObject);
         }
     }
