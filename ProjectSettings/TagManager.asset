@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NormalEnemy
   - EnemyGenerator
+  - JoyConRight
   layers:
   - Default
   - TransparentFX
