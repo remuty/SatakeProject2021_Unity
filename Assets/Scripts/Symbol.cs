@@ -6,17 +6,19 @@ using UnityEngine.UI;
 
 public class Symbol : MonoBehaviour
 {
-    [SerializeField] private Image[] _sides;
+    [SerializeField] private Image[] sides;
     
     private Stick _stick;
 
     private int _sideCount;
     
-    private float _drawTime = 0.1f;
+    private float _drawTime = 0.05f;
 
     private float _time;
 
     private bool _isDrawing;
+
+    private float _knockBackPower = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,7 @@ public class Symbol : MonoBehaviour
         _stick.isShaked.Subscribe(isShaked =>
         {
             //振られたときの処理
-            if (_sideCount < _sides.Length)
+            if (_sideCount < sides.Length)
             {
                 if (isShaked)
                 {
@@ -47,14 +49,24 @@ public class Symbol : MonoBehaviour
         
             if (_time > _drawTime)
             {
-                _sides[_sideCount].fillAmount = 1;
+                sides[_sideCount].fillAmount = 1;
                 _isDrawing = false;
                 _time = 0;
                 _sideCount++;
+                if (_sideCount >= sides.Length)
+                {
+                    for (int i = 0; i < sides.Length; i++)
+                    {
+                        sides[i].fillAmount = 0;
+                        _sideCount = 0;
+                        GameObject.FindWithTag("NormalEnemy").GetComponent<NormalEnemy>()
+                            .AddDamage(_knockBackPower);
+                    }
+                }
             }
             else
             {
-                _sides[_sideCount].fillAmount = _time / _drawTime;
+                sides[_sideCount].fillAmount = _time / _drawTime;
             }
         }
     }
