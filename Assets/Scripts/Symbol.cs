@@ -71,7 +71,7 @@ public class Symbol : MonoBehaviour
             }
         }
 
-        if (_target == null)
+        if (_target == null || _stick.j.GetButtonDown(Joycon.Button.DPAD_RIGHT))
         {
             SelectTarget();
         }
@@ -79,8 +79,26 @@ public class Symbol : MonoBehaviour
 
     void SelectTarget()
     {
-        _target = GameObject.FindWithTag("NormalEnemy");
-        var renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
+        SpriteRenderer[] renderers;
+        if (_target != null)
+        {
+            renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
+            foreach (var renderer in renderers)
+            {
+                renderer.enabled = false;
+            }
+        }
+        var enemies = GameObject.FindGameObjectsWithTag("NormalEnemy");
+        var targetPosY = 1f;
+        foreach (var enemy in enemies)
+        {
+            if (enemy.transform.position.y < targetPosY)
+            {
+                _target = enemy;
+                targetPosY = enemy.transform.position.y;
+            }
+        }
+        renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
         foreach (var renderer in renderers)
         {
             renderer.enabled = true;

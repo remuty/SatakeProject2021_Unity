@@ -1289,7 +1289,7 @@ MonoBehaviour:
   shakeSpeed: 0
   crouchSpeed: -3
   crouchTime: 0.5
-  coolTime: 1
+  coolTime: 0.4
   selectedNum: 0
   isSelected: 0
   isShaked:
