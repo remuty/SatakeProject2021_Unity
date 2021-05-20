@@ -19,6 +19,8 @@ public class Symbol : MonoBehaviour
     private bool _isDrawing;
 
     private float _knockBackPower = 2;
+
+    private GameObject _target;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,8 +62,7 @@ public class Symbol : MonoBehaviour
                         sides[i].fillAmount = 0;
                         _sideCount = 0;
                     }
-                    GameObject.FindWithTag("NormalEnemy").GetComponent<NormalEnemy>()
-                        .AddDamage(_knockBackPower);
+                    _target.GetComponent<NormalEnemy>().AddDamage(_knockBackPower);
                 }
             }
             else
@@ -69,8 +70,22 @@ public class Symbol : MonoBehaviour
                 sides[_sideCount].fillAmount = _time / _drawTime;
             }
         }
+
+        if (_target == null)
+        {
+            SelectTarget();
+        }
     }
 
+    void SelectTarget()
+    {
+        _target = GameObject.FindWithTag("NormalEnemy");
+        var renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
+        foreach (var renderer in renderers)
+        {
+            renderer.enabled = true;
+        }
+    }
     void DrawSide()
     {
     }

@@ -28,5 +28,5 @@ Material:
     - _MaskOn: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _MaskColor: {r: 0.9956136, g: 1, b: 0, a: 0}
+    - _MaskColor: {r: 1, g: 0.9071668, b: 0.19077575, a: 0}
   m_BuildTextureStacks: []
