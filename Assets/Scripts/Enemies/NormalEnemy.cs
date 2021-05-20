@@ -34,9 +34,9 @@ public class NormalEnemy : MonoBehaviour
             _time += Time.deltaTime;
             var rate = _time / enemyData.speed;
             transform.position = Vector3.Lerp(transformData.initialPosition[_lane],
-                transformData.endPosition[_lane], rate);
+                transformData.endPosition[_lane], rate * rate);
             transform.localScale = 
-                Vector2.Lerp(transformData.initialScale, transformData.endScale, rate);
+                Vector2.Lerp(transformData.initialScale, transformData.endScale, rate * rate);
         }
         else
         {
@@ -55,5 +55,6 @@ public class NormalEnemy : MonoBehaviour
     public void AddDamage(float knockBackPower)  //TODO:ダメージを受ける処理
     {
         _time -= knockBackPower;
+        Debug.Log(knockBackPower + "ノックバック");
     }
 }

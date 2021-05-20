@@ -12,7 +12,7 @@ public class Symbol : MonoBehaviour
 
     private int _sideCount;
     
-    private float _drawTime = 0.05f;
+    private float _drawTime = 0.1f;
 
     private float _time;
 
@@ -59,9 +59,9 @@ public class Symbol : MonoBehaviour
                     {
                         sides[i].fillAmount = 0;
                         _sideCount = 0;
-                        GameObject.FindWithTag("NormalEnemy").GetComponent<NormalEnemy>()
-                            .AddDamage(_knockBackPower);
                     }
+                    GameObject.FindWithTag("NormalEnemy").GetComponent<NormalEnemy>()
+                        .AddDamage(_knockBackPower);
                 }
             }
             else

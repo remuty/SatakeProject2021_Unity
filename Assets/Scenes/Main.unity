@@ -1269,7 +1269,7 @@ MonoBehaviour:
   jc_ind: 0
   orientation: {x: 0, y: 0, z: 0, w: 0}
   euler: {x: 0, y: 0, z: 0}
-  shakeSpeed: -1
+  shakeSpeed: 0
   crouchSpeed: -3
   crouchTime: 0.5
   coolTime: 1
