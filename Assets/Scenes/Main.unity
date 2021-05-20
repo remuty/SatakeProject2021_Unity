@@ -2251,6 +2251,8 @@ MonoBehaviour:
   - {fileID: 1790740897}
   - {fileID: 486533183}
   - {fileID: 451391170}
+  _atk: 3
+  _knockBackPower: 2
 --- !u!1 &1790740895
 GameObject:
   m_ObjectHideFlags: 0

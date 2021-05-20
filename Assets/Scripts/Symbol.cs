@@ -8,6 +8,10 @@ public class Symbol : MonoBehaviour
 {
     [SerializeField] private Image[] sides;
     
+    [SerializeField] private int _atk;
+    
+    [SerializeField] private float _knockBackPower;
+    
     private Stick _stick;
 
     private int _sideCount;
@@ -17,8 +21,6 @@ public class Symbol : MonoBehaviour
     private float _time;
 
     private bool _isDrawing;
-
-    private float _knockBackPower = 2;
 
     private GameObject _target;
     // Start is called before the first frame update
@@ -62,7 +64,7 @@ public class Symbol : MonoBehaviour
                         sides[i].fillAmount = 0;
                         _sideCount = 0;
                     }
-                    _target.GetComponent<NormalEnemy>().AddDamage(_knockBackPower);
+                    _target.GetComponent<NormalEnemy>().AddDamage(_atk,_knockBackPower);
                 }
             }
             else
@@ -88,6 +90,7 @@ public class Symbol : MonoBehaviour
                 renderer.enabled = false;
             }
         }
+        
         var enemies = GameObject.FindGameObjectsWithTag("NormalEnemy");
         var targetPosY = 1f;
         foreach (var enemy in enemies)
@@ -98,10 +101,14 @@ public class Symbol : MonoBehaviour
                 targetPosY = enemy.transform.position.y;
             }
         }
-        renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
-        foreach (var renderer in renderers)
+
+        if (_target != null)
         {
-            renderer.enabled = true;
+            renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
+            foreach (var renderer in renderers)
+            {
+                renderer.enabled = true;
+            }
         }
     }
     void DrawSide()

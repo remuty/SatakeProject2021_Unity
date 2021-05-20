@@ -52,9 +52,9 @@ public class NormalEnemy : MonoBehaviour
         }
     }
 
-    public void AddDamage(float knockBackPower)  //TODO:ダメージを受ける処理
+    public void AddDamage(int damage, float knockBack)
     {
-        _time -= knockBackPower;
-        Debug.Log(knockBackPower + "ノックバック");
+        _hp -= damage;
+        _time -= knockBack;
     }
 }
