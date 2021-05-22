@@ -7,6 +7,7 @@ public class NormalEnemy : MonoBehaviour
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private TransformData transformData;
     private EnemyGenerator _enemyGenerator;
+    private Player _player;
     private int _lane;
     public int Lane
     {
@@ -19,6 +20,7 @@ public class NormalEnemy : MonoBehaviour
     void Start()
     {
         _enemyGenerator = GameObject.FindWithTag("EnemyGenerator").GetComponent<EnemyGenerator>();
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         transform.position = transformData.initialPosition[_lane];
         transform.localScale = transformData.initialScale;
         _hp = enemyData.maxHp;
@@ -31,14 +33,14 @@ public class NormalEnemy : MonoBehaviour
         {
             _time += Time.deltaTime;
             var rate = _time / enemyData.speed;
-            transform.position = Vector2.Lerp(transformData.initialPosition[_lane],
-                transformData.endPosition[_lane], rate);
+            transform.position = Vector3.Lerp(transformData.initialPosition[_lane],
+                transformData.endPosition[_lane], rate * rate);
             transform.localScale = 
-                Vector2.Lerp(transformData.initialScale, transformData.endScale, rate);
+                Vector2.Lerp(transformData.initialScale, transformData.endScale, rate * rate);
         }
         else
         {
-            Debug.Log(enemyData.atk + "ダメージ");//TODO:ダメージを与える処理
+            _player.AddDamage(enemyData.atk);
             _enemyGenerator.AddLane(_lane);
             Destroy(this.gameObject);
         }
@@ -50,8 +52,9 @@ public class NormalEnemy : MonoBehaviour
         }
     }
 
-    void AddDamage(int damage)  //TODO:ダメージを受ける処理
+    public void AddDamage(int damage, float knockBack)
     {
         _hp -= damage;
+        _time -= knockBack;
     }
 }

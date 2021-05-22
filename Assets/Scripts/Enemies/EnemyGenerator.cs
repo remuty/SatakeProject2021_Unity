@@ -42,7 +42,7 @@ public class EnemyGenerator : MonoBehaviour
                 _laneList.RemoveAt(i);
             }
             _time = 0;
-            _generateTime = Random.Range(8, 10) - _wave;
+            _generateTime = Random.Range(6, 8) - _wave;
         }
     }
 
