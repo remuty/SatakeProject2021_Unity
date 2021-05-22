@@ -37,8 +37,6 @@ public class Symbol : MonoBehaviour
                     _isDrawing = true;
                     // _sides[_sideCount].fillAmount = 1;
                     // _sideCount++;
-                    //s.SelectedNumが選ばれている角度のインデックスを保持している
-                    //cube[s.selectedNum].GetComponent<Cube>().Slash();
                 }
             }
         });
@@ -64,7 +62,11 @@ public class Symbol : MonoBehaviour
                         sides[i].fillAmount = 0;
                         _sideCount = 0;
                     }
-                    _target.GetComponent<NormalEnemy>().AddDamage(_atk,_knockBackPower);
+
+                    if (_target != null)
+                    {
+                        _target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
+                    }
                 }
             }
             else

@@ -41,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackCanvas
+    uniqueID: 698385675
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: FrontCanvas
+    uniqueID: 2317124629
     locked: 0
