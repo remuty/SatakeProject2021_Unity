@@ -14,6 +14,8 @@ public class Symbol : MonoBehaviour
     
     private Stick _stick;
 
+    private RhythmManager _rhythmManager;
+
     private int _sideCount;
     
     private float _drawTime = 0.1f;
@@ -26,13 +28,14 @@ public class Symbol : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
         _stick.isShaked.Subscribe(isShaked =>
         {
             //振られたときの処理
             if (_sideCount < sides.Length)
             {
-                if (isShaked)
+                if (isShaked && _rhythmManager.CanBeat())
                 {
                     _isDrawing = true;
                     // _sides[_sideCount].fillAmount = 1;

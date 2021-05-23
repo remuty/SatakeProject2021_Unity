@@ -1,16 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Note : MonoBehaviour
 {
-    private Transform _startTransform;
-    private Transform _endTransform;
+    [SerializeField] private Transform _startTransform;
+    [SerializeField] private Transform _endTransform;
+    private SpriteRenderer _renderer;
+    
     private float _time;
     private float _speed = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
+        _renderer = this.GetComponent<SpriteRenderer>();
         transform.position = _startTransform.position;
     }
 
@@ -25,7 +29,8 @@ public class Note : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            _renderer.enabled = true;
+            _time = 0;
         }
     }
 
