@@ -33,13 +33,19 @@ public class Symbol : MonoBehaviour
         _stick.isShaked.Subscribe(isShaked =>
         {
             //振られたときの処理
-            if (_sideCount < sides.Length)
+            if (_sideCount < sides.Length && isShaked)
             {
-                if (isShaked && _rhythmManager.CanBeat())
+                if (_rhythmManager.CanBeat())
                 {
                     _isDrawing = true;
-                    // _sides[_sideCount].fillAmount = 1;
-                    // _sideCount++;
+                }
+                else
+                {
+                    for (int i = 0; i < sides.Length; i++)
+                    {
+                        sides[i].fillAmount = 0;
+                        _sideCount = 0;
+                    }
                 }
             }
         });
@@ -48,7 +54,7 @@ public class Symbol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isDrawing)
+        if (_isDrawing) //TODO:シンボルを描く処理
         {
             _time += Time.deltaTime;
         

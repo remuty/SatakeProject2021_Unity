@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class RhythmManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _notes;
+    [SerializeField] private GameObject notePrefab;
+    [SerializeField] private Transform[] noteGeneratePositions = new Transform[2];
+    [SerializeField] private Transform beatPosition;
+    
+    // [SerializeField] private GameObject[] _notes;
+    private List<GameObject> _notes = new List<GameObject>();
     
     private AudioSource _audio;
 
@@ -12,9 +17,7 @@ public class RhythmManager : MonoBehaviour
 
     private float _time;
 
-    private int _generatedCount;
-    
-    private float _checkRange = 1f;
+    private float _checkRange = 0.8f;
     
     private float _beatRange = 0.3f;
     
@@ -28,40 +31,43 @@ public class RhythmManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_generatedCount < 6)
+        _time += Time.deltaTime;
+        if (_time > _generateTime)
         {
-            _time += Time.deltaTime;
-            if (_time > _generateTime)
-            {
-                _notes[_generatedCount].SetActive(true);
-                _notes[_generatedCount + 1].SetActive(true);
-                _time = 0;
-                _generateTime = 0.5f;
-                _generatedCount += 2;
-            }
+            var generatedNote = Instantiate(notePrefab, transform.position, Quaternion.identity);
+            generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[0],beatPosition);
+            _notes.Add(generatedNote);
+            generatedNote = Instantiate(notePrefab, transform.position, Quaternion.identity);
+            generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[1],beatPosition);
+            _notes.Add(generatedNote);
+            _time = 0;
+            _generateTime = 0.5f;
         }
     }
 
     public bool CanBeat()
     {
-        for (int i = 0; i < 6; i += 2 )
+        var ret = false;
+        if (Mathf.Abs(_notes[0].transform.position.x) <= _checkRange)
         {
-            if (Mathf.Abs(_notes[i].transform.position.x) <= _checkRange)
+            if (Mathf.Abs(_notes[0].transform.position.x) <= _beatRange)
             {
-                _notes[i].GetComponent<SpriteRenderer>().enabled = false;
-                _notes[i + 1].GetComponent<SpriteRenderer>().enabled = false;
-                if (Mathf.Abs(_notes[i].transform.position.x) <= _beatRange)
-                {
-                    Debug.Log("成功:" + i + "pos:" + _notes[i].transform.position.x);
-                    return true;
-                }
-                else
-                {
-                    Debug.Log("ミス:" + i + "pos:" + _notes[i].transform.position.x);
-                    return false;
-                }
+                Debug.Log("成功:" + "pos:" + _notes[0].transform.position.x);
+                ret = true;
             }
+            else
+            {
+                Debug.Log("ミス:" + "pos:" + _notes[0].transform.position.x);
+            }
+            Destroy(_notes[0]);
+            Destroy(_notes[1]);
+            _notes.RemoveRange(0,2);
         }
-        return false;
+        return ret;
+    }
+
+    public void RemoveNote()
+    {
+        _notes.RemoveAt(0);
     }
 }

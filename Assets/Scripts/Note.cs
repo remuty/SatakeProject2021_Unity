@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class Note : MonoBehaviour
 {
-    [SerializeField] private Transform _startTransform;
-    [SerializeField] private Transform _endTransform;
-    private SpriteRenderer _renderer;
+    private Transform _startTransform;
+    private Transform _endTransform;
+    
+    private RhythmManager _rhythmManager;
     
     private float _time;
     private float _speed = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
-        _renderer = this.GetComponent<SpriteRenderer>();
+        _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
         transform.position = _startTransform.position;
     }
 
@@ -29,8 +30,8 @@ public class Note : MonoBehaviour
         }
         else
         {
-            _renderer.enabled = true;
-            _time = 0;
+            _rhythmManager.RemoveNote();
+            Destroy(this.gameObject);
         }
     }
 
