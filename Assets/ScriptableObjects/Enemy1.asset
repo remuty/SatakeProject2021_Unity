@@ -16,4 +16,4 @@ MonoBehaviour:
   element: 
   maxHp: 10
   atk: 10
-  speed: 10
+  speed: 15
