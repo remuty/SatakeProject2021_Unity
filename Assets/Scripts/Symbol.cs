@@ -22,7 +22,9 @@ public class Symbol : MonoBehaviour
 
     private float _time;
 
-    private bool _isDrawing;
+    private bool _isSideDrawing;
+    
+    private bool _isSymbolDrawing;
 
     private GameObject _target;
     // Start is called before the first frame update
@@ -37,7 +39,8 @@ public class Symbol : MonoBehaviour
             {
                 if (_rhythmManager.CanBeat())
                 {
-                    _isDrawing = true;
+                    _isSideDrawing = true;
+                    _isSymbolDrawing = true;
                 }
                 else
                 {
@@ -54,14 +57,14 @@ public class Symbol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isDrawing) //TODO:シンボルを描く処理
+        if (_isSideDrawing) //TODO:シンボルを描く処理
         {
             _time += Time.deltaTime;
         
             if (_time > _drawTime)
             {
                 sides[_sideCount].fillAmount = 1;
-                _isDrawing = false;
+                _isSideDrawing = false;
                 _time = 0;
                 _sideCount++;
                 if (_sideCount >= sides.Length)
@@ -84,6 +87,15 @@ public class Symbol : MonoBehaviour
             }
         }
 
+        if (_isSymbolDrawing && _rhythmManager.Combo == 0)
+        {
+            for (int i = 0; i < sides.Length; i++)
+            {
+                sides[i].fillAmount = 0;
+                _sideCount = 0;
+            }
+        }
+        
         if (_target == null || _stick.j.GetButtonDown(Joycon.Button.DPAD_RIGHT))
         {
             SelectTarget();

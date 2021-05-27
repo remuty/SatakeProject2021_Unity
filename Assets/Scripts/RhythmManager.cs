@@ -23,6 +23,10 @@ public class RhythmManager : MonoBehaviour
     
     [SerializeField] private float _beatRange = 0.4f;
     private int _combo;
+    public int Combo
+    {
+        get { return _combo; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +51,11 @@ public class RhythmManager : MonoBehaviour
             _generateTime = 0.5f;
         }
 
+        if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
+        {
+            _combo = 0;
+        }
+        
         if (_combo >= 2)
         {
             comboText.text = _combo + "連";
