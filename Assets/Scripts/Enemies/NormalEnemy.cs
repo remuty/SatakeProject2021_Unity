@@ -34,9 +34,9 @@ public class NormalEnemy : MonoBehaviour
             _time += Time.deltaTime;
             var rate = _time / enemyData.speed;
             transform.position = Vector3.Lerp(transformData.initialPosition[_lane],
-                transformData.endPosition[_lane], rate * rate);
+                transformData.endPosition[_lane], rate * rate * rate);
             transform.localScale = 
-                Vector2.Lerp(transformData.initialScale, transformData.endScale, rate * rate);
+                Vector2.Lerp(transformData.initialScale, transformData.endScale, rate * rate* rate);
         }
         else
         {

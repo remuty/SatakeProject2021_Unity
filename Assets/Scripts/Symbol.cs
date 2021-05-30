@@ -14,29 +14,41 @@ public class Symbol : MonoBehaviour
     
     private Stick _stick;
 
+    private RhythmManager _rhythmManager;
+
     private int _sideCount;
     
     private float _drawTime = 0.1f;
 
     private float _time;
 
-    private bool _isDrawing;
+    private bool _isSideDrawing;
+    
+    private bool _isSymbolDrawing;
 
     private GameObject _target;
     // Start is called before the first frame update
     void Start()
     {
+        _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
         _stick.isShaked.Subscribe(isShaked =>
         {
             //振られたときの処理
-            if (_sideCount < sides.Length)
+            if (_sideCount < sides.Length && isShaked)
             {
-                if (isShaked)
+                if (_rhythmManager.CanBeat())
                 {
-                    _isDrawing = true;
-                    // _sides[_sideCount].fillAmount = 1;
-                    // _sideCount++;
+                    _isSideDrawing = true;
+                    _isSymbolDrawing = true;
+                }
+                else
+                {
+                    for (int i = 0; i < sides.Length; i++)
+                    {
+                        sides[i].fillAmount = 0;
+                        _sideCount = 0;
+                    }
                 }
             }
         });
@@ -45,14 +57,14 @@ public class Symbol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isDrawing)
+        if (_isSideDrawing) //TODO:シンボルを描く処理
         {
             _time += Time.deltaTime;
         
             if (_time > _drawTime)
             {
                 sides[_sideCount].fillAmount = 1;
-                _isDrawing = false;
+                _isSideDrawing = false;
                 _time = 0;
                 _sideCount++;
                 if (_sideCount >= sides.Length)
@@ -75,6 +87,15 @@ public class Symbol : MonoBehaviour
             }
         }
 
+        if (_isSymbolDrawing && _rhythmManager.Combo == 0)
+        {
+            for (int i = 0; i < sides.Length; i++)
+            {
+                sides[i].fillAmount = 0;
+                _sideCount = 0;
+            }
+        }
+        
         if (_target == null || _stick.j.GetButtonDown(Joycon.Button.DPAD_RIGHT))
         {
             SelectTarget();
