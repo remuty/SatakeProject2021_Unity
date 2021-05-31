@@ -58,7 +58,7 @@ public class RhythmManager : MonoBehaviour
         
         if (_combo >= 2)
         {
-            comboText.text = _combo + "連";
+            comboText.text = $"{_combo}";
         }
         else
         {
@@ -91,7 +91,6 @@ public class RhythmManager : MonoBehaviour
             Debug.Log("ミス:" + "pos:" + _notes[0].transform.position.x);
             _combo = 0;
         }
-        Debug.Log("コンボ:" + _combo);
         return ret;
     }
 
