@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int maxHp;
 
     private int _hp;
+    
     // Start is called before the first frame update
     void Start()
     {

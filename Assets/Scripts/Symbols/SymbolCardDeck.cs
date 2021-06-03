@@ -11,20 +11,21 @@ public class SymbolCardDeck : MonoBehaviour
 
     private GameObject[] _deck;
 
-    [SerializeField] private GameObject symbol;
-    [SerializeField] private GameObject canvas;
+    private SymbolCard _selectedCard;
     // Start is called before the first frame update
     void Start()
     {
-        int[] cardIds = {0, 1, 2, 3, 0, 1, 2, 3, 0, 1};
+        int[] cardIds = {0, 1, 2, 3, 4, 5, 6, 3, 0, 1};
         CreateCardDeck(cardIds);
-        var prefab = Instantiate(symbol);
-        prefab.transform.SetParent(canvas.transform,false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_selectedCard.Symbol != null && !_selectedCard.Symbol.activeSelf)
+        {
+            _selectedCard.Symbol.SetActive(true);
+        }
     }
 
     void CreateCardDeck(int[] cardIds)
@@ -42,6 +43,8 @@ public class SymbolCardDeck : MonoBehaviour
                 _deck[i] = Instantiate(symbolCardPrefabs[id], deckPosition, Quaternion.identity);
             }
         }
+
+        _selectedCard = _deck[0].GetComponent<SymbolCard>();
     }
 
     void DrawCard()

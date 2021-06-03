@@ -7,26 +7,27 @@ using UnityEngine.UI;
 public class Symbol : MonoBehaviour
 {
     [SerializeField] private Image[] sides;
-    
+
     [SerializeField] private int _atk;
-    
+
     [SerializeField] private float _knockBackPower;
-    
+
     private Stick _stick;
 
     private RhythmManager _rhythmManager;
 
     private int _sideCount;
-    
+
     private float _drawTime = 0.1f;
 
     private float _time;
 
     private bool _isSideDrawing;
-    
+
     private bool _isSymbolDrawing;
 
     private GameObject _target;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +61,7 @@ public class Symbol : MonoBehaviour
         if (_isSideDrawing) //TODO:シンボルを描く処理
         {
             _time += Time.deltaTime;
-        
+
             if (_time > _drawTime)
             {
                 sides[_sideCount].fillAmount = 1;
@@ -95,7 +96,7 @@ public class Symbol : MonoBehaviour
                 _sideCount = 0;
             }
         }
-        
+
         if (_target == null || _stick.j.GetButtonDown(Joycon.Button.DPAD_RIGHT))
         {
             SelectTarget();
@@ -104,16 +105,7 @@ public class Symbol : MonoBehaviour
 
     void SelectTarget()
     {
-        SpriteRenderer[] renderers;
-        if (_target != null)
-        {
-            renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
-            foreach (var renderer in renderers)
-            {
-                renderer.enabled = false;
-            }
-        }
-        
+        SwitchRenderer(false);
         var enemies = GameObject.FindGameObjectsWithTag("NormalEnemy");
         var targetPosY = 1f;
         foreach (var enemy in enemies)
@@ -125,16 +117,18 @@ public class Symbol : MonoBehaviour
             }
         }
 
+        SwitchRenderer(true);
+    }
+
+    void SwitchRenderer(bool b)
+    {
         if (_target != null)
         {
-            renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
+            var renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
             foreach (var renderer in renderers)
             {
-                renderer.enabled = true;
+                renderer.enabled = b;
             }
         }
-    }
-    void DrawSide()
-    {
     }
 }

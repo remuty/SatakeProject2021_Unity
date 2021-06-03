@@ -14,7 +14,7 @@ public class EnemyGenerator : MonoBehaviour
 
     public int Wave
     {
-        set { _wave = value; }
+        set => _wave = value;
     }
 
     private List<int> _laneList = new List<int>();

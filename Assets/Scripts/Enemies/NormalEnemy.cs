@@ -11,7 +11,7 @@ public class NormalEnemy : MonoBehaviour
     private int _lane;
     public int Lane
     {
-        set { _lane = value; }
+        set => _lane = value;
     }
     private float _time;
     private int _hp;
