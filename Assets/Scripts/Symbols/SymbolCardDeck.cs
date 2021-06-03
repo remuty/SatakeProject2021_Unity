@@ -15,8 +15,7 @@ public class SymbolCardDeck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int[] cardIds = {0, 1, 2, 3, 4, 5, 6, 3, 0, 1};
-        CreateCardDeck(cardIds);
+        CreateCardDeck();
     }
 
     // Update is called once per frame
@@ -28,12 +27,17 @@ public class SymbolCardDeck : MonoBehaviour
         }
     }
 
-    void CreateCardDeck(int[] cardIds)
+    void CreateCardDeck()
     {
-        _deck = new GameObject[10];
+        _deck = new GameObject[symbolCardPrefabs.Length];
+        List<int> num = new List<int>();
         for (int i = 0; i < _deck.Length; i++)
         {
-            var id = cardIds[i];
+            num.Add(i);
+        }
+        for (int i = 0; i < _deck.Length; i++)
+        {
+            var id = num[Random.Range(0,num.Count)];
             if (i < cardPositions.Length)
             {
                 _deck[i] = Instantiate(symbolCardPrefabs[id], cardPositions[i], Quaternion.identity);
@@ -42,6 +46,7 @@ public class SymbolCardDeck : MonoBehaviour
             {
                 _deck[i] = Instantiate(symbolCardPrefabs[id], deckPosition, Quaternion.identity);
             }
+            num.Remove(id);
         }
 
         _selectedCard = _deck[0].GetComponent<SymbolCard>();

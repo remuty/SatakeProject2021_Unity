@@ -11,7 +11,7 @@ public class Note : MonoBehaviour
     private RhythmManager _rhythmManager;
     
     private float _time;
-    private float _speed = 1.52f;
+    private float _speed = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
