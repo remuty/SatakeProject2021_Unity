@@ -11,11 +11,15 @@ public class SymbolCardDeck : MonoBehaviour
 
     private GameObject[] _deck;
 
+    [SerializeField] private GameObject symbol;
+    [SerializeField] private GameObject canvas;
     // Start is called before the first frame update
     void Start()
     {
         int[] cardIds = {0, 1, 2, 3, 0, 1, 2, 3, 0, 1};
         CreateCardDeck(cardIds);
+        var prefab = Instantiate(symbol);
+        prefab.transform.SetParent(canvas.transform,false);
     }
 
     // Update is called once per frame
