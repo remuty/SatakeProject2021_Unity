@@ -7,16 +7,20 @@ public class SymbolCard : MonoBehaviour
     [SerializeField] private GameObject symbolPrefab;
     private GameObject _canvas;
     
-    private GameObject _symbol;
-    public GameObject Symbol => _symbol;
+    private GameObject _symbolObject;
+    public GameObject SymbolObject => _symbolObject;
+    
+    private Symbol _symbol;
+    public Symbol Symbol => _symbol;
 
     // Start is called before the first frame update
     void Start()
     {
         _canvas = GameObject.FindWithTag("FrontCanvas");
-        _symbol = Instantiate(symbolPrefab);
-        _symbol.SetActive(false);
-        _symbol.transform.SetParent(_canvas.transform, false);
+        _symbolObject = Instantiate(symbolPrefab);
+        _symbolObject.SetActive(false);
+        _symbolObject.transform.SetParent(_canvas.transform, false);
+        _symbol = _symbolObject.GetComponent<Symbol>();
     }
 
     // Update is called once per frame

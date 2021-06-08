@@ -23,10 +23,7 @@ public class RhythmManager : MonoBehaviour
     
     [SerializeField] private float _beatRange = 0.4f;
     private int _combo;
-    public int Combo
-    {
-        get { return _combo; }
-    }
+    public int Combo => _combo;
 
     // Start is called before the first frame update
     void Start()
