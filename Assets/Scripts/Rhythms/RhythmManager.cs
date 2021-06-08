@@ -73,13 +73,13 @@ public class RhythmManager : MonoBehaviour
         {
             if (Mathf.Abs(_notes[0].transform.position.x) <= _beatRange)
             {
-                Debug.Log("成功:" + "pos:" + _notes[0].transform.position.x);
+                // Debug.Log("成功:" + "pos:" + _notes[0].transform.position.x);
                 _combo++;
                 ret = true;
             }
             else
             {
-                Debug.Log("ミス:" + "pos:" + _notes[0].transform.position.x);
+                // Debug.Log("ミス:" + "pos:" + _notes[0].transform.position.x);
                 _combo = 0;
             }
             Destroy(_notes[0]);
@@ -88,7 +88,7 @@ public class RhythmManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("ミス:" + "pos:" + _notes[0].transform.position.x);
+            // Debug.Log("ミス:" + "pos:" + _notes[0].transform.position.x);
             _combo = 0;
         }
         return ret;

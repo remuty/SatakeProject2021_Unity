@@ -12,6 +12,8 @@ public class SymbolCardDeck : MonoBehaviour
     private GameObject[] _deck;
 
     private SymbolCard _selectedCard;
+
+    private int _drawNum = 4;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +54,19 @@ public class SymbolCardDeck : MonoBehaviour
         _selectedCard = _deck[0].GetComponent<SymbolCard>();
     }
 
-    void DrawCard()
+    public void DrawCard() //TODO:デッキからドローする処理
     {
+        _selectedCard.Symbol.SetActive(false);
+        var card = _deck[0];
+        _deck[0] = _deck[_drawNum];
+        _deck[_drawNum] = card;
+        _deck[_drawNum].transform.position = deckPosition;
+        _deck[0].transform.position = cardPositions[0];
+        _selectedCard = _deck[0].GetComponent<SymbolCard>();
+        _drawNum++;
+        if (_drawNum >= _deck.Length)
+        {
+            _drawNum = 4;
+        }
     }
 }

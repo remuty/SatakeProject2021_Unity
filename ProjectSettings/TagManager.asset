@@ -9,6 +9,7 @@ TagManager:
   - JoyConRight
   - RhythmManager
   - FrontCanvas
+  - SymbolCardDeck
   layers:
   - Default
   - TransparentFX

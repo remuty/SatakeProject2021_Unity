@@ -16,6 +16,8 @@ public class Symbol : MonoBehaviour
 
     private RhythmManager _rhythmManager;
 
+    private SymbolCardDeck _symbolCardDeck;
+
     private int _sideCount;
 
     private float _drawTime = 0.1f;
@@ -31,7 +33,9 @@ public class Symbol : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log($"start{this.name}");
         _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
+        _symbolCardDeck = GameObject.FindWithTag("SymbolCardDeck").GetComponent<SymbolCardDeck>();
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
         _stick.isShaked.Subscribe(isShaked =>
         {
@@ -60,8 +64,8 @@ public class Symbol : MonoBehaviour
     {
         if (_isSideDrawing) //TODO:シンボルを描く処理
         {
+            
             _time += Time.deltaTime;
-
             if (_time > _drawTime)
             {
                 sides[_sideCount].fillAmount = 1;
@@ -80,6 +84,8 @@ public class Symbol : MonoBehaviour
                     {
                         _target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
                     }
+                    
+                    _symbolCardDeck.DrawCard();
                 }
             }
             else
