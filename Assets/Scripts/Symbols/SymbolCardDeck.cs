@@ -71,4 +71,9 @@ public class SymbolCardDeck : MonoBehaviour
             _drawNum = 4;
         }
     }
+
+    public void SelectCard(int i)
+    {
+        _selectedCard.SymbolObject.SetActive(false);
+    }
 }

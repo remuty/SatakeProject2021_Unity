@@ -6,6 +6,8 @@ using UniRx;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private GameObject _resultCanvas;
+    
     [SerializeField] private Slider hpGauge;
 
     [SerializeField] private int maxHp;
@@ -23,10 +25,11 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hpGauge.value = 1;
-        _hp = maxHp;
+        _resultCanvas.SetActive(false);
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
         _symbolCardDeck = GameObject.FindWithTag("SymbolCardDeck").GetComponent<SymbolCardDeck>();
+        hpGauge.value = 1;
+        _hp = maxHp;
         _stick.isShaked.Subscribe(isShaked =>
         {
             var symbol = _symbolCardDeck.SelectedCard.Symbol;
@@ -44,6 +47,12 @@ public class Player : MonoBehaviour
         if (_target == null || _stick.j.GetButtonDown(Joycon.Button.DPAD_RIGHT))
         {
             SelectTarget();
+        }
+
+        if (_hp <= 0)
+        {
+            _resultCanvas.SetActive(true);
+            Time.timeScale = 0;
         }
     }
     
