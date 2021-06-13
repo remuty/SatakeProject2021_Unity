@@ -2179,6 +2179,7 @@ MonoBehaviour:
   - {fileID: 1746481046}
   beatPosition: {fileID: 1404815709}
   comboText: {fileID: 1320063043}
+  comboSubText: {fileID: 1419172118}
   _checkRange: 0.8
   _beatRange: 0.4
 --- !u!82 &1162159692
@@ -2493,7 +2494,7 @@ GameObject:
   - component: {fileID: 1419172119}
   - component: {fileID: 1419172118}
   m_Layer: 5
-  m_Name: Combo (1)
+  m_Name: ComboSub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

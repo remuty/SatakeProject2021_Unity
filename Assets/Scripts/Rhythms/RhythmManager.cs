@@ -9,6 +9,7 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] private Transform[] noteGeneratePositions = new Transform[2];
     [SerializeField] private Transform beatPosition;
     [SerializeField] private Text comboText;
+    [SerializeField] private Text comboSubText;
     
     // [SerializeField] private GameObject[] _notes;
     private List<GameObject> _notes = new List<GameObject>();
@@ -56,10 +57,12 @@ public class RhythmManager : MonoBehaviour
         if (_combo >= 2)
         {
             comboText.text = $"{_combo}";
+            comboSubText.text = "連";
         }
         else
         {
             comboText.text = "";
+            comboSubText.text = "";
         }
     }
 
