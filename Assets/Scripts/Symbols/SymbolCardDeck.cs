@@ -15,7 +15,10 @@ public class SymbolCardDeck : MonoBehaviour
 
     public SymbolCard SelectedCard => _selectedCard;
 
+    private int _selectedCardNum;
+
     private int _drawNum = 4;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +42,10 @@ public class SymbolCardDeck : MonoBehaviour
         {
             num.Add(i);
         }
+
         for (int i = 0; i < _deck.Length; i++)
         {
-            var id = num[Random.Range(0,num.Count)];
+            var id = num[Random.Range(0, num.Count)];
             if (i < cardPositions.Length)
             {
                 _deck[i] = Instantiate(symbolCardPrefabs[id], cardPositions[i], Quaternion.identity);
@@ -50,21 +54,23 @@ public class SymbolCardDeck : MonoBehaviour
             {
                 _deck[i] = Instantiate(symbolCardPrefabs[id], deckPosition, Quaternion.identity);
             }
+
             num.Remove(id);
         }
 
-        _selectedCard = _deck[0].GetComponent<SymbolCard>();
+        _selectedCardNum = 0;
+        _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
     }
 
     public void DrawCard() //TODO:デッキからドローする処理
     {
         _selectedCard.SymbolObject.SetActive(false);
-        var card = _deck[0];
-        _deck[0] = _deck[_drawNum];
+        var card = _deck[_selectedCardNum];
+        _deck[_selectedCardNum] = _deck[_drawNum];
         _deck[_drawNum] = card;
         _deck[_drawNum].transform.position = deckPosition;
-        _deck[0].transform.position = cardPositions[0];
-        _selectedCard = _deck[0].GetComponent<SymbolCard>();
+        _deck[_selectedCardNum].transform.position = cardPositions[0];
+        _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
         _drawNum++;
         if (_drawNum >= _deck.Length)
         {
@@ -72,8 +78,27 @@ public class SymbolCardDeck : MonoBehaviour
         }
     }
 
-    public void SelectCard(int i)
+    public void SelectCard(float f)
     {
         _selectedCard.SymbolObject.SetActive(false);
+        if (f > 0)
+        {
+            _selectedCardNum++;
+        }
+        else if (f < 0)
+        {
+            _selectedCardNum--;
+        }
+        
+        if (_selectedCardNum < 0)
+        {
+            _selectedCardNum = 3;
+        }
+        else if (_selectedCardNum > 3)
+        {
+            _selectedCardNum = 0;
+        }
+        _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
+        Debug.Log(_selectedCardNum);
     }
 }

@@ -7,20 +7,22 @@ using UniRx;
 public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject _resultCanvas;
-    
+
     [SerializeField] private Slider hpGauge;
 
     [SerializeField] private int maxHp;
 
     private int _hp;
-    
+
     private Stick _stick;
-    
+
     private SymbolCardDeck _symbolCardDeck;
-    
+
     private GameObject _target;
 
     public GameObject Target => _target;
+
+    private bool _isSelected;
 
     // Start is called before the first frame update
     void Start()
@@ -44,9 +46,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_target == null || _stick.j.GetButtonDown(Joycon.Button.DPAD_RIGHT))
+        if (_target == null || _stick.j.GetButtonDown(Joycon.Button.DPAD_DOWN))
         {
             SelectTarget();
+        }
+
+        if (Mathf.Abs(_stick.j.GetStick()[0]) > 0.6f && !_isSelected) //joyconのスティックを左右に傾けたとき
+        {
+            _symbolCardDeck.SelectCard(_stick.j.GetStick()[0]);
+            _isSelected = true;
+        }
+        else if (Mathf.Abs(_stick.j.GetStick()[0]) < 0.2f && _isSelected)
+        {
+            _isSelected = false;
         }
 
         if (_hp <= 0)
@@ -55,13 +67,13 @@ public class Player : MonoBehaviour
             Time.timeScale = 0;
         }
     }
-    
+
     public void AddDamage(int damage)
     {
         _hp -= damage;
-        hpGauge.value = (float)_hp / (float)maxHp;
+        hpGauge.value = (float) _hp / (float) maxHp;
     }
-    
+
     void SelectTarget()
     {
         SwitchRenderer(false);
