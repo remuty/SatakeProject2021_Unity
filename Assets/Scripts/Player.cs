@@ -53,8 +53,10 @@ public class Player : MonoBehaviour
 
         if (Mathf.Abs(_stick.j.GetStick()[0]) > 0.6f && !_isSelected) //joyconのスティックを左右に傾けたとき
         {
+            SwitchOutline(_symbolCardDeck.SelectedCard.gameObject,false);
             _symbolCardDeck.SelectCard(_stick.j.GetStick()[0]);
             _isSelected = true;
+            SwitchOutline(_symbolCardDeck.SelectedCard.gameObject,true);
         }
         else if (Mathf.Abs(_stick.j.GetStick()[0]) < 0.2f && _isSelected)
         {
@@ -76,7 +78,7 @@ public class Player : MonoBehaviour
 
     void SelectTarget()
     {
-        SwitchRenderer(false);
+        SwitchOutline(_target,false);
         var enemies = GameObject.FindGameObjectsWithTag("NormalEnemy");
         var targetPosY = 1f;
         foreach (var enemy in enemies)
@@ -88,14 +90,14 @@ public class Player : MonoBehaviour
             }
         }
 
-        SwitchRenderer(true);
+        SwitchOutline(_target,true);
     }
 
-    void SwitchRenderer(bool b)
+    void SwitchOutline(GameObject obj,bool b)
     {
-        if (_target != null)
+        if (obj != null)
         {
-            var renderers = _target.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
+            var renderers = obj.transform.Find("Outline").GetComponentsInChildren<SpriteRenderer>();
             foreach (var renderer in renderers)
             {
                 renderer.enabled = b;

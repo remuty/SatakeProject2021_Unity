@@ -99,6 +99,5 @@ public class SymbolCardDeck : MonoBehaviour
             _selectedCardNum = 0;
         }
         _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
-        Debug.Log(_selectedCardNum);
     }
 }
