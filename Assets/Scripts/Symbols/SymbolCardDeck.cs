@@ -60,27 +60,30 @@ public class SymbolCardDeck : MonoBehaviour
 
         _selectedCardNum = 0;
         _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
+        SwitchOutline(true);
     }
 
-    public void DrawCard() //TODO:デッキからドローする処理
+    public void DrawCard()
     {
         _selectedCard.SymbolObject.SetActive(false);
         var card = _deck[_selectedCardNum];
         _deck[_selectedCardNum] = _deck[_drawNum];
         _deck[_drawNum] = card;
         _deck[_drawNum].transform.position = deckPosition;
-        _deck[_selectedCardNum].transform.position = cardPositions[0];
+        _deck[_selectedCardNum].transform.position = cardPositions[_selectedCardNum];
         _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
         _drawNum++;
         if (_drawNum >= _deck.Length)
         {
             _drawNum = 4;
         }
+        SwitchOutline(true);
     }
 
     public void SelectCard(float f)
     {
         _selectedCard.SymbolObject.SetActive(false);
+        SwitchOutline(false);
         if (f > 0)
         {
             _selectedCardNum++;
@@ -99,5 +102,15 @@ public class SymbolCardDeck : MonoBehaviour
             _selectedCardNum = 0;
         }
         _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
+        SwitchOutline(true);
+    }
+    
+    void SwitchOutline(bool b)
+    {
+        if (_selectedCard != null)
+        {
+            var renderer = _selectedCard.transform.Find("Outline").GetComponentInChildren<SpriteRenderer>();
+            renderer.enabled = b;
+        }
     }
 }
