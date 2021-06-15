@@ -18,7 +18,7 @@ public class RhythmManager : MonoBehaviour
 
     private float _generateTime;
 
-    private float _time;
+    private float _time = -0.6f;
 
     [SerializeField] private float _checkRange = 0.8f;
     
@@ -49,11 +49,14 @@ public class RhythmManager : MonoBehaviour
             _generateTime = 0.5f;
         }
 
-        if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
+        if (_notes.Count > 0)
         {
-            _combo = 0;
+            if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
+            {
+                _combo = 0;
+            }
         }
-        
+
         if (_combo >= 2)
         {
             comboText.text = $"{_combo}";
