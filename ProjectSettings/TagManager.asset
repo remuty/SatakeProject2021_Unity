@@ -8,6 +8,8 @@ TagManager:
   - EnemyGenerator
   - JoyConRight
   - RhythmManager
+  - FrontCanvas
+  - SymbolCardDeck
   layers:
   - Default
   - TransparentFX

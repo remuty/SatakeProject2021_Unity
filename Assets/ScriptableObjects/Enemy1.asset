@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Enemy1
   element: 
-  maxHp: 10
-  atk: 10
+  maxHp: 5
+  atk: 30
   speed: 15
