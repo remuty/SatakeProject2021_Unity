@@ -2124,7 +2124,7 @@ MonoBehaviour:
   comboText: {fileID: 1320063043}
   comboSubText: {fileID: 1419172118}
   _checkRange: 0.8
-  _beatRange: 0.4
+  _beatRange: 0.6
 --- !u!82 &1162159692
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3578,6 +3578,18 @@ PrefabInstance:
     - target: {fileID: 820027623007174240, guid: aab39082d0a618e4a8cccc9a3b503c97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820027623007174241, guid: aab39082d0a618e4a8cccc9a3b503c97, type: 3}
+      propertyPath: joyconType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 820027623007174241, guid: aab39082d0a618e4a8cccc9a3b503c97, type: 3}
+      propertyPath: shakeSpeed
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 820027623007174241, guid: aab39082d0a618e4a8cccc9a3b503c97, type: 3}
+      propertyPath: shakeCoolTime
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 820027623007174246, guid: aab39082d0a618e4a8cccc9a3b503c97, type: 3}
       propertyPath: m_Name
