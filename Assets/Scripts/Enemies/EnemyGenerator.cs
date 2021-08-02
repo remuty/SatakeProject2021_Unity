@@ -36,7 +36,8 @@ public class EnemyGenerator : MonoBehaviour
             if (_laneList.Count > 0)
             {
                 var i = Random.Range(0, enemyPrefabs.Length);
-                var generatedEnemy = Instantiate(enemyPrefabs[i], transform.position, Quaternion.identity);
+                var generatedEnemy = Instantiate(enemyPrefabs[i],
+                    transform.position, Quaternion.identity, this.transform);
                 i = Random.Range(0, _laneList.Count);
                 generatedEnemy.GetComponent<NormalEnemy>().Lane = _laneList[i];
                 _laneList.RemoveAt(i);

@@ -10,6 +10,7 @@ TagManager:
   - RhythmManager
   - FrontCanvas
   - SymbolCardDeck
+  - SwitchScene
   layers:
   - Default
   - TransparentFX
