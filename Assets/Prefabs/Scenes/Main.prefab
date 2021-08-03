@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 4714890825553231882}
   - component: {fileID: 4714890825553231881}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Menu1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,7 +327,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4714890825853438484}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 4714890825673177773}
   - component: {fileID: 4714890825673177772}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Menu0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -488,7 +488,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4714890825853438484}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -674,8 +674,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_Children:
-  - {fileID: 4714890825553231880}
   - {fileID: 4714890825673177771}
+  - {fileID: 4714890825553231880}
   - {fileID: 4714890826926321405}
   - {fileID: 4714890825867828946}
   m_Father: {fileID: 4714890826558090314}
@@ -1900,6 +1900,7 @@ GameObject:
   - component: {fileID: 4714890826558090313}
   - component: {fileID: 4714890826558090312}
   - component: {fileID: 4714890826558090327}
+  - component: {fileID: 7742611951303456284}
   m_Layer: 5
   m_Name: ResultCanvas
   m_TagString: FrontCanvas
@@ -1988,6 +1989,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7742611951303456284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714890826558090326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9227dba20c85144a39d475b889d548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuAxis: 0
+  menu:
+  - {fileID: 4714890825673177772}
+  - {fileID: 4714890825553231881}
 --- !u!1 &4714890826565798317
 GameObject:
   m_ObjectHideFlags: 0

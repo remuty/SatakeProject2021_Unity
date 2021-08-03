@@ -37,7 +37,6 @@ public class Player : MonoBehaviour
         _hp = maxHp;
         _stick.isShaked.Subscribe(isShaked =>
         {
-            Debug.Log("振った");
             var symbol = _symbolCardDeck.SelectedCard.Symbol;
             //振られたときの処理
             if (isShaked)
@@ -70,6 +69,7 @@ public class Player : MonoBehaviour
             _resultCanvas.SetActive(true);
             _switchScene.Scene = SwitchScene.Scenes.Result;
             Time.timeScale = 0;
+            this.gameObject.SetActive(false);
         }
     }
 

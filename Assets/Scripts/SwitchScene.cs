@@ -10,6 +10,13 @@ public class SwitchScene : MonoBehaviour
     private GameObject _title;
     private GameObject _main;
 
+    private int _menuNum;
+
+    public int MenuNum
+    {
+        set => _menuNum = value;
+    }
+
     public enum Scenes
     {
         Title,
@@ -21,7 +28,6 @@ public class SwitchScene : MonoBehaviour
 
     public Scenes Scene
     {
-        get => _scene;
         set => _scene = value;
     }
 
@@ -39,23 +45,49 @@ public class SwitchScene : MonoBehaviour
         {
             if (_scene == Scenes.Title)
             {
-                Destroy(_title);
-                _main = Instantiate(mainPrefab);
-                var canvases = _main.GetComponentsInChildren<Canvas>();
-                foreach (var canvas in canvases)
+                if (_menuNum != -1)
                 {
-                    canvas.worldCamera = Camera.main;
+                    if (_menuNum == 0)
+                    {
+                        Destroy(_title);
+                        LoadMain();
+                    }
+                    
+                    _menuNum = -1;
                 }
-                _scene = Scenes.Main;
+                
             }
             else if (_scene == Scenes.Result)
             {
-                Debug.Log(titlePrefab);
-                Time.timeScale = 1;
-                Destroy(_main);
-                _title = Instantiate(titlePrefab);
-                _scene = Scenes.Title;
+                if (_menuNum != -1)
+                {
+                    Time.timeScale = 1;
+                    Destroy(_main);
+                    if (_menuNum == 0)
+                    {
+                        LoadMain();
+                    }
+                    else if (_menuNum == 1)
+                    {
+                        _title = Instantiate(titlePrefab);
+                        _scene = Scenes.Title;
+                    }
+
+                    _menuNum = -1;
+                }
             }
         }
+    }
+
+    void LoadMain()
+    {
+        _main = Instantiate(mainPrefab);
+        var canvases = _main.GetComponentsInChildren<Canvas>();
+        foreach (var canvas in canvases)
+        {
+            canvas.worldCamera = Camera.main;
+        }
+
+        _scene = Scenes.Main;
     }
 }
