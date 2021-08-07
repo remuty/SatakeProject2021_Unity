@@ -39,10 +39,11 @@ public class RhythmManager : MonoBehaviour
         _time += Time.deltaTime;
         if (_time > _generateTime)
         {
-            var generatedNote = Instantiate(notePrefab, transform.position, Quaternion.identity);
+            var generatedNote = Instantiate(notePrefab,
+                transform.position, Quaternion.identity, this.transform);
             generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[0],beatPosition);
             _notes.Add(generatedNote);
-            generatedNote = Instantiate(notePrefab, transform.position, Quaternion.identity);
+            generatedNote = Instantiate(notePrefab, transform.position, Quaternion.identity, this.transform);
             generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[1],beatPosition);
             _notes.Add(generatedNote);
             _time = 0;

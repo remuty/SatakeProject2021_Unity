@@ -48,11 +48,13 @@ public class SymbolCardDeck : MonoBehaviour
             var id = num[Random.Range(0, num.Count)];
             if (i < cardPositions.Length)
             {
-                _deck[i] = Instantiate(symbolCardPrefabs[id], cardPositions[i], Quaternion.identity);
+                _deck[i] = Instantiate(symbolCardPrefabs[id],cardPositions[i],
+                    Quaternion.identity, this.transform);
             }
             else
             {
-                _deck[i] = Instantiate(symbolCardPrefabs[id], deckPosition, Quaternion.identity);
+                _deck[i] = Instantiate(symbolCardPrefabs[id], deckPosition,
+                    Quaternion.identity, this.transform);
             }
 
             num.Remove(id);

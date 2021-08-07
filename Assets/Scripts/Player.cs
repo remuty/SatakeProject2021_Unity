@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private Stick _stick;
 
     private SymbolCardDeck _symbolCardDeck;
+    
+    private SwitchScene _switchScene;
 
     private GameObject _target;
 
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour
         _resultCanvas.SetActive(false);
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
         _symbolCardDeck = GameObject.FindWithTag("SymbolCardDeck").GetComponent<SymbolCardDeck>();
+        _switchScene = GameObject.FindWithTag("SwitchScene").GetComponent<SwitchScene>();
         hpGauge.value = 1;
         _hp = maxHp;
         _stick.isShaked.Subscribe(isShaked =>
@@ -64,7 +67,9 @@ public class Player : MonoBehaviour
         if (_hp <= 0)
         {
             _resultCanvas.SetActive(true);
+            _switchScene.Scene = SwitchScene.Scenes.Result;
             Time.timeScale = 0;
+            this.gameObject.SetActive(false);
         }
     }
 

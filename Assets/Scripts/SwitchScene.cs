@@ -1,24 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour
 {
+    [SerializeField] private GameObject titlePrefab;
+    [SerializeField] private GameObject mainPrefab;
     private Stick _stick;
+    private GameObject _title;
+    private GameObject _main;
+
+    private int _menuNum;
+
+    public int MenuNum
+    {
+        set => _menuNum = value;
+    }
 
     public enum Scenes
     {
         Title,
-        Main
+        Main,
+        Result
     }
 
-    private static Scenes _scenes;
+    private Scenes _scene;
+
+    public Scenes Scene
+    {
+        set => _scene = value;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
+        _title = Instantiate(titlePrefab);
     }
 
     // Update is called once per frame
@@ -26,17 +43,51 @@ public class SwitchScene : MonoBehaviour
     {
         if (_stick.j.GetButtonDown(Joycon.Button.DPAD_RIGHT))
         {
-            if (_scenes == Scenes.Title)
+            if (_scene == Scenes.Title)
             {
-                SceneManager.LoadScene("Main");
-                _scenes = Scenes.Main;
+                if (_menuNum != -1)
+                {
+                    if (_menuNum == 0)
+                    {
+                        Destroy(_title);
+                        LoadMain();
+                    }
+                    
+                    _menuNum = -1;
+                }
+                
             }
-            else if (_scenes == Scenes.Main)
+            else if (_scene == Scenes.Result)
             {
-                SceneManager.LoadScene("Title");
-                _scenes = Scenes.Title;
-                Time.timeScale = 1;
+                if (_menuNum != -1)
+                {
+                    Time.timeScale = 1;
+                    Destroy(_main);
+                    if (_menuNum == 0)
+                    {
+                        LoadMain();
+                    }
+                    else if (_menuNum == 1)
+                    {
+                        _title = Instantiate(titlePrefab);
+                        _scene = Scenes.Title;
+                    }
+
+                    _menuNum = -1;
+                }
             }
         }
+    }
+
+    void LoadMain()
+    {
+        _main = Instantiate(mainPrefab);
+        var canvases = _main.GetComponentsInChildren<Canvas>();
+        foreach (var canvas in canvases)
+        {
+            canvas.worldCamera = Camera.main;
+        }
+
+        _scene = Scenes.Main;
     }
 }
