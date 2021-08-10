@@ -28,9 +28,9 @@ public class SymbolCardDeck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_selectedCard.SymbolObject != null && !_selectedCard.SymbolObject.activeSelf)
+        if (_selectedCard.SymbolObject == null)
         {
-            _selectedCard.SymbolObject.SetActive(true);
+            _selectedCard.GenerateSymbol();
         }
     }
 
@@ -67,7 +67,7 @@ public class SymbolCardDeck : MonoBehaviour
 
     public void DrawCard()
     {
-        _selectedCard.SymbolObject.SetActive(false);
+        Destroy(_selectedCard.SymbolObject);
         var card = _deck[_selectedCardNum];
         _deck[_selectedCardNum] = _deck[_drawNum];
         _deck[_drawNum] = card;
@@ -84,7 +84,7 @@ public class SymbolCardDeck : MonoBehaviour
 
     public void SelectCard(float f)
     {
-        _selectedCard.SymbolObject.SetActive(false);
+        Destroy(_selectedCard.SymbolObject);
         SwitchOutline(false);
         if (f > 0)
         {
