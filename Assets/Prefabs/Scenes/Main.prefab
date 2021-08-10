@@ -909,7 +909,7 @@ MonoBehaviour:
   comboText: {fileID: 4714890826134877819}
   comboSubText: {fileID: 4714890826239196974}
   _checkRange: 0.8
-  _beatRange: 0.6
+  _beatRange: 0.7
 --- !u!82 &4714890825982525556
 AudioSource:
   m_ObjectHideFlags: 0

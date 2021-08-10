@@ -6,26 +6,24 @@ using UnityEngine.UI;
 public class Symbol : MonoBehaviour
 {
     [SerializeField] private Image[] sides;
-
     [SerializeField] private int _atk;
-
     [SerializeField] private float _knockBackPower;
 
     private RhythmManager _rhythmManager;
-
     private SymbolCardDeck _symbolCardDeck;
-
     private Player _player;
 
     private int _sideCount;
 
     private float _drawTime = 0.1f;
-
     private float _time;
 
     private bool _isSideDrawing;
-
     private bool _isSymbolDrawing;
+    private bool _isAttacking;
+
+    private Vector2 _initialPosition;
+    private Vector2 _initialScale;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +31,8 @@ public class Symbol : MonoBehaviour
         _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
         _symbolCardDeck = GameObject.FindWithTag("SymbolCardDeck").GetComponent<SymbolCardDeck>();
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _initialPosition = this.transform.position;
+        _initialScale = this.transform.localScale;
     }
 
     // Update is called once per frame
@@ -49,15 +49,9 @@ public class Symbol : MonoBehaviour
                 _sideCount++;
                 if (_sideCount >= sides.Length)
                 {
-                    for (int i = 0; i < sides.Length; i++)
-                    {
-                        sides[i].fillAmount = 0;
-                        _sideCount = 0;
-                    }
-
                     if (_player.Target != null)
                     {
-                        _player.Target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
+                        _isAttacking = true;
                     }
 
                     _symbolCardDeck.DrawCard();
@@ -75,6 +69,24 @@ public class Symbol : MonoBehaviour
             {
                 sides[i].fillAmount = 0;
                 _sideCount = 0;
+            }
+        }
+
+        if (_isAttacking)   //攻撃処理
+        {
+            if (_time < 0.3f)
+            {
+                _time += Time.deltaTime;
+                var rate = _time / 0.3f;
+                transform.position = Vector2.Lerp(_initialPosition,
+                    _player.Target.transform.position, rate);
+                transform.localScale = Vector2.Lerp(_initialScale, 
+                    _player.Target.transform.localScale / 15, rate);
+            }
+            else
+            {
+                _player.Target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
+                Destroy(this.gameObject);
             }
         }
     }

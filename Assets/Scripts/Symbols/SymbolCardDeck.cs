@@ -67,7 +67,6 @@ public class SymbolCardDeck : MonoBehaviour
 
     public void DrawCard()
     {
-        Destroy(_selectedCard.SymbolObject);
         var card = _deck[_selectedCardNum];
         _deck[_selectedCardNum] = _deck[_drawNum];
         _deck[_drawNum] = card;
