@@ -37,10 +37,10 @@ public class Player : MonoBehaviour
         _hp = maxHp;
         _stick.isShaked.Subscribe(isShaked =>
         {
-            var symbol = _symbolCardDeck.SelectedCard.Symbol;
             //振られたときの処理
-            if (isShaked)
+            if (isShaked && _symbolCardDeck != null)
             {
+                var symbol = _symbolCardDeck.SelectedCard.Symbol;
                 symbol.DrawSymbol();
             }
         });
