@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public class Symbol : MonoBehaviour
 {
+    enum Element
+    {
+        Default,
+        Fire
+    }
+
+    [SerializeField] private Element element;
+    [SerializeField] private GameObject attackEffect;
     [SerializeField] private Image[] sides;
     [SerializeField] private int _atk;
     [SerializeField] private float _knockBackPower;
@@ -52,6 +60,11 @@ public class Symbol : MonoBehaviour
                     if (_player.Target != null)
                     {
                         _isAttacking = true;
+                        if (element != Element.Default)
+                        {
+                            var effect = Instantiate(attackEffect, this.transform.parent);
+                            effect.GetComponent<AttackEffect>().Target = _player.Target;
+                        }
                     }
 
                     _symbolCardDeck.DrawCard();
@@ -72,20 +85,27 @@ public class Symbol : MonoBehaviour
             }
         }
 
-        if (_isAttacking)   //攻撃処理
+        if (_isAttacking) //攻撃処理
         {
-            if (_time < 0.3f)
+            if (element == Element.Default)
             {
-                _time += Time.deltaTime;
-                var rate = _time / 0.3f;
-                transform.position = Vector2.Lerp(_initialPosition,
-                    _player.Target.transform.position, rate);
-                transform.localScale = Vector2.Lerp(_initialScale, 
-                    _player.Target.transform.localScale / 15, rate);
+                if (_time < 0.3f)
+                {
+                    _time += Time.deltaTime;
+                    var rate = _time / 0.3f;
+                    transform.position = Vector2.Lerp(_initialPosition,
+                        _player.Target.transform.position, rate);
+                    transform.localScale = Vector2.Lerp(_initialScale,
+                        _player.Target.transform.localScale / 15, rate);
+                }
+                else
+                {
+                    _player.Target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
+                    Destroy(this.gameObject);
+                }
             }
             else
             {
-                _player.Target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
                 Destroy(this.gameObject);
             }
         }
