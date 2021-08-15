@@ -14,6 +14,7 @@ public class Symbol : MonoBehaviour
     [SerializeField] private Element element;
     [SerializeField] private GameObject attackEffect;
     [SerializeField] private Image[] sides;
+    [SerializeField] private GameObject[] guides;
     [SerializeField] private int _atk;
     [SerializeField] private float _knockBackPower;
 
@@ -41,6 +42,7 @@ public class Symbol : MonoBehaviour
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _initialPosition = this.transform.position;
         _initialScale = this.transform.localScale;
+        SwitchGuide();
     }
 
     // Update is called once per frame
@@ -55,6 +57,7 @@ public class Symbol : MonoBehaviour
                 _isSideDrawing = false;
                 _time = 0;
                 _sideCount++;
+                SwitchGuide();
                 if (_sideCount >= sides.Length)
                 {
                     if (_player.Target != null)
@@ -83,6 +86,7 @@ public class Symbol : MonoBehaviour
                 sides[i].fillAmount = 0;
                 _sideCount = 0;
             }
+            SwitchGuide();
         }
 
         if (_isAttacking) //攻撃処理
@@ -125,6 +129,19 @@ public class Symbol : MonoBehaviour
                 sides[i].fillAmount = 0;
                 _sideCount = 0;
             }
+        }
+    }
+
+    void SwitchGuide()
+    {
+        foreach (var guide in guides)
+        {
+            guide.SetActive(false);
+        }
+
+        if (_sideCount < guides.Length)
+        {
+            guides[_sideCount].SetActive(true);
         }
     }
 }

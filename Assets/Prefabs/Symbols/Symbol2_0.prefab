@@ -383,6 +383,9 @@ MonoBehaviour:
   sides:
   - {fileID: 9000957096799456099}
   - {fileID: 9000957096090413821}
+  guides:
+  - {fileID: 7290137088702349675}
+  - {fileID: 2820535845438069342}
   _atk: 1
   _knockBackPower: 1
 --- !u!1 &9000957097004704113
@@ -546,6 +549,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
+--- !u!1 &2820535845438069342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 247284133167570926, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
+  m_PrefabInstance: {fileID: 2614913475937076656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3734389037661807844 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1700459573366579540, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
@@ -648,6 +656,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
+--- !u!1 &7290137088702349675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 247284133167570926, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
+  m_PrefabInstance: {fileID: 7369369574389194373}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8204569431664721873 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1700459573366579540, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}

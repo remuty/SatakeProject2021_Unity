@@ -47,7 +47,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2842833594387314655
 Transform:
   m_ObjectHideFlags: 0
@@ -81,6 +81,8 @@ MonoBehaviour:
   attackEffect: {fileID: 0}
   sides:
   - {fileID: 2842833595709664442}
+  guides:
+  - {fileID: 7917191433718660721}
   _atk: 1
   _knockBackPower: 0
 --- !u!1 &2842833594462949903
@@ -392,6 +394,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
+--- !u!1 &7917191433718660721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 247284133167570926, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
+  m_PrefabInstance: {fileID: 7976161030354755999}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8730292518743605451 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1700459573366579540, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
