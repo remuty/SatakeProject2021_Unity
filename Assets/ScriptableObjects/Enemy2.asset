@@ -15,5 +15,5 @@ MonoBehaviour:
   enemyName: Enemy2
   element: 
   maxHp: 3
-  atk: 10
-  speed: 11
+  atk: 7
+  speed: 7
