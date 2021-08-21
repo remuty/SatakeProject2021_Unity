@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6109c0cdb5978b042b8e7bec82f8f357, type: 3}
-  m_Name: Enemy1
+  m_Name: Enemy2
   m_EditorClassIdentifier: 
-  enemyName: Enemy1
+  enemyName: Enemy2
   element: 
-  maxHp: 5
-  atk: 15
-  speed: 10
+  maxHp: 3
+  atk: 10
+  speed: 11
