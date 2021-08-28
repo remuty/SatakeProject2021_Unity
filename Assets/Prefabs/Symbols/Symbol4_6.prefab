@@ -652,7 +652,7 @@ MonoBehaviour:
   - {fileID: 6276928407256741550}
   - {fileID: 929018758950854086}
   _atk: 3
-  _knockBackPower: 3
+  _knockBackPower: 3.6
 --- !u!1 &9061012333817309543
 GameObject:
   m_ObjectHideFlags: 0
