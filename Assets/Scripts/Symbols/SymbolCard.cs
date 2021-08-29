@@ -17,14 +17,16 @@ public class SymbolCard : MonoBehaviour
     void Start()
     {
         _canvas = GameObject.FindWithTag("FrontCanvas");
-        _symbolObject = Instantiate(symbolPrefab);
-        _symbolObject.SetActive(false);
-        _symbolObject.transform.SetParent(_canvas.transform, false);
-        _symbol = _symbolObject.GetComponent<Symbol>();
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void GenerateSymbol()
+    {
+        _symbolObject = Instantiate(symbolPrefab,_canvas.transform);
+        _symbol = _symbolObject.GetComponent<Symbol>();
     }
 }
