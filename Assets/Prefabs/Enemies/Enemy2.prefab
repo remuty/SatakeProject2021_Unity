@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 847b89f2b60e06540a93fc5b55404158, type: 2}
   transformData: {fileID: 11400000, guid: 84d6b1ebd0c27ff428706e7ecc9e762f, type: 2}
+  atkObjPrefab: {fileID: 0}
+  canAttack: 0
 --- !u!210 &-7392776756635747821
 SortingGroup:
   m_ObjectHideFlags: 0
