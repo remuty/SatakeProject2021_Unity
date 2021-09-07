@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
 
     void SelectTarget()
     {
-        SwitchOutline(false);
+        // SwitchOutline(false);
         var enemies = GameObject.FindGameObjectsWithTag("NormalEnemy");
         var targetPosY = 1f;
         foreach (var enemy in enemies)
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
         }
 
         _target.tag = "Target";
-        SwitchOutline(true);
+        // SwitchOutline(true);
     }
 
     void SwitchOutline(bool b)
