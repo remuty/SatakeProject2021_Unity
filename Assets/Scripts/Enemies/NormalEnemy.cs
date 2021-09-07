@@ -63,7 +63,8 @@ public class NormalEnemy : MonoBehaviour
         if (canAttack)
         {
             _atkTime += Time.deltaTime;
-            if (_atkTime > _attackTime)
+            //1番前にいる敵だけが攻撃できる
+            if (_atkTime > _attackTime && this.CompareTag("Target"))
             {
                 var atkObj =
                     Instantiate(atkObjPrefab, this.transform.position, Quaternion.identity, this.transform.parent);

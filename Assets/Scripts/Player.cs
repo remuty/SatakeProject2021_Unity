@@ -114,6 +114,7 @@ public class Player : MonoBehaviour
             }
         }
 
+        _target.tag = "Target";
         SwitchOutline(true);
     }
 
