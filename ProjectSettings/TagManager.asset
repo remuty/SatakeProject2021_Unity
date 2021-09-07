@@ -11,6 +11,8 @@ TagManager:
   - FrontCanvas
   - SymbolCardDeck
   - SwitchScene
+  - JoyConLeft
+  - EnemyAttackObject
   layers:
   - Default
   - TransparentFX

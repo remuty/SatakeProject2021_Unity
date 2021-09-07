@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4714890825347672750}
   - component: {fileID: 4714890825347672749}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SymbolCardDeck
   m_TagString: SymbolCardDeck
   m_Icon: {fileID: 0}
@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 4714890825982525553}
   - component: {fileID: 4714890825982525555}
   - component: {fileID: 4714890825982525556}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RhythmManager
   m_TagString: RhythmManager
   m_Icon: {fileID: 0}
@@ -830,7 +830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4714890826219597669}
   - component: {fileID: 4714890826219597670}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BeatPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1349,7 +1349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4714890826555797509}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: NoteGeneratePosition1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1496,7 +1496,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4714890826565798318}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: NoteGeneratePosition2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1731,7 +1731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4278234553461129376}
   - component: {fileID: 4899760131235913341}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UltCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

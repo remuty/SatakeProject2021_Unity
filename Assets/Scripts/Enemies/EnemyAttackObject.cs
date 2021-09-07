@@ -36,14 +36,14 @@ public class EnemyAttackObject : MonoBehaviour
         {
             _time += Time.deltaTime;
             var rate = _time / speed;
-            transform.position = 
-                Vector3.Lerp(_initialPosition,_endPosition, rate * rate * rate);
+            transform.position =
+                Vector3.Lerp(_initialPosition, _endPosition, rate * rate * rate);
             transform.localScale =
                 Vector2.Lerp(_initialScale, _endScale, rate * rate * rate);
         }
         else
         {
-            _player.AddDamage(atk);
+            _player.AddDamage(atk, this.tag);
             Destroy(this.gameObject);
         }
     }

@@ -18,9 +18,9 @@ public class NormalEnemy : MonoBehaviour
         set => _lane = value;
     }
 
-    private float _moveTime;    
-    private float _atkTime;     //攻撃までの時間を計る
-    private float _attackTime;  //攻撃するタイミングの時間
+    private float _moveTime;
+    private float _atkTime; //攻撃までの時間を計る
+    private float _attackTime; //攻撃するタイミングの時間
     private int _hp;
 
     // Start is called before the first frame update
@@ -49,7 +49,7 @@ public class NormalEnemy : MonoBehaviour
         }
         else
         {
-            _player.AddDamage(enemyData.atk);
+            _player.AddDamage(enemyData.atk, this.tag);
             _enemyGenerator.AddLane(_lane);
             Destroy(this.gameObject);
         }
@@ -65,7 +65,7 @@ public class NormalEnemy : MonoBehaviour
             _atkTime += Time.deltaTime;
             if (_atkTime > _attackTime)
             {
-                var atkObj = 
+                var atkObj =
                     Instantiate(atkObjPrefab, this.transform.position, Quaternion.identity, this.transform.parent);
                 atkObj.GetComponent<EnemyAttackObject>().AtkTime = _moveTime / enemyData.speed;
                 _atkTime = 0;
