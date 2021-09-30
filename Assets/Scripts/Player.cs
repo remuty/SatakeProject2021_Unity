@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
             _resultCanvas.SetActive(true);
             _switchScene.Scene = SwitchScene.Scenes.Result;
             Time.timeScale = 0;
-            this.gameObject.SetActive(false);
+            GetComponent<Player>().enabled = false;
         }
     }
 
