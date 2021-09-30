@@ -26,7 +26,7 @@ public class EnemyAttackObject : MonoBehaviour
         _initialPosition = this.transform.position;
         _endPosition = new Vector2(0, 0);
         _initialScale = this.transform.localScale;
-        _endScale = new Vector2(1, 1);
+        _endScale = new Vector2(2, 2);
     }
 
     // Update is called once per frame

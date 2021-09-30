@@ -24,7 +24,7 @@ public class Symbol : MonoBehaviour
 
     private int _sideCount;
 
-    private float _drawTime = 0.1f;
+    private float _drawTime = 0.05f;
     private float _time;
 
     private bool _isSideDrawing;
@@ -117,12 +117,12 @@ public class Symbol : MonoBehaviour
 
     public void DrawSymbol()
     {
-        if (_rhythmManager.CanBeat())
+        if (_rhythmManager.CanBeat() == RhythmManager.Beat.good)
         {
             _isSideDrawing = true;
             _isSymbolDrawing = true;
         }
-        else
+        else if (_rhythmManager.CanBeat() == RhythmManager.Beat.miss)
         {
             for (int i = 0; i < sides.Length; i++)
             {
