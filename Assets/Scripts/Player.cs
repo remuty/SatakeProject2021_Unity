@@ -75,6 +75,10 @@ public class Player : MonoBehaviour
 
         if (Mathf.Abs(_stickR.j.GetStick()[0]) > 0.6f && !_isSelected) //joyconのスティックを左右に傾けたとき
         {
+            if (_symbolCardDeck == null)
+            {
+                _symbolCardDeck = GameObject.FindWithTag("SymbolCardDeck").GetComponent<SymbolCardDeck>();
+            }
             _symbolCardDeck.SelectCard(_stickR.j.GetStick()[0]);
             _isSelected = true;
         }

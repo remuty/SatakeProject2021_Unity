@@ -61,8 +61,8 @@ public class SwitchScene : MonoBehaviour
             {
                 if (_menuNum != -1)
                 {
-                    Time.timeScale = 1;
                     Destroy(_main);
+                    Time.timeScale = 1;
                     if (_menuNum == 0)
                     {
                         LoadMain();
