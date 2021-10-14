@@ -270,9 +270,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuAxis: 1
-  menu:
+  menuTexts:
   - {fileID: 2395037524715334755}
   - {fileID: 1416812594086804774}
+  menuImages: []
 --- !u!1 &4614712679930915246
 GameObject:
   m_ObjectHideFlags: 0

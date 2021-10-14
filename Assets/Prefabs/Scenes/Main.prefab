@@ -296,7 +296,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30BF\u30A4\u30C8\u30EB\u3078"
+  m_Text: "\u30DB\u30FC\u30E0\u3078"
 --- !u!1 &4714890825662989115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,9 +1484,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuAxis: 0
-  menu:
+  menuTexts:
   - {fileID: 4714890825673177772}
   - {fileID: 4714890825553231881}
+  menuImages: []
 --- !u!1 &4714890826565798317
 GameObject:
   m_ObjectHideFlags: 0

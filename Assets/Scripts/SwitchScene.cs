@@ -5,9 +5,11 @@ using UnityEngine;
 public class SwitchScene : MonoBehaviour
 {
     [SerializeField] private GameObject titlePrefab;
+    [SerializeField] private GameObject homePrefab;
     [SerializeField] private GameObject mainPrefab;
     private Stick _stick;
     private GameObject _title;
+    private GameObject _home;
     private GameObject _main;
 
     private int _menuNum;
@@ -20,6 +22,7 @@ public class SwitchScene : MonoBehaviour
     public enum Scenes
     {
         Title,
+        Home,
         Main,
         Result
     }
@@ -50,12 +53,29 @@ public class SwitchScene : MonoBehaviour
                     if (_menuNum == 0)
                     {
                         Destroy(_title);
-                        LoadMain();
+                        _home = Instantiate(homePrefab);
+                        _scene = Scenes.Home;
                     }
-                    
                     _menuNum = -1;
                 }
                 
+            }
+            else if (_scene == Scenes.Home)
+            {
+                if (_menuNum != -1)
+                {
+                    Destroy(_home);
+                    if (_menuNum == 0)
+                    {
+                        LoadMain();
+                    }
+                    else if (_menuNum == 4)
+                    {
+                        _title = Instantiate(titlePrefab);
+                        _scene = Scenes.Title;
+                    }
+                    _menuNum = -1;
+                }
             }
             else if (_scene == Scenes.Result)
             {
@@ -69,8 +89,8 @@ public class SwitchScene : MonoBehaviour
                     }
                     else if (_menuNum == 1)
                     {
-                        _title = Instantiate(titlePrefab);
-                        _scene = Scenes.Title;
+                        _home = Instantiate(homePrefab);
+                        _scene = Scenes.Home;
                     }
 
                     _menuNum = -1;

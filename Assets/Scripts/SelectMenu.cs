@@ -10,26 +10,27 @@ public class SelectMenu : MonoBehaviour
         horizontal,
         vertical
     }
-    
+
     [SerializeField] private MenuAxis menuAxis;
-    [SerializeField] private Text[] menu;
-    
+    [SerializeField] private Text[] menuTexts;
+    [SerializeField] private Image[] menuImages;
+
     private Stick _stick;
     private SwitchScene _switchScene;
-    
+
     private int _menuNum = -1;
     private bool _isSelected;
-    
-    private Color defaultColor = new Color32(219, 219, 219, 65);
-    private Color selectedColor = new Color32(219, 219, 219, 255);
-    
+
+    private Color defaultColor = new Color32(160, 160, 160, 255);
+    private Color selectedColor = new Color32(255, 255, 255, 255);
+
     // Start is called before the first frame update
     void Start()
     {
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
         _switchScene = GameObject.FindWithTag("SwitchScene").GetComponent<SwitchScene>();
         _switchScene.MenuNum = _menuNum;
-        ChangeTextColor();
+        ChangeColor();
     }
 
     // Update is called once per frame
@@ -61,17 +62,31 @@ public class SelectMenu : MonoBehaviour
             {
                 _menuNum--;
             }
-        
-            if (_menuNum < 0)
+
+            if (menuTexts.Length != 0)
             {
-                _menuNum = menu.Length -1;
+                if (_menuNum < 0)
+                {
+                    _menuNum = menuTexts.Length - 1;
+                }
+                else if (_menuNum > menuTexts.Length - 1)
+                {
+                    _menuNum = 0;
+                }
             }
-            else if (_menuNum > menu.Length -1)
+            else
             {
-                _menuNum = 0;
+                if (_menuNum < 0)
+                {
+                    _menuNum = menuImages.Length - 1;
+                }
+                else if (_menuNum > menuImages.Length - 1)
+                {
+                    _menuNum = 0;
+                }
             }
 
-            ChangeTextColor();
+            ChangeColor();
             _isSelected = true;
 
             _switchScene.MenuNum = _menuNum;
@@ -82,15 +97,31 @@ public class SelectMenu : MonoBehaviour
         }
     }
 
-    void ChangeTextColor()  //テキストの色(透明度)を調整
+    void ChangeColor() //メニューの色(透明度)を調整
     {
-        foreach (var text in menu)
+        if (menuTexts.Length != 0)
         {
-            text.color = defaultColor;
+            foreach (var text in menuTexts)
+            {
+                text.color = defaultColor;
+            }
+
+            if (_menuNum != -1)
+            {
+                menuTexts[_menuNum].color = selectedColor;
+            }
         }
-        if (_menuNum != -1)
+        else
         {
-            menu[_menuNum].color = selectedColor;
+            foreach (var image in menuImages)
+            {
+                image.color = defaultColor;
+            }
+
+            if (_menuNum != -1)
+            {
+                menuImages[_menuNum].color = selectedColor;
+            }
         }
     }
 }
