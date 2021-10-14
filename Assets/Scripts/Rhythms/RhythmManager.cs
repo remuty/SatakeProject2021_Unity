@@ -25,6 +25,12 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] private float _beatRange = 0.4f;
     private int _combo;
     public int Combo => _combo;
+    public enum Beat
+    {
+        noReaction,
+        good,
+        miss
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -70,30 +76,26 @@ public class RhythmManager : MonoBehaviour
         }
     }
 
-    public bool CanBeat()
+    public Beat CanBeat()
     {
-        var ret = false;
+        var ret = Beat.noReaction;
         if (Mathf.Abs(_notes[0].transform.position.x) <= _checkRange)
         {
             if (Mathf.Abs(_notes[0].transform.position.x) <= _beatRange)
             {
                 // Debug.Log("成功:" + "pos:" + _notes[0].transform.position.x);
                 _combo++;
-                ret = true;
+                ret = Beat.good;
             }
             else
             {
                 // Debug.Log("ミス:" + "pos:" + _notes[0].transform.position.x);
                 _combo = 0;
+                ret = Beat.miss;
             }
             Destroy(_notes[0]);
             Destroy(_notes[1]);
             _notes.RemoveRange(0,2);
-        }
-        else
-        {
-            // Debug.Log("ミス:" + "pos:" + _notes[0].transform.position.x);
-            _combo = 0;
         }
         return ret;
     }

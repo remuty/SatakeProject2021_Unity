@@ -23,6 +23,7 @@ public class SymbolCardDeck : MonoBehaviour
     void Start()
     {
         CreateCardDeck();
+        Debug.Log("create");
     }
 
     // Update is called once per frame
