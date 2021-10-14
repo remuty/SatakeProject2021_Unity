@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using System;
 
 public class SwitchScene : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class SwitchScene : MonoBehaviour
 
     public Scenes Scene
     {
+        get => _scene;
         set => _scene = value;
     }
 
@@ -64,13 +67,14 @@ public class SwitchScene : MonoBehaviour
             {
                 if (_menuNum != -1)
                 {
-                    Destroy(_home);
                     if (_menuNum == 0)
                     {
+                        Destroy(_home);
                         LoadMain();
                     }
                     else if (_menuNum == 4)
                     {
+                        Destroy(_home);
                         _title = Instantiate(titlePrefab);
                         _scene = Scenes.Title;
                     }
