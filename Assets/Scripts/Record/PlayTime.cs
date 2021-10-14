@@ -6,14 +6,21 @@ using UnityEngine.UI;
 public class PlayTime : MonoBehaviour
 {
     private SwitchScene _switchScene;
+    private SaveLoad _saveLoad;
     private float _seconds;
     private int _minutes;
     private int _hours;
+    private bool _isSaved;
 
     // Start is called before the first frame update
     void Start()
     {
         _switchScene = GameObject.FindWithTag("SwitchScene").GetComponent<SwitchScene>();
+        _saveLoad = GameObject.FindWithTag("SaveLoad").GetComponent<SaveLoad>();
+        _saveLoad.LoadPlayTimeData();
+        _seconds = _saveLoad.PlayTimeData.seconds;
+        _minutes = _saveLoad.PlayTimeData.minutes;
+        _hours = _saveLoad.PlayTimeData.hours;
     }
 
     // Update is called once per frame
@@ -21,6 +28,11 @@ public class PlayTime : MonoBehaviour
     {
         if (_switchScene.Scene == SwitchScene.Scenes.Main)
         {
+            if (_isSaved)
+            {
+                _isSaved = false;
+            }
+
             _seconds += Time.deltaTime;
             if (_seconds >= 60f)
             {
@@ -31,6 +43,15 @@ public class PlayTime : MonoBehaviour
                     _hours++;
                     _minutes = 0;
                 }
+            }
+        }
+        else if (_switchScene.Scene == SwitchScene.Scenes.Result)
+        {
+            if (!_isSaved)
+            {
+                _isSaved = true;
+                _saveLoad.PlayTimeData.SetPlayTime(_seconds, _minutes, _hours);
+                _saveLoad.SavePlayTimeData();
             }
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Home)
