@@ -487,8 +487,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76aa1bd8e26a6484a9fa48e6be0b16b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  element: 1
-  attackEffect: {fileID: 4249106495264295941, guid: b79630cead40c4a17bab49e656bae3a8, type: 3}
+  element: 0
+  attackEffect: {fileID: 0}
   sides:
   - {fileID: 3830918182438941259}
   - {fileID: 9061012333817309529}

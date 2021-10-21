@@ -64,8 +64,8 @@ public class Symbol : MonoBehaviour
                         _isAttacking = true;
                         if (element != Element.Default)
                         {
-                            var effect = Instantiate(attackEffect, this.transform.parent);
-                            effect.GetComponent<AttackEffect>().Target = _player.Target;
+                            var effect = Instantiate(attackEffect);
+                            effect.GetComponent<AttackEffect>().SetPower(_atk,_knockBackPower);
                         }
                     }
                     _isSymbolDrawing = false;
