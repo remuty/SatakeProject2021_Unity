@@ -59,7 +59,5 @@ public class PlayTime : MonoBehaviour
             GameObject.Find("Minutes").GetComponent<Text>().text = $"{_minutes}";
             GameObject.Find("Hours").GetComponent<Text>().text = $"{_hours}";
         }
-
-        // Debug.Log(_minutes + "分" + _seconds + "秒");
     }
 }
