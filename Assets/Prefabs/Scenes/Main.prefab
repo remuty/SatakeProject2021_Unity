@@ -204,20 +204,6 @@ MonoBehaviour:
   - {fileID: 2674821459514481835, guid: 9a552e17b286700449577a2466160382, type: 3}
   - {fileID: 1399244322372991621, guid: d269a25ad12273a45aeac6957e973237, type: 3}
   - {fileID: 3641834809546500201, guid: 1401e6819542f5b488dfa5e4e8f33970, type: 3}
-  - {fileID: 1593510646057501107, guid: 360aa2322ce36bf4494c4078d4758efe, type: 3}
-  - {fileID: 1593510646057501107, guid: 2521adc0c61386d4bb14dd2f132621c7, type: 3}
-  - {fileID: 1593510646057501107, guid: 90a4ca330ee8f5d499c1f00e9a6a7f24, type: 3}
-  - {fileID: 1593510646057501107, guid: 875fd65e16feb6d44a22ba62995bc718, type: 3}
-  - {fileID: 1593510646057501107, guid: cf3c14bb774ea2043a9f413e138fce97, type: 3}
-  - {fileID: 1593510646057501107, guid: 8282396adb5342c469380b41596f2bdf, type: 3}
-  - {fileID: 1593510646057501107, guid: 98bd380802d0f624ca4527713947b833, type: 3}
-  - {fileID: 1593510646057501107, guid: 6e6a4f428ffa30f46bc764fc4e372033, type: 3}
-  - {fileID: 1593510646057501107, guid: 3a4f6adb36d42bb4aadfb00f51012f71, type: 3}
-  - {fileID: 1593510646057501107, guid: 25410ebfc17aaf447a570268c310c94a, type: 3}
-  - {fileID: 1593510646057501107, guid: 4366388668a2062468c043d5b8bc9d18, type: 3}
-  - {fileID: 1593510646057501107, guid: ec7ca9beac2a7554086e8d7ea808bd39, type: 3}
-  - {fileID: 1593510646057501107, guid: da7acf8875b73b348bf16029dec59c32, type: 3}
-  - {fileID: 1593510646057501107, guid: c275db9988f057448b9d0456a193a748, type: 3}
 --- !u!1 &4714890825553231895
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +628,7 @@ MonoBehaviour:
   beatPosition: {fileID: 4714890826219597669}
   comboText: {fileID: 4714890826134877819}
   comboSubText: {fileID: 4714890826239196974}
-  _checkRange: 2.2
+  _checkRange: 3
   _beatRange: 2
 --- !u!82 &4714890825982525556
 AudioSource:
@@ -656,7 +642,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1768a65f4527cb44da9cdd34c29ccbea, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.212
+  m_Volume: 0.128
   m_Pitch: 1
   Loop: 1
   Mute: 0

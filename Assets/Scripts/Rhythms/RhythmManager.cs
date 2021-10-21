@@ -56,14 +56,6 @@ public class RhythmManager : MonoBehaviour
             _generateTime = 0.5f;
         }
 
-        if (_notes.Count > 0)
-        {
-            if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
-            {
-                _combo = 0;
-            }
-        }
-
         if (_combo >= 2)
         {
             comboText.text = $"{_combo}";
