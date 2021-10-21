@@ -23,12 +23,11 @@ public class Symbol : MonoBehaviour
     private Player _player;
 
     private int _sideCount;
-
     private float _drawTime = 0.05f;
     private float _time;
-
     private bool _isSideDrawing;
     private bool _isSymbolDrawing;
+
     private bool _isAttacking;
 
     private Vector2 _initialPosition;
@@ -69,7 +68,7 @@ public class Symbol : MonoBehaviour
                             effect.GetComponent<AttackEffect>().Target = _player.Target;
                         }
                     }
-
+                    _isSymbolDrawing = false;
                     _symbolCardDeck.DrawCard();
                 }
             }
@@ -79,14 +78,21 @@ public class Symbol : MonoBehaviour
             }
         }
 
-        if (_isSymbolDrawing && _rhythmManager.Combo == 0)
+        if (_isSymbolDrawing)
         {
-            for (int i = 0; i < sides.Length; i++)
+            _rhythmManager.NotesCheck();    //シンボルを描く途中でノーツを見逃したらコンボリセット
+            if (_rhythmManager.Combo == 0)  //コンボがゼロになったらシンボルリセット
             {
-                sides[i].fillAmount = 0;
-                _sideCount = 0;
+                for (int i = 0; i < sides.Length; i++)
+                {
+                    sides[i].fillAmount = 0;
+                    _sideCount = 0;
+                }
+                SwitchGuide();
+                _isSideDrawing = false;
+                _isSymbolDrawing = false;
             }
-            SwitchGuide();
+            
         }
 
         if (_isAttacking) //攻撃処理
@@ -121,14 +127,6 @@ public class Symbol : MonoBehaviour
         {
             _isSideDrawing = true;
             _isSymbolDrawing = true;
-        }
-        else if (_rhythmManager.CanBeat() == RhythmManager.Beat.miss)
-        {
-            for (int i = 0; i < sides.Length; i++)
-            {
-                sides[i].fillAmount = 0;
-                _sideCount = 0;
-            }
         }
     }
 

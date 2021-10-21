@@ -17,11 +17,9 @@ public class RhythmManager : MonoBehaviour
     private AudioSource _audio;
 
     private float _generateTime;
-
     private float _time = -0.6f;
 
     [SerializeField] private float _checkRange = 0.8f;
-    
     [SerializeField] private float _beatRange = 0.4f;
     private int _combo;
     public int Combo => _combo;
@@ -75,13 +73,11 @@ public class RhythmManager : MonoBehaviour
         {
             if (Mathf.Abs(_notes[0].transform.position.x) <= _beatRange)
             {
-                // Debug.Log("成功:" + "pos:" + _notes[0].transform.position.x);
                 _combo++;
                 ret = Beat.good;
             }
             else
             {
-                // Debug.Log("ミス:" + "pos:" + _notes[0].transform.position.x);
                 _combo = 0;
                 ret = Beat.miss;
             }
@@ -90,6 +86,17 @@ public class RhythmManager : MonoBehaviour
             _notes.RemoveRange(0,2);
         }
         return ret;
+    }
+
+    public void NotesCheck()    //ノーツを見逃したらコンボリセット
+    {
+        if (_notes.Count > 0)
+        {
+            if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
+            {
+                _combo = 0;
+            }
+        }
     }
 
     public void RemoveNote()
