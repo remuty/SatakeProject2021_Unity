@@ -9,6 +9,7 @@ public class Record : MonoBehaviour
     private SwitchScene _switchScene;
     private SaveLoad _saveLoad;
     private RecordData _recordData;
+    private List<RecordData> _recordDataList;
     private float _seconds;
     private int _minutes;
     private int _hours;
@@ -23,6 +24,7 @@ public class Record : MonoBehaviour
         _saveLoad = GameObject.FindWithTag("SaveLoad").GetComponent<SaveLoad>();
         _saveLoad.Load();
         _recordData = _saveLoad.RecordData;
+        _recordDataList = _saveLoad.SaveData.recordDataList;
         //セーブデータの日付が今日ならロード
         if (_recordData.date == _date)
         {
@@ -66,6 +68,8 @@ public class Record : MonoBehaviour
                 var time = _hours + _minutes / 60f;
                 _calorie = (int)(5 * 60 * time * 1.05);
                 _recordData.SetRecord(_seconds, _minutes, _hours,_calorie,_date);
+                _recordDataList.Add(_recordData);
+                _saveLoad.SaveData.SetRecordList(_recordDataList);
                 _saveLoad.Save();
             }
         }
