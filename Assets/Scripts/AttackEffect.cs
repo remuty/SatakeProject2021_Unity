@@ -46,7 +46,10 @@ public class AttackEffect : MonoBehaviour
         }
         else
         {
-            target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
+            if (target != null)
+            {
+                target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
+            }
             Destroy(this.gameObject);
         }
     }
