@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 1299428141}
   - component: {fileID: 1299428140}
   m_Layer: 0
-  m_Name: PlayTime
+  m_Name: Record
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1299428139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd58d8c79ff48e7478c0186391b71dff, type: 3}
+  m_Script: {fileID: 11500000, guid: 07dc6301e6315314d94c72c37e38d836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1299428141

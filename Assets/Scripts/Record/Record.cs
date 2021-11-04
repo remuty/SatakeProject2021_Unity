@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayTime : MonoBehaviour
+public class Record : MonoBehaviour
 {
     private SwitchScene _switchScene;
     private SaveLoad _saveLoad;
     private float _seconds;
     private int _minutes;
     private int _hours;
+    private int _calorie;
     private bool _isSaved;
 
     // Start is called before the first frame update
@@ -17,10 +18,11 @@ public class PlayTime : MonoBehaviour
     {
         _switchScene = GameObject.FindWithTag("SwitchScene").GetComponent<SwitchScene>();
         _saveLoad = GameObject.FindWithTag("SaveLoad").GetComponent<SaveLoad>();
-        _saveLoad.LoadPlayTimeData();
-        _seconds = _saveLoad.PlayTimeData.seconds;
-        _minutes = _saveLoad.PlayTimeData.minutes;
-        _hours = _saveLoad.PlayTimeData.hours;
+        _saveLoad.Load();
+        _seconds = _saveLoad.RecordData.seconds;
+        _minutes = _saveLoad.RecordData.minutes;
+        _hours = _saveLoad.RecordData.hours;
+        _calorie = _saveLoad.RecordData.calorie;
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class PlayTime : MonoBehaviour
                 _isSaved = false;
             }
 
+            //プレイ時間計測
             _seconds += Time.deltaTime;
             if (_seconds >= 60f)
             {
@@ -47,17 +50,23 @@ public class PlayTime : MonoBehaviour
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Result)
         {
+            //セーブ
             if (!_isSaved)
             {
                 _isSaved = true;
-                _saveLoad.PlayTimeData.SetPlayTime(_seconds, _minutes, _hours);
-                _saveLoad.SavePlayTimeData();
+                //カロリー計算
+                var time = _hours + _minutes / 60f;
+                _calorie = (int)(5 * 60 * time * 1.05);
+                _saveLoad.RecordData.SetRecord(_seconds, _minutes, _hours,_calorie);
+                _saveLoad.Save();
             }
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Home)
         {
+            //プレイ時間とカロリー表示
             GameObject.Find("Minutes").GetComponent<Text>().text = $"{_minutes}";
             GameObject.Find("Hours").GetComponent<Text>().text = $"{_hours}";
+            GameObject.Find("Calorie").GetComponent<Text>().text = $"{_calorie}";
         }
     }
 }

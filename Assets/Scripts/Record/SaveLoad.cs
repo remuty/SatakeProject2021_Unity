@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class SaveLoad : MonoBehaviour
 {
-    private PlayTimeData _playTimeData;
+    private string _key = "RecordData";
+    private RecordData _recordData;
 
-    public PlayTimeData PlayTimeData
-    {
-        get => _playTimeData;
-    }
+    public RecordData RecordData => _recordData;
 
     // Start is called before the first frame update
     void Start()
@@ -17,20 +15,22 @@ public class SaveLoad : MonoBehaviour
         
     }
 
-    //　プレイ時間をセーブ
-    public void SavePlayTimeData() {
-        PlayerPrefs.SetString("PlayTimeData", _playTimeData.GetJsonData());
+    //　セーブ
+    public void Save() {
+        PlayerPrefs.SetString(_key, _recordData.GetJsonData());
         PlayerPrefs.Save ();
-        Debug.Log($"セーブ{_playTimeData.hours}時間{_playTimeData.minutes}分{_playTimeData.seconds}秒");
+        Debug.Log($"セーブ{_recordData.hours}時間{_recordData.minutes}分" +
+                  $"{_recordData.seconds}秒{_recordData.calorie}kcal");
     }
-    //　プレイ時間をロード
-    public void LoadPlayTimeData()
+    //　ロード
+    public void Load()
     {
-        if(PlayerPrefs.HasKey("PlayTimeData")) {
-            _playTimeData = new PlayTimeData();
-            var data = PlayerPrefs.GetString("PlayTimeData");
-            JsonUtility.FromJsonOverwrite(data, _playTimeData);
-            Debug.Log($"ロード{_playTimeData.hours}時間{_playTimeData.minutes}分{_playTimeData.seconds}秒");
+        _recordData = new RecordData();
+        if(PlayerPrefs.HasKey(_key)) {
+            var data = PlayerPrefs.GetString(_key);
+            JsonUtility.FromJsonOverwrite(data, _recordData);
+            Debug.Log($"ロード{_recordData.hours}時間{_recordData.minutes}分" +
+                      $"{_recordData.seconds}秒{_recordData.calorie}kcal");
         }
     }
 }

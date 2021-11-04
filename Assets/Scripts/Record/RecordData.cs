@@ -4,20 +4,22 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class PlayTimeData : object
+public class RecordData : object
 {
     public float seconds;
     public int minutes;
     public int hours;
+    public int calorie;
     
     public string GetJsonData() {
         return JsonUtility.ToJson(this);
     }
 
-    public void SetPlayTime(float s,int m,int h)
+    public void SetRecord(float s,int m,int h,int c)
     {
         seconds = s;
         minutes = m;
         hours = h;
+        calorie = c;
     }
 }
