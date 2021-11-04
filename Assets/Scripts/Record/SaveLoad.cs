@@ -18,9 +18,9 @@ public class SaveLoad : MonoBehaviour
     //　セーブ
     public void Save() {
         PlayerPrefs.SetString(_key, _recordData.GetJsonData());
-        PlayerPrefs.Save ();
+        PlayerPrefs.Save();
         Debug.Log($"セーブ{_recordData.hours}時間{_recordData.minutes}分" +
-                  $"{_recordData.seconds}秒{_recordData.calorie}kcal");
+                  $"{_recordData.seconds}秒{_recordData.calorie}kcal{_recordData.date}");
     }
     //　ロード
     public void Load()
@@ -30,7 +30,7 @@ public class SaveLoad : MonoBehaviour
             var data = PlayerPrefs.GetString(_key);
             JsonUtility.FromJsonOverwrite(data, _recordData);
             Debug.Log($"ロード{_recordData.hours}時間{_recordData.minutes}分" +
-                      $"{_recordData.seconds}秒{_recordData.calorie}kcal");
+                      $"{_recordData.seconds}秒{_recordData.calorie}kcal{_recordData.date}");
         }
     }
 }

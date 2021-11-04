@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Record : MonoBehaviour
 {
     private SwitchScene _switchScene;
     private SaveLoad _saveLoad;
+    private RecordData _recordData;
     private float _seconds;
     private int _minutes;
     private int _hours;
     private int _calorie;
     private bool _isSaved;
+    private string _date = DateTime.Today.ToLongDateString();
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +22,15 @@ public class Record : MonoBehaviour
         _switchScene = GameObject.FindWithTag("SwitchScene").GetComponent<SwitchScene>();
         _saveLoad = GameObject.FindWithTag("SaveLoad").GetComponent<SaveLoad>();
         _saveLoad.Load();
-        _seconds = _saveLoad.RecordData.seconds;
-        _minutes = _saveLoad.RecordData.minutes;
-        _hours = _saveLoad.RecordData.hours;
-        _calorie = _saveLoad.RecordData.calorie;
+        _recordData = _saveLoad.RecordData;
+        //セーブデータの日付が今日ならロード
+        if (_recordData.date == _date)
+        {
+            _seconds = _recordData.seconds;
+            _minutes = _recordData.minutes;
+            _hours = _recordData.hours;
+            _calorie = _recordData.calorie;
+        }
     }
 
     // Update is called once per frame
@@ -36,7 +44,7 @@ public class Record : MonoBehaviour
             }
 
             //プレイ時間計測
-            _seconds += Time.deltaTime;
+            _seconds += Time.deltaTime + 1;
             if (_seconds >= 60f)
             {
                 _minutes++;
@@ -54,10 +62,10 @@ public class Record : MonoBehaviour
             if (!_isSaved)
             {
                 _isSaved = true;
-                //カロリー計算
+                //カロリー計算 5メッツ*60kg*時間*1.05
                 var time = _hours + _minutes / 60f;
                 _calorie = (int)(5 * 60 * time * 1.05);
-                _saveLoad.RecordData.SetRecord(_seconds, _minutes, _hours,_calorie);
+                _recordData.SetRecord(_seconds, _minutes, _hours,_calorie,_date);
                 _saveLoad.Save();
             }
         }
