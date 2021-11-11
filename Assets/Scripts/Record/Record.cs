@@ -10,10 +10,8 @@ public class Record : MonoBehaviour
     private SaveLoad _saveLoad;
     private RecordData _recordData;
     private List<RecordData> _recordDataList;
-    private float _seconds;
-    private int _minutes;
-    private int _hours;
-    private int _calorie;
+    private float _seconds, _secondsSum;
+    private int _minutes, _minutesSum, _hours, _hoursSum, _calorie, _calorieSum;
     private bool _isSaved;
     private string _date = DateTime.Today.ToLongDateString();
 
@@ -28,10 +26,10 @@ public class Record : MonoBehaviour
         //セーブデータの日付が今日ならロード
         if (_recordData.date == _date)
         {
-            _seconds = _recordData.seconds;
-            _minutes = _recordData.minutes;
-            _hours = _recordData.hours;
-            _calorie = _recordData.calorie;
+            _secondsSum = _recordData.seconds;
+            _minutesSum = _recordData.minutes;
+            _hoursSum = _recordData.hours;
+            _calorieSum = _recordData.calorie;
         }
     }
 
@@ -46,7 +44,7 @@ public class Record : MonoBehaviour
             }
 
             //プレイ時間計測
-            _seconds += Time.deltaTime + 1;
+            _seconds += Time.deltaTime + 0.1f; //TODO:デバッグ用　0.1を消す
             if (_seconds >= 60f)
             {
                 _minutes++;
@@ -58,7 +56,7 @@ public class Record : MonoBehaviour
                 }
             }
         }
-        else if (_switchScene.Scene == SwitchScene.Scenes.Result)
+        else if (_switchScene.Scene == SwitchScene.Scenes.Result0)
         {
             //セーブ
             if (!_isSaved)
@@ -67,18 +65,30 @@ public class Record : MonoBehaviour
                 //カロリー計算 5メッツ*60kg*時間*1.05
                 var time = _hours + _minutes / 60f;
                 _calorie = (int)(5 * 60 * time * 1.05);
-                _recordData.SetRecord(_seconds, _minutes, _hours,_calorie,_date);
+                _secondsSum += _seconds;
+                _minutesSum += _minutes;
+                _hoursSum += _hours;
+                _calorieSum += _calorie;
+                _recordData.SetRecord(_secondsSum, _minutesSum, _hoursSum,_calorieSum,_date);
                 _recordDataList.Add(_recordData);
                 _saveLoad.SaveData.SetRecordList(_recordDataList);
                 _saveLoad.Save();
             }
+            //リザルト表示
+            GameObject.Find("Time").GetComponent<Text>().text = $"{_minutes}分{(int)_seconds}秒";
+            
+        }
+        else if (_switchScene.Scene == SwitchScene.Scenes.Result1)
+        {
+            //リザルト表示
+            GameObject.Find("Calorie").GetComponent<Text>().text = $"{_calorie}kcal";
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Home)
         {
-            //プレイ時間とカロリー表示
-            GameObject.Find("Minutes").GetComponent<Text>().text = $"{_minutes}";
-            GameObject.Find("Hours").GetComponent<Text>().text = $"{_hours}";
-            GameObject.Find("Calorie").GetComponent<Text>().text = $"{_calorie}";
+            //ホーム画面プレイ時間とカロリー表示
+            GameObject.Find("Minutes").GetComponent<Text>().text = $"{_minutesSum}";
+            GameObject.Find("Hours").GetComponent<Text>().text = $"{_hoursSum}";
+            GameObject.Find("Calorie").GetComponent<Text>().text = $"{_calorieSum}";
         }
     }
 }

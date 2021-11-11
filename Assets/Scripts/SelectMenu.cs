@@ -111,7 +111,7 @@ public class SelectMenu : MonoBehaviour
                 menuTexts[_menuNum].color = selectedColor;
             }
         }
-        else
+        else if (menuImages.Length != 0)
         {
             foreach (var image in menuImages)
             {
