@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6707420398829315365}
   - component: {fileID: 6707420398829315364}
   - component: {fileID: 6707420398829315384}
+  - component: {fileID: -5731767909374887606}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +83,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &6707420398829315364
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -107,4 +110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0313f15fc1f994685518cb96d6eb42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0.5
+  time: 0.1
+--- !u!114 &-5731767909374887606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6707420398829315363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb982d09623019449780cf89ecfc03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFly: 1

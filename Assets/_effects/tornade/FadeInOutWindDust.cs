@@ -57,7 +57,7 @@ public class FadeInOutWindDust : MonoBehaviour
     }
     void fadeIn()
     {
-        timePosition -= 0.001f;
+        timePosition -= 0.005f;
         if (getTimePosition() >= 0)
         {
             fade(timePosition);
