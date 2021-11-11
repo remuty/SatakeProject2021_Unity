@@ -796,8 +796,9 @@ MonoBehaviour:
   beatPosition: {fileID: 4714890826219597669}
   comboText: {fileID: 4714890826134877819}
   comboSubText: {fileID: 4714890826239196974}
+  bpm: 120
   _checkRange: 3
-  _beatRange: 2
+  _beatRange: 2.5
 --- !u!82 &4714890825982525556
 AudioSource:
   m_ObjectHideFlags: 0
