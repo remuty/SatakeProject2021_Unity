@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: 1
-  attackEffect: {fileID: 6707420398829315363, guid: 1684552ad6e6b174b9aec5190362a8cb, type: 3}
+  attackEffect: {fileID: 4249106495264295941, guid: b79630cead40c4a17bab49e656bae3a8, type: 3}
   sides:
   - {fileID: 209308678341356548}
   - {fileID: 5364513236151957270}
