@@ -76,12 +76,13 @@ public class Record : MonoBehaviour
             }
             //リザルト表示
             GameObject.Find("Time").GetComponent<Text>().text = $"{_minutes}分{(int)_seconds}秒";
+            GameObject.Find("Calorie").GetComponent<Text>().text = $"{_calorie}kcal";
             
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Result1)
         {
             //リザルト表示
-            GameObject.Find("Calorie").GetComponent<Text>().text = $"{_calorie}kcal";
+            
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Home)
         {
