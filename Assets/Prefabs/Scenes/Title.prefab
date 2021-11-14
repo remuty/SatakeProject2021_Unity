@@ -270,6 +270,7 @@ MonoBehaviour:
   menuImages:
   - {fileID: 6561421575026643235}
   - {fileID: 3022300130367327152}
+  defaultColor: {r: 1, g: 1, b: 1, a: 0.78431374}
 --- !u!1 &5748259422798826998
 GameObject:
   m_ObjectHideFlags: 0

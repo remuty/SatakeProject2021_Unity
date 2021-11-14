@@ -14,6 +14,7 @@ public class SelectMenu : MonoBehaviour
     [SerializeField] private MenuAxis menuAxis;
     [SerializeField] private Text[] menuTexts;
     [SerializeField] private Image[] menuImages;
+    [SerializeField] private Color defaultColor = new Color32(160, 160, 160, 255);
 
     private Stick _stick;
     private SwitchScene _switchScene;
@@ -21,7 +22,6 @@ public class SelectMenu : MonoBehaviour
     private int _menuNum = -1;
     private bool _isSelected;
 
-    private Color defaultColor = new Color32(160, 160, 160, 255);
     private Color selectedColor = new Color32(255, 255, 255, 255);
 
     // Start is called before the first frame update

@@ -56,6 +56,15 @@ public class SwitchScene : MonoBehaviour
                     _home = Instantiate(homePrefab);
                     _scene = Scenes.Home;
                 }
+                else if (_menuNum == 1)
+                {
+                    //アプリ終了
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+#else
+                    Application.Quit();
+#endif
+                }
             }
             else if (_scene == Scenes.Home)
             {
@@ -66,9 +75,12 @@ public class SwitchScene : MonoBehaviour
                 }
                 else if (_menuNum == 4)
                 {
-                    Destroy(_home);
-                    _title = Instantiate(titlePrefab);
-                    _scene = Scenes.Title;
+                    //アプリ終了
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+#else
+                    Application.Quit();
+#endif
                 }
             }
             else if (_scene == Scenes.Result0)
