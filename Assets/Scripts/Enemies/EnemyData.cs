@@ -6,8 +6,8 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     public string enemyName;
-    public string element;
     public int maxHp;
     public int atk;
     public int speed;
+    public int point;
 }
