@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6109c0cdb5978b042b8e7bec82f8f357, type: 3}
   m_Name: Enemy3
   m_EditorClassIdentifier: 
-  enemyName: Enemy3
-  element: 
+  enemyName: "\u308A\u3093\u3054\u3042\u3081"
   maxHp: 4
   atk: 8
   speed: 8
+  point: 60
