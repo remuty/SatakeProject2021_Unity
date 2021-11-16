@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         if (_hp <= 0)
         {
             _resultCanvas.SetActive(true);
-            _switchScene.Scene = SwitchScene.Scenes.Result;
+            _switchScene.Scene = SwitchScene.Scenes.Result0;
             Time.timeScale = 0;
             GetComponent<Player>().enabled = false;
         }
