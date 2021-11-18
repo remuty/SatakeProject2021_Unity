@@ -32,7 +32,8 @@ public class FadeInOutCore : MonoBehaviour
         switch (lifecycle)
         {
             case "fadeIn":
-                Invoke(nameof(fadeIn), 0.7f);
+                Invoke(nameof(fadeIn), 0.00005f);
+                //fadeIn();
                 if (getTimePosition() <= 0)
                 {
                     lifecycle = "render";
@@ -58,7 +59,7 @@ public class FadeInOutCore : MonoBehaviour
     }
     void fadeIn()
     {
-        timePosition -= 0.001f;
+        timePosition -= 0.003f;
         if (getTimePosition() >= 0)
         {
             fade(timePosition);

@@ -97,7 +97,7 @@ Material:
     - Vector1_54cbf93f7d1d479cbfa6cf044b23501b: 0.01
     - Vector1_6644e8c4f97746e489cdb6cb98bf4ad5: 19.68
     - Vector1_6686f02fa2e64a5397db0bf098d42a7f: 12.4
-    - Vector1_c43d4d4a27754154b868b0458cf271ab: 5.27
+    - Vector1_c43d4d4a27754154b868b0458cf271ab: 10
     - Vector1_ecb935fe390e4904a5b8c58babbc38d7: 0.4
     - _AlphaClip: 0
     - _Blend: 0
@@ -129,10 +129,10 @@ Material:
     m_Colors:
     - Color_9cb0880c405948efb0f4a5ae504ea00d: {r: 0.034531865, g: 0.035944644, b: 0.0754717, a: 0}
     - Vector2_431349437da34227ac75bb480defd3df: {r: -0.4, g: 7.4, b: 0, a: 0}
-    - Vector2_b0b29bbc3fb74b22bbaa12604351f74c: {r: 0, g: -0.5, b: 0, a: 0}
+    - Vector2_b0b29bbc3fb74b22bbaa12604351f74c: {r: 0, g: -0.7, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - noiseSpeed: {r: -0.1, g: 0.6, b: 0, a: 0}
+    - noiseSpeed: {r: -0.2, g: 0.8, b: 0, a: 0}
   m_BuildTextureStacks: []

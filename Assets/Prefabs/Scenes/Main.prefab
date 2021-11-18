@@ -645,6 +645,8 @@ MonoBehaviour:
   symbolCardPrefabs:
   - {fileID: 2674821459514481835, guid: 9a552e17b286700449577a2466160382, type: 3}
   - {fileID: 1399244322372991621, guid: d269a25ad12273a45aeac6957e973237, type: 3}
+  - {fileID: 3641834809546500201, guid: 1401e6819542f5b488dfa5e4e8f33970, type: 3}
+  - {fileID: 1593510646057501107, guid: 360aa2322ce36bf4494c4078d4758efe, type: 3}
 --- !u!1 &4714890825662989115
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +892,7 @@ SortingGroup:
   m_GameObject: {fileID: 4714890825982525552}
   m_Enabled: 1
   m_SortingLayerID: -1977842667
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
 --- !u!114 &4714890825982525555
 MonoBehaviour:
