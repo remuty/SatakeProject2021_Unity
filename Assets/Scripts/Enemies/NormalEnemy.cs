@@ -11,6 +11,7 @@ public class NormalEnemy : MonoBehaviour
 
     private EnemyGenerator _enemyGenerator;
     private Player _player;
+    private Record _record;
     private int _lane;
 
     public int Lane
@@ -28,6 +29,7 @@ public class NormalEnemy : MonoBehaviour
     {
         _enemyGenerator = GameObject.FindWithTag("EnemyGenerator").GetComponent<EnemyGenerator>();
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _record = GameObject.FindWithTag("Record").GetComponent<Record>();
         transform.position = transformData.initialPosition[_lane];
         transform.localScale = transformData.initialScale;
         _hp = enemyData.maxHp;
@@ -40,6 +42,7 @@ public class NormalEnemy : MonoBehaviour
     {
         if (_moveTime < enemyData.speed)
         {
+            //近づいてくる
             _moveTime += Time.deltaTime;
             var rate = _moveTime / enemyData.speed;
             transform.position = Vector3.Lerp(transformData.initialPosition[_lane],
@@ -49,6 +52,7 @@ public class NormalEnemy : MonoBehaviour
         }
         else
         {
+            //到達したらプレイヤーに攻撃
             _player.AddDamage(enemyData.atk, this.tag);
             _enemyGenerator.AddLane(_lane);
             Destroy(this.gameObject);
@@ -56,7 +60,9 @@ public class NormalEnemy : MonoBehaviour
 
         if (_hp <= 0)
         {
+            //倒されたらスコアに加算
             _enemyGenerator.AddLane(_lane);
+            _record.AddScore(enemyData.point);
             Destroy(this.gameObject);
         }
 
