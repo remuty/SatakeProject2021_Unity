@@ -28,10 +28,6 @@ public class SymbolCardDeck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_selectedCard.SymbolObject == null)
-        {
-            _selectedCard.GenerateSymbol();
-        }
     }
 
     void CreateCardDeck()
@@ -62,6 +58,7 @@ public class SymbolCardDeck : MonoBehaviour
 
         _selectedCardNum = 0;
         _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
+        _selectedCard.GenerateSymbol();
         SwitchOutline(true);
     }
 
@@ -73,6 +70,7 @@ public class SymbolCardDeck : MonoBehaviour
         _deck[_drawNum].transform.position = deckPosition;
         _deck[_selectedCardNum].transform.position = cardPositions[_selectedCardNum];
         _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
+        _selectedCard.GenerateSymbolSlow();
         _drawNum++;
         if (_drawNum >= _deck.Length)
         {
@@ -103,6 +101,7 @@ public class SymbolCardDeck : MonoBehaviour
             _selectedCardNum = 0;
         }
         _selectedCard = _deck[_selectedCardNum].GetComponent<SymbolCard>();
+        _selectedCard.GenerateSymbol();
         SwitchOutline(true);
     }
     
