@@ -47,7 +47,7 @@ public class Symbol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isSideDrawing) //TODO:シンボルを描く処理
+        if (_isSideDrawing) 
         {
             _time += Time.deltaTime;
             if (_time > _drawTime)

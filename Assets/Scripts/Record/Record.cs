@@ -10,8 +10,8 @@ public class Record : MonoBehaviour
     private SaveLoad _saveLoad;
     private RecordData _recordData;
     private List<RecordData> _recordDataList;
-    private float _seconds, _secondsSum;
-    private int _minutes, _minutesSum, _hours, _hoursSum, _calorie, _calorieSum, _score;
+    private float _seconds, _secondsSum, _time;
+    private int _minutes, _minutesSum, _hours, _hoursSum, _calorie, _calorieSum, _score, _exp;
 
     private bool _isSaved;
     private string _date = DateTime.Today.ToLongDateString();
@@ -39,11 +39,6 @@ public class Record : MonoBehaviour
     {
         if (_switchScene.Scene == SwitchScene.Scenes.Main)
         {
-            if (_isSaved)
-            {
-                _isSaved = false;
-            }
-
             //プレイ時間計測
             _seconds += Time.deltaTime + 0.1f; //TODO:デバッグ用　0.1を消す
             if (_seconds >= 60f)
@@ -67,9 +62,11 @@ public class Record : MonoBehaviour
                 var time = _hours + _minutes / 60f;
                 _calorie = (int) (5 * 60 * time * 1.05);
                 //得点計算 waveごとに500点　10秒ごとに2点
-                _score += 500 * 1;  //TODO:wave数で加算
-                _score += (int) (_minutes * 60 + _seconds) / 10 * 2;    
-                
+                _score += 500 * 1; //TODO:wave数で加算
+                _score += (int) (_minutes * 60 + _seconds) / 10 * 2;
+                //経験値計算　得点*0.3
+                _exp = (int) (_score * 0.3);
+
                 _secondsSum += _seconds;
                 _minutesSum += _minutes;
                 _hoursSum += _hours;
@@ -79,7 +76,7 @@ public class Record : MonoBehaviour
                 _saveLoad.SaveData.SetRecordList(_recordDataList);
                 _saveLoad.Save();
             }
-            
+
             //得点、最大波、運動時間、消費カロリー表示
             GameObject.Find("Score").GetComponent<Text>().text = $"{_score}点";
             GameObject.Find("Time").GetComponent<Text>().text = $"{_minutes}分{(int) _seconds}秒";
@@ -87,7 +84,25 @@ public class Record : MonoBehaviour
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Result1)
         {
-            //経験値表示
+            if (_isSaved)
+            {
+                //経験値表示
+                GameObject.Find("EXP").GetComponent<Text>().text = $"{_exp}";
+                var bar = GameObject.Find("EXPBar").GetComponent<Image>();
+                if (_time < 0.5f)
+                {
+                    _time += Time.unscaledDeltaTime;
+                    bar.fillAmount = _time / 0.5f;
+                }
+                else
+                {
+                    bar.fillAmount = 0.2f;
+                    GameObject.Find("ResultPanel").transform.Find("Result2").gameObject.SetActive(true);
+                    _switchScene.Scene = SwitchScene.Scenes.Result2;
+                    GameObject.Find("Result1").SetActive(false);
+                    Reset();
+                }
+            }
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Home)
         {
@@ -96,6 +111,19 @@ public class Record : MonoBehaviour
             GameObject.Find("Hours").GetComponent<Text>().text = $"{_hoursSum}";
             GameObject.Find("Calorie").GetComponent<Text>().text = $"{_calorieSum}";
         }
+    }
+
+    void Reset()
+    {
+        _seconds = 0;
+        _secondsSum = 0;
+        _time = 0;
+        _minutes = 0;
+        _hours = 0;
+        _calorie = 0;
+        _score = 0;
+        _exp = 0;
+        _isSaved = false;
     }
 
     public void AddScore(int point)

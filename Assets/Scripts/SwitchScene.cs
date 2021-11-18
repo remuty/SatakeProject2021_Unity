@@ -25,7 +25,8 @@ public class SwitchScene : MonoBehaviour
         Home,
         Main,
         Result0,
-        Result1
+        Result1,
+        Result2
     }
 
     private Scenes _scene;
@@ -104,6 +105,15 @@ public class SwitchScene : MonoBehaviour
                 {
                     _home = Instantiate(homePrefab);
                     _scene = Scenes.Home;
+                }
+            }
+            else if (_scene == Scenes.Result2)
+            {
+                if (_menuNum == 0)
+                {
+                    GameObject.Find("ResultPanel").transform.Find("Result1").gameObject.SetActive(true);
+                    _scene = Scenes.Result1;
+                    GameObject.Find("Result2").SetActive(false);
                 }
             }
 
