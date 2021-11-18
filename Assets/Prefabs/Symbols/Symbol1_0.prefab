@@ -77,8 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76aa1bd8e26a6484a9fa48e6be0b16b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  element: 0
-  attackEffect: {fileID: 0}
+  element: 1
+  attackEffect: {fileID: 9215863914179970305, guid: 0a942a974cbd240fc8c7372873cd6711, type: 3}
   sides:
   - {fileID: 2842833595709664442}
   guides:
