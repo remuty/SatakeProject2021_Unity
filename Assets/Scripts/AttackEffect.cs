@@ -32,15 +32,15 @@ public class AttackEffect : MonoBehaviour
                 var rate = _time / 0.6f;
                 transform.position = Vector2.Lerp(_initialPosition,
                     target.transform.position, rate);
-                transform.localScale = Vector2.Lerp(_initialScale, 
-                    target.transform.localScale, rate);
+                transform.localScale = Vector2.Lerp(_initialScale,
+                    target.transform.localScale / 4, rate);
                 var pos = transform.position;
                 pos.z = -1;
                 transform.position = pos;
             }
             else
             {
-                transform.position = new Vector3(target.transform.position.x,target.transform.position.y,-1);
+                transform.position = new Vector3(target.transform.position.x, target.transform.position.y, -1);
                 transform.localScale = target.transform.localScale;
             }
         }
@@ -50,11 +50,12 @@ public class AttackEffect : MonoBehaviour
             {
                 target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
             }
+
             Destroy(this.gameObject);
         }
     }
 
-    public void SetPower(int atk,float knockBackPower)
+    public void SetPower(int atk, float knockBackPower)
     {
         _atk = atk;
         _knockBackPower = knockBackPower;
