@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7334634060791433945}
   - component: {fileID: 7334634060791433926}
   - component: {fileID: 7334634060791433927}
-  - component: {fileID: -2727336547098232824}
+  - component: {fileID: -1762918973859138500}
   m_Layer: 0
   m_Name: lightning
   m_TagString: Untagged
@@ -115,7 +115,7 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &-2727336547098232824
+--- !u!114 &-1762918973859138500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,4 +127,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb982d09623019449780cf89ecfc03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFly: 1
+  isFly: 0

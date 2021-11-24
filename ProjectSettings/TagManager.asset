@@ -57,6 +57,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Effect
+    uniqueID: 2424334945
+    locked: 0
   - name: FrontCanvas
     uniqueID: 2317124629
     locked: 0
