@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
 
     private bool _isSelected;
     private bool _isCrouch;
-
     public bool IsCrouch => _isCrouch;
 
     // Start is called before the first frame update

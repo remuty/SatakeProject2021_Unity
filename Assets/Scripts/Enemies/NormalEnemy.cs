@@ -40,8 +40,12 @@ public class NormalEnemy : MonoBehaviour
         transform.position = transformData.initialPosition[_lane];
         transform.localScale = transformData.initialScale;
         _hp = enemyData.maxHp;
-        _attackTime = Random.Range(enemyData.speed / 5, enemyData.speed * 2);
-        Debug.Log(_attackTime);
+        _attackTime = Random.Range(1, enemyData.speed * 2);
+        //近距離から攻撃できないようにする
+        if (_attackTime >= enemyData.speed - 3 && _attackTime <= enemyData.speed)
+        {
+            _attackTime -= 3;
+        }
     }
 
     // Update is called once per frame
