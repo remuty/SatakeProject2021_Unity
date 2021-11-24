@@ -32,10 +32,6 @@ public class EnemyAttackObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_time > 0.5 && _time < 0.7 && _player.IsCrouch)
-        {
-            _endPosition = new Vector2(0, 7);
-        }
         if (_time < speed)
         {
             _time += Time.deltaTime;
