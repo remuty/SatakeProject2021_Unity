@@ -52,6 +52,10 @@ public class RhythmManager : MonoBehaviour
     //次のノーツを団子にするかどうか（デバッグ用にSelializeField）
     [SerializeField]
     private bool _isWarning;
+    public bool IsWarning
+    {
+        set => _isWarning = value;
+    }
 
     public enum Beat
     {
@@ -68,7 +72,6 @@ public class RhythmManager : MonoBehaviour
         _audio.Play();
         _interval = 1d / (bpm[0] / 60d);
         _metronomeStartDspTime = AudioSettings.dspTime;
-        Debug.Log(_metronomeStartDspTime);
         _wave = 1;
         //音の再生が止まったらWave切り替えスタート
         this.UpdateAsObservable()
@@ -87,28 +90,28 @@ public class RhythmManager : MonoBehaviour
             //Wave切り替え中はNoteを生成しない
             if (!_isSwitching)
             {
+                GameObject.FindWithTag("Target").GetComponent<NormalEnemy>().IsAttacking = true;
                 var generatedNote = Instantiate(notePrefab,
                 transform.position, Quaternion.identity, this.transform);
                 generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[0], beatPosition);
-                //泥団子に切り替える
-                if (_isWarning) {
-                    generatedNote.GetComponent<SpriteRenderer>().sprite = dangoSprite;
-                }
+               
                 _notes.Add(generatedNote);
                 generatedNote = Instantiate(notePrefab, transform.position, Quaternion.identity, this.transform);
                 generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[1], beatPosition);
-                if (_isWarning)
-                {
-                    generatedNote.GetComponent<SpriteRenderer>().sprite = dangoSprite;
-                }
+                
                 _notes.Add(generatedNote);
             }
             _buffer = _time - _interval;
             _oldTime += _time - _buffer;
         }
-
+        
         if (_notes.Count > 0)
         {
+            if (_isWarning) {    //泥団子に切り替える
+                _notes[_notes.Count - 1].GetComponent<SpriteRenderer>().sprite = dangoSprite;
+                _notes[_notes.Count - 2].GetComponent<SpriteRenderer>().sprite = dangoSprite;
+                _isWarning = false;
+            }
             if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
             {
                 _combo = 0;
@@ -125,8 +128,6 @@ public class RhythmManager : MonoBehaviour
             comboText.text = "";
             comboSubText.text = "";
         }
-        
-        
     }
     
 
