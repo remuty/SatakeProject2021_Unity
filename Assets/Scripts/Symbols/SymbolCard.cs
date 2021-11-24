@@ -37,6 +37,7 @@ public class SymbolCard : MonoBehaviour
     {
         var canvas = GameObject.FindWithTag("FrontCanvas");
         _symbolObject = Instantiate(symbolPrefab,canvas.transform);
+        _symbolObject.transform.SetSiblingIndex(1);
         _symbol = _symbolObject.GetComponent<Symbol>();
         _isGenerated = false;
     }
