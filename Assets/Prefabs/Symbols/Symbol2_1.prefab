@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: 1
-  attackEffect: {fileID: 4300136503456345990, guid: 8575d4cabfbb1284cb913ecbcb859346, type: 3}
+  attackEffect: {fileID: 2634361289039213792, guid: fe961d397ef5c3d42b405d8b1530e7d2, type: 3}
   sides:
   - {fileID: 4580514520310342088}
   - {fileID: 4580514522192070315}
