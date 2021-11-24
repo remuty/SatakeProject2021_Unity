@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
+using UniRx.Triggers;
 
 public class RhythmManager : MonoBehaviour
 {
@@ -10,7 +12,14 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] private Transform beatPosition;
     [SerializeField] private Text comboText;
     [SerializeField] private Text comboSubText;
-    [SerializeField] private double bpm;
+    [SerializeField] private double[] bpm;
+    //BGM
+    [SerializeField] private AudioClip[] bgm; 
+    //Wave切り替え時カットイン画像(Canvasの子オブジェクトに用意してあるものが割り当てられる想定)
+    [SerializeField] private Image waveSwitchImage;
+    //団子飛んでくるときのノーツスプライト
+    [SerializeField] private Sprite dangoSprite;
+
 
     // [SerializeField] private GameObject[] _notes;
     private List<GameObject> _notes = new List<GameObject>();
@@ -30,8 +39,24 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] private float _checkRange = 0.8f;
     
     [SerializeField] private float _beatRange = 0.4f;
+
     private int _combo;
     public int Combo => _combo;
+
+    //Wave数
+    private int _wave;
+    public int Wave => _wave;
+    //Wave切り替え中かどうか
+    private bool _isSwitching;
+    public bool IsSwitching => _isSwitching;
+    //次のノーツを団子にするかどうか（デバッグ用にSelializeField）
+    [SerializeField]
+    private bool _isWarning;
+    public bool IsWarning
+    {
+        set => _isWarning = value;
+    }
+
     public enum Beat
     {
         noReaction,
@@ -43,9 +68,16 @@ public class RhythmManager : MonoBehaviour
     void Start()
     {
         _audio = this.GetComponent<AudioSource>();
+        _audio.clip = bgm[0];
         _audio.Play();
-        _interval = 1d / (bpm / 60d);
+        _interval = 1d / (bpm[0] / 60d);
         _metronomeStartDspTime = AudioSettings.dspTime;
+        _wave = 1;
+        //音の再生が止まったらWave切り替えスタート
+        this.UpdateAsObservable()
+            .Where(_ => !_audio.isPlaying)
+            .ThrottleFirst(System.TimeSpan.FromSeconds(10f))
+            .Subscribe(_ => StartCoroutine("SwitchWave"));
     }
 
     // Update is called once per frame
@@ -55,19 +87,31 @@ public class RhythmManager : MonoBehaviour
         _time = elapsedDspTime - _oldTime;
         if (_time > _interval)
         {
-            var generatedNote = Instantiate(notePrefab,
+            //Wave切り替え中はNoteを生成しない
+            if (!_isSwitching)
+            {
+                GameObject.FindWithTag("Target").GetComponent<NormalEnemy>().IsAttacking = true;
+                var generatedNote = Instantiate(notePrefab,
                 transform.position, Quaternion.identity, this.transform);
-            generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[0],beatPosition);
-            _notes.Add(generatedNote);
-            generatedNote = Instantiate(notePrefab, transform.position, Quaternion.identity, this.transform);
-            generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[1],beatPosition);
-            _notes.Add(generatedNote);
+                generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[0], beatPosition);
+               
+                _notes.Add(generatedNote);
+                generatedNote = Instantiate(notePrefab, transform.position, Quaternion.identity, this.transform);
+                generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[1], beatPosition);
+                
+                _notes.Add(generatedNote);
+            }
             _buffer = _time - _interval;
             _oldTime += _time - _buffer;
         }
-
+        
         if (_notes.Count > 0)
         {
+            if (_isWarning) {    //泥団子に切り替える
+                _notes[_notes.Count - 1].GetComponent<SpriteRenderer>().sprite = dangoSprite;
+                _notes[_notes.Count - 2].GetComponent<SpriteRenderer>().sprite = dangoSprite;
+                _isWarning = false;
+            }
             if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
             {
                 _combo = 0;
@@ -127,4 +171,16 @@ public class RhythmManager : MonoBehaviour
         _notes.RemoveAt(0);
     }
     
+    IEnumerator SwitchWave()
+    {
+        _wave++;
+        waveSwitchImage.enabled = true;
+        _isSwitching = true;
+        yield return new WaitForSeconds(5f);
+        waveSwitchImage.enabled = false;
+        _isSwitching = false;
+        _audio.clip = bgm[(_wave - 1) % bgm.Length];
+        _interval = 1d / (bpm[(_wave - 1) % bgm.Length] / 60d);
+        _audio.Play();
+    }
 }

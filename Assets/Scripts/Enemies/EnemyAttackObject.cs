@@ -5,13 +5,8 @@ using UnityEngine;
 public class EnemyAttackObject : MonoBehaviour
 {
     [SerializeField] private int atk;
-    [SerializeField] private int speed;
+    private float speed = 1.5f; //ノーツのスピードに合わせる
     private float _time;
-
-    public float AtkTime
-    {
-        set => _time = value;
-    }
 
     private Vector2 _initialPosition;
     private Vector2 _endPosition;
@@ -26,16 +21,12 @@ public class EnemyAttackObject : MonoBehaviour
         _initialPosition = this.transform.position;
         _endPosition = new Vector2(0, 0);
         _initialScale = this.transform.localScale;
-        _endScale = new Vector2(2, 2);
+        _endScale = new Vector2(4, 4);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_time > 0.5 && _time < 0.7 && _player.IsCrouch)
-        {
-            _endPosition = new Vector2(0, 7);
-        }
         if (_time < speed)
         {
             _time += Time.deltaTime;

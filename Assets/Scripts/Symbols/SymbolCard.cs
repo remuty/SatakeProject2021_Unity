@@ -5,7 +5,6 @@ using UnityEngine;
 public class SymbolCard : MonoBehaviour
 {
     [SerializeField] private GameObject symbolPrefab;
-    private GameObject _canvas;
     
     private GameObject _symbolObject;
     public GameObject SymbolObject => _symbolObject;
@@ -13,10 +12,11 @@ public class SymbolCard : MonoBehaviour
     private Symbol _symbol;
     public Symbol Symbol => _symbol;
 
+    private bool _isGenerated;
+
     // Start is called before the first frame update
     void Start()
     {
-        _canvas = GameObject.FindWithTag("FrontCanvas");
     }
 
     // Update is called once per frame
@@ -24,9 +24,21 @@ public class SymbolCard : MonoBehaviour
     {
     }
 
+    public void GenerateSymbolSlow()
+    {
+        if (!_isGenerated)
+        {
+            _isGenerated = true;
+            Invoke("GenerateSymbol",0.6f);
+        }
+    }
+
     public void GenerateSymbol()
     {
-        _symbolObject = Instantiate(symbolPrefab,_canvas.transform);
+        var canvas = GameObject.FindWithTag("FrontCanvas");
+        _symbolObject = Instantiate(symbolPrefab,canvas.transform);
+        _symbolObject.transform.SetSiblingIndex(1);
         _symbol = _symbolObject.GetComponent<Symbol>();
+        _isGenerated = false;
     }
 }

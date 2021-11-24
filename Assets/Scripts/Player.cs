@@ -7,9 +7,8 @@ using UniRx;
 public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject _resultCanvas;
-
+    [SerializeField] private Image _barrier;
     [SerializeField] private Slider hpGauge;
-
     [SerializeField] private int maxHp;
 
     private int _hp;
@@ -27,7 +26,6 @@ public class Player : MonoBehaviour
 
     private bool _isSelected;
     private bool _isCrouch;
-
     public bool IsCrouch => _isCrouch;
 
     // Start is called before the first frame update
@@ -55,12 +53,12 @@ public class Player : MonoBehaviour
             if (n)
             {
                 _isCrouch = true;
-                Debug.Log("しゃがむ");
+                _barrier.enabled = true;
             }
             else
             {
                 _isCrouch = false;
-                Debug.Log("立つ");
+                _barrier.enabled = false;
             }
         });
     }

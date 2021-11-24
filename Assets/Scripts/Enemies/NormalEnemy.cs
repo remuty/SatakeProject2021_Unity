@@ -10,6 +10,7 @@ public class NormalEnemy : MonoBehaviour
     [SerializeField] private bool canAttack;
 
     private EnemyGenerator _enemyGenerator;
+    private RhythmManager _rhythmManager;
     private Player _player;
     private Record _record;
     private int _lane;
@@ -24,17 +25,27 @@ public class NormalEnemy : MonoBehaviour
     private float _attackTime; //攻撃するタイミングの時間
     private int _hp;
 
+    private bool _isAttacking;
+    public bool IsAttacking
+    {
+        set => _isAttacking = value;
+    }
     // Start is called before the first frame update
     void Start()
     {
         _enemyGenerator = GameObject.FindWithTag("EnemyGenerator").GetComponent<EnemyGenerator>();
+        _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _record = GameObject.FindWithTag("Record").GetComponent<Record>();
         transform.position = transformData.initialPosition[_lane];
         transform.localScale = transformData.initialScale;
         _hp = enemyData.maxHp;
-        _attackTime = Random.Range(enemyData.speed / 2, enemyData.speed * 2);
-        _attackTime = 2;
+        _attackTime = Random.Range(1, enemyData.speed * 2);
+        //近距離から攻撃できないようにする
+        if (_attackTime >= enemyData.speed - 3 && _attackTime <= enemyData.speed)
+        {
+            _attackTime -= 3;
+        }
     }
 
     // Update is called once per frame
@@ -69,15 +80,15 @@ public class NormalEnemy : MonoBehaviour
         if (canAttack)
         {
             _atkTime += Time.deltaTime;
-            //1番前にいる敵だけが攻撃できる
-            if (_atkTime > _attackTime && this.CompareTag("Target"))
+            //1番前にいる敵だけが攻撃できる。ノーツとタイミングを合わせる。
+            if (_atkTime > _attackTime && this.CompareTag("Target") && _isAttacking)
             {
-                var atkObj =
-                    Instantiate(atkObjPrefab, this.transform.position, Quaternion.identity, this.transform.parent);
-                atkObj.GetComponent<EnemyAttackObject>().AtkTime = _moveTime / enemyData.speed;
+                _rhythmManager.IsWarning = true;
+                Instantiate(atkObjPrefab, this.transform.position, Quaternion.identity, this.transform.parent);
                 _atkTime = 0;
                 _attackTime = Random.Range(enemyData.speed / 2, enemyData.speed * 2);
             }
+            _isAttacking = false;
         }
     }
 
