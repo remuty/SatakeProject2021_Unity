@@ -74,7 +74,6 @@ public class NormalEnemy : MonoBehaviour
             {
                 var atkObj =
                     Instantiate(atkObjPrefab, this.transform.position, Quaternion.identity, this.transform.parent);
-                atkObj.GetComponent<EnemyAttackObject>().AtkTime = _moveTime / enemyData.speed;
                 _atkTime = 0;
                 _attackTime = Random.Range(enemyData.speed / 2, enemyData.speed * 2);
             }
