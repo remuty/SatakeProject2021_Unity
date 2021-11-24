@@ -33,8 +33,7 @@ public class NormalEnemy : MonoBehaviour
         transform.position = transformData.initialPosition[_lane];
         transform.localScale = transformData.initialScale;
         _hp = enemyData.maxHp;
-        _attackTime = Random.Range(enemyData.speed / 2, enemyData.speed * 2);
-        _attackTime = 2;
+        _attackTime = Random.Range(enemyData.speed / 5, enemyData.speed * 2);
     }
 
     // Update is called once per frame
@@ -72,8 +71,7 @@ public class NormalEnemy : MonoBehaviour
             //1番前にいる敵だけが攻撃できる
             if (_atkTime > _attackTime && this.CompareTag("Target"))
             {
-                var atkObj =
-                    Instantiate(atkObjPrefab, this.transform.position, Quaternion.identity, this.transform.parent);
+                Instantiate(atkObjPrefab, this.transform.position, Quaternion.identity, this.transform.parent);
                 _atkTime = 0;
                 _attackTime = Random.Range(enemyData.speed / 2, enemyData.speed * 2);
             }

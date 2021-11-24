@@ -12,7 +12,7 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] private Transform beatPosition;
     [SerializeField] private Text comboText;
     [SerializeField] private Text comboSubText;
-    [SerializeField] private double bpm;
+    [SerializeField] private double[] bpm;
     //BGM
     [SerializeField] private AudioClip[] bgm; 
     //Wave切り替え時カットイン画像(Canvasの子オブジェクトに用意してあるものが割り当てられる想定)
@@ -66,8 +66,9 @@ public class RhythmManager : MonoBehaviour
         _audio = this.GetComponent<AudioSource>();
         _audio.clip = bgm[0];
         _audio.Play();
-        _interval = 1d / (bpm / 60d);
+        _interval = 1d / (bpm[0] / 60d);
         _metronomeStartDspTime = AudioSettings.dspTime;
+        Debug.Log(_metronomeStartDspTime);
         _wave = 1;
         //音の再生が止まったらWave切り替えスタート
         this.UpdateAsObservable()
@@ -178,6 +179,7 @@ public class RhythmManager : MonoBehaviour
         waveSwitchImage.enabled = false;
         _isSwitching = false;
         _audio.clip = bgm[(_wave - 1) % bgm.Length];
+        _interval = 1d / (bpm[(_wave - 1) % bgm.Length] / 60d);
         _audio.Play();
     }
 }
