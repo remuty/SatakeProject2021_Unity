@@ -722,7 +722,7 @@ MonoBehaviour:
   - {fileID: 1399244322372991621, guid: d269a25ad12273a45aeac6957e973237, type: 3}
   - {fileID: 3641834809546500201, guid: 1401e6819542f5b488dfa5e4e8f33970, type: 3}
   - {fileID: 1593510646057501107, guid: 360aa2322ce36bf4494c4078d4758efe, type: 3}
-  - {fileID: 1593510646057501107, guid: 2521adc0c61386d4bb14dd2f132621c7, type: 3}
+  - {fileID: 1593510646057501107, guid: 360aa2322ce36bf4494c4078d4758efe, type: 3}
 --- !u!1 &4714890825662989115
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,11 +992,17 @@ MonoBehaviour:
   comboSubText: {fileID: 4714890826239196974}
   bpm:
   - 90
+  - 90
+  - 100
   - 100
   - 110
+  - 110
   bgm:
+  - {fileID: 8300000, guid: 74a6d61c5488e2d4884fe459b862ab65, type: 3}
   - {fileID: 8300000, guid: fa096c0ba98afc140b8bde644ddac2ac, type: 3}
+  - {fileID: 8300000, guid: 171feb330392d5f498fb86e6c9a36626, type: 3}
   - {fileID: 8300000, guid: 2cd4b00416aaef54bb40f477e22c0d08, type: 3}
+  - {fileID: 8300000, guid: 1f8f01438d9360a4d85dac3c65f19a17, type: 3}
   - {fileID: 8300000, guid: 259bfbffe677a9249b4901da55ba7093, type: 3}
   waveSwitchImage: {fileID: 5627141606688029884}
   dangoSprite: {fileID: 21300000, guid: eb25e5ac52f155545b9af2f00358eb12, type: 3}
