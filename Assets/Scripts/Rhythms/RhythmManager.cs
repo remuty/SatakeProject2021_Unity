@@ -12,6 +12,7 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] private Transform beatPosition;
     [SerializeField] private Text comboText;
     [SerializeField] private Text comboSubText;
+    [SerializeField] private Text waveText;
     [SerializeField] private double[] bpm;
     //BGM
     [SerializeField] private AudioClip[] bgm; 
@@ -175,8 +176,11 @@ public class RhythmManager : MonoBehaviour
     {
         _wave++;
         waveSwitchImage.enabled = true;
+        waveText.text = $"{_wave}";
+        waveText.enabled = true;
         _isSwitching = true;
         yield return new WaitForSeconds(5f);
+        waveText.enabled = false;
         waveSwitchImage.enabled = false;
         _isSwitching = false;
         _audio.clip = bgm[(_wave - 1) % bgm.Length];
