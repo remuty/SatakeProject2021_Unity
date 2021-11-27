@@ -848,7 +848,7 @@ MonoBehaviour:
   _resultCanvas: {fileID: 4714890826558090326}
   _barrier: {fileID: 699669932773901492}
   hpGauge: {fileID: 5420332798510565256}
-  maxHp: 1
+  maxHp: 1000
 --- !u!1 &4714890825853438483
 GameObject:
   m_ObjectHideFlags: 0

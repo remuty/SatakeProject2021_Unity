@@ -27,7 +27,8 @@ public class RhythmManager : MonoBehaviour
     private List<GameObject> _notes = new List<GameObject>();
     
     private AudioSource _audio;
-    
+    public AudioSource Audio => _audio;
+
     private double _metronomeStartDspTime;
 
     private double _interval;
@@ -46,7 +47,7 @@ public class RhythmManager : MonoBehaviour
     public int Combo => _combo;
 
     //Wave数
-    private int _wave;
+    private int _wave = 1;
     public int Wave => _wave;
     //Wave切り替え中かどうか
     private bool _isSwitching;
@@ -74,7 +75,6 @@ public class RhythmManager : MonoBehaviour
         _audio.Play();
         _interval = 1d / (bpm[0] / 60d);
         _metronomeStartDspTime = AudioSettings.dspTime;
-        _wave = 1;
         //音の再生が止まったらWave切り替えスタート
         this.UpdateAsObservable()
             .Where(_ => !_audio.isPlaying)

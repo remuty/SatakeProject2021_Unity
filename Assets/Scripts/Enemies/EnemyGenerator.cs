@@ -6,21 +6,15 @@ public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
 
+    private RhythmManager _rhythmManager;
     private float _generateTime;
-
     private float _time;
-
-    private int _wave;
-
-    public int Wave
-    {
-        set => _wave = value;
-    }
 
     private List<int> _laneList = new List<int>();
     // Start is called before the first frame update
     void Start()
     {
+        _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
         for (int i = 0; i < 3; i++)
         {
             _laneList.Add(i);
@@ -30,20 +24,25 @@ public class EnemyGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _time += Time.deltaTime;
-        if (_time > _generateTime)
+        //waveが切り替わる間際では生成しない
+        if (_rhythmManager.Audio.time < _rhythmManager.Audio.clip.length - 10)
         {
-            if (_laneList.Count > 0)
+            _time += Time.deltaTime;
+            if (_time > _generateTime)
             {
-                var i = Random.Range(0, enemyPrefabs.Length);
-                var generatedEnemy = Instantiate(enemyPrefabs[i],
-                    transform.position, Quaternion.identity, this.transform);
-                i = Random.Range(0, _laneList.Count);
-                generatedEnemy.GetComponent<NormalEnemy>().Lane = _laneList[i];
-                _laneList.RemoveAt(i);
+                if (_laneList.Count > 0)
+                {
+                    var i = Random.Range(0, enemyPrefabs.Length);
+                    var generatedEnemy = Instantiate(enemyPrefabs[i],
+                        transform.position, Quaternion.identity, this.transform);
+                    i = Random.Range(0, _laneList.Count);
+                    generatedEnemy.GetComponent<NormalEnemy>().Lane = _laneList[i];
+                    _laneList.RemoveAt(i);
+                }
+                _time = 0;
+                //waveが増えるごとに生成時間が早くなる
+                _generateTime = Random.Range(7f, 10f) - _rhythmManager.Wave;
             }
-            _time = 0;
-            _generateTime = Random.Range(6, 8) - _wave;
         }
     }
 
