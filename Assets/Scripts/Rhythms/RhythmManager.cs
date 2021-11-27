@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
@@ -176,7 +177,7 @@ public class RhythmManager : MonoBehaviour
     {
         _wave++;
         waveSwitchImage.enabled = true;
-        waveText.text = $"{_wave}";
+        waveText.text = StringWidthConverter.IntToFull(_wave);
         waveText.enabled = true;
         _isSwitching = true;
         yield return new WaitForSeconds(5f);
