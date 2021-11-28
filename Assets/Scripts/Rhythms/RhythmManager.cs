@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
@@ -12,6 +13,7 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] private Transform beatPosition;
     [SerializeField] private Text comboText;
     [SerializeField] private Text comboSubText;
+    [SerializeField] private Text waveText;
     [SerializeField] private double[] bpm;
     //BGM
     [SerializeField] private AudioClip[] bgm; 
@@ -25,7 +27,8 @@ public class RhythmManager : MonoBehaviour
     private List<GameObject> _notes = new List<GameObject>();
     
     private AudioSource _audio;
-    
+    public AudioSource Audio => _audio;
+
     private double _metronomeStartDspTime;
 
     private double _interval;
@@ -44,7 +47,7 @@ public class RhythmManager : MonoBehaviour
     public int Combo => _combo;
 
     //Wave数
-    private int _wave;
+    private int _wave = 1;
     public int Wave => _wave;
     //Wave切り替え中かどうか
     private bool _isSwitching;
@@ -72,7 +75,6 @@ public class RhythmManager : MonoBehaviour
         _audio.Play();
         _interval = 1d / (bpm[0] / 60d);
         _metronomeStartDspTime = AudioSettings.dspTime;
-        _wave = 1;
         //音の再生が止まったらWave切り替えスタート
         this.UpdateAsObservable()
             .Where(_ => !_audio.isPlaying)
@@ -175,8 +177,11 @@ public class RhythmManager : MonoBehaviour
     {
         _wave++;
         waveSwitchImage.enabled = true;
+        waveText.text = StringWidthConverter.IntToFull(_wave);
+        waveText.enabled = true;
         _isSwitching = true;
         yield return new WaitForSeconds(5f);
+        waveText.enabled = false;
         waveSwitchImage.enabled = false;
         _isSwitching = false;
         _audio.clip = bgm[(_wave - 1) % bgm.Length];

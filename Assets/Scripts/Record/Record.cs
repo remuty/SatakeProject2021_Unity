@@ -11,7 +11,7 @@ public class Record : MonoBehaviour
     private RecordData _recordData;
     private List<RecordData> _recordDataList;
     private float _seconds, _secondsSum, _time;
-    private int _minutes, _minutesSum, _hours, _hoursSum, _calorie, _calorieSum, _score, _exp;
+    private int _minutes, _minutesSum, _hours, _hoursSum, _calorie, _calorieSum, _score, _wave, _exp;
 
     private bool _isSaved;
     private string _date = DateTime.Today.ToLongDateString();
@@ -62,7 +62,8 @@ public class Record : MonoBehaviour
                 var time = _hours + _minutes / 60f;
                 _calorie = (int) (5 * 60 * time * 1.05);
                 //得点計算 waveごとに500点　10秒ごとに2点
-                _score += 500 * 1; //TODO:wave数で加算
+                _wave = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>().Wave;
+                _score += 500 * _wave;
                 _score += (int) (_minutes * 60 + _seconds) / 10 * 2;
                 //経験値計算　得点*0.3
                 _exp = (int) (_score * 0.3);
@@ -78,16 +79,18 @@ public class Record : MonoBehaviour
             }
 
             //得点、最大波、運動時間、消費カロリー表示
-            GameObject.Find("Score").GetComponent<Text>().text = $"{_score}点";
-            GameObject.Find("Time").GetComponent<Text>().text = $"{_minutes}分{(int) _seconds}秒";
-            GameObject.Find("Calorie").GetComponent<Text>().text = $"{_calorie}kcal";
+            GameObject.Find("Score").GetComponent<Text>().text = $"{StringWidthConverter.IntToFull(_score)}点";
+            GameObject.Find("Wave").GetComponent<Text>().text = $"{StringWidthConverter.IntToFull(_wave)}点";
+            GameObject.Find("Time").GetComponent<Text>().text = $"{StringWidthConverter.IntToFull(_minutes)}分"+
+                $"{StringWidthConverter.IntToFull((int) _seconds)}秒";
+            GameObject.Find("Calorie").GetComponent<Text>().text = StringWidthConverter.IntToFull(_calorie);
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Result1)
         {
             if (_isSaved)
             {
                 //経験値表示
-                GameObject.Find("EXP").GetComponent<Text>().text = $"{_exp}";
+                GameObject.Find("EXP").GetComponent<Text>().text = StringWidthConverter.IntToFull(_exp);
                 var bar = GameObject.Find("EXPBar").GetComponent<Image>();
                 if (_time < 0.5f)
                 {
@@ -107,9 +110,9 @@ public class Record : MonoBehaviour
         else if (_switchScene.Scene == SwitchScene.Scenes.Home)
         {
             //ホーム画面プレイ時間とカロリー表示
-            GameObject.Find("Minutes").GetComponent<Text>().text = $"{_minutesSum}";
-            GameObject.Find("Hours").GetComponent<Text>().text = $"{_hoursSum}";
-            GameObject.Find("Calorie").GetComponent<Text>().text = $"{_calorieSum}";
+            GameObject.Find("Minutes").GetComponent<Text>().text = StringWidthConverter.IntToFull(_minutesSum);
+            GameObject.Find("Hours").GetComponent<Text>().text = StringWidthConverter.IntToFull(_hoursSum);
+            GameObject.Find("Calorie").GetComponent<Text>().text = StringWidthConverter.IntToFull(_calorieSum);
         }
     }
 
@@ -129,5 +132,18 @@ public class Record : MonoBehaviour
     public void AddScore(int point)
     {
         _score += point;
+    }
+    
+    //文字列を全角に変換
+    string StrConvToFull(string halfWidthStr)
+    {
+        string fullWidthStr = null;
+
+        for (int i = 0; i < halfWidthStr.Length; i++)
+        {
+            fullWidthStr += (char)(halfWidthStr[i] + 65248);
+        }
+
+        return fullWidthStr;
     }
 }
