@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SaveLoad : MonoBehaviour
 {
-    private string _key = "RecordData";
-    private string _key2 = "SaveData";
+    private string _key = "SaveData";
     private RecordData _recordData;
     private SaveData _saveData;
     public RecordData RecordData => _recordData;
@@ -19,27 +18,21 @@ public class SaveLoad : MonoBehaviour
 
     //　セーブ
     public void Save() {
-        PlayerPrefs.SetString(_key, _recordData.GetJsonData());
-        PlayerPrefs.SetString(_key2, _saveData.GetJsonData());
+        PlayerPrefs.SetString(_key, _saveData.GetJsonData());
         PlayerPrefs.Save();
-        Debug.Log($"セーブ{_recordData}");
+        Debug.Log($"セーブ{_saveData}");
     }
     //　ロード
     public void Load()
     {
         _recordData = new RecordData();
-        if(PlayerPrefs.HasKey(_key)) {
-            var data = PlayerPrefs.GetString(_key);
-            JsonUtility.FromJsonOverwrite(data, _recordData);
-            Debug.Log($"ロード{_recordData}");
-        }
         _saveData = new SaveData();
         _saveData.recordDataList = new List<RecordData>();
-        if(PlayerPrefs.HasKey(_key2)) {
-            var data = PlayerPrefs.GetString(_key2);
+        if(PlayerPrefs.HasKey(_key)) {
+            var data = PlayerPrefs.GetString(_key);
             JsonUtility.FromJsonOverwrite(data, _saveData);
 
-            Debug.Log(_saveData);
+            Debug.Log($"ロード{_saveData}");
         }
     }
 }

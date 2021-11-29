@@ -15,7 +15,7 @@ public class Record : MonoBehaviour
     private int _secondsToday, _minutesToday, _hoursToday, _calorieToday;   //今日のプレイ記録の合計
     private int _minutesSum, _hoursSum, _calorieSum;    //全てのプレイ記録の合計
     private bool _isSaved;
-    private string _date = DateTime.Today.ToLongDateString();
+    private string _date = DateTime.Today.AddDays(0).ToLongDateString();
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +25,17 @@ public class Record : MonoBehaviour
         _saveLoad.Load();
         _recordData = _saveLoad.RecordData;
         _recordDataList = _saveLoad.SaveData.recordDataList;
-        //セーブデータの日付が今日ならロード
-        if (_recordData.date == _date)
+        //最新のセーブデータの日付が今日ならロード
+        if (_recordDataList.Count > 0)
         {
-            _secondsToday = _recordData.seconds;
-            _minutesToday = _recordData.minutes;
-            _hoursToday = _recordData.hours;
-            _calorieToday = _recordData.calorie;
+            if (_recordDataList[_recordDataList.Count - 1].date == _date)
+            {
+                _recordData = _recordDataList[_recordDataList.Count - 1];
+                _secondsToday = _recordData.seconds;
+                _minutesToday = _recordData.minutes;
+                _hoursToday = _recordData.hours;
+                _calorieToday = _recordData.calorie;
+            }
         }
 
         Sum();
@@ -43,7 +47,7 @@ public class Record : MonoBehaviour
         if (_switchScene.Scene == SwitchScene.Scenes.Main)
         {
             //プレイ時間計測
-            _seconds += Time.deltaTime;
+            _seconds += Time.deltaTime + 1f;    //ToDo:デバッグ用1fを消す
             if (_seconds >= 60f)
             {
                 _minutes++;
@@ -76,7 +80,22 @@ public class Record : MonoBehaviour
                 _hoursToday += _hours;
                 _calorieToday += _calorie;
                 _recordData.SetRecord(_secondsToday, _minutesToday, _hoursToday, _calorieToday, _date);
-                _recordDataList.Add(_recordData);
+                //セーブデータ上書きor追加
+                if (_recordDataList.Count > 0)
+                {
+                    if (_recordDataList[_recordDataList.Count - 1].date == _date)
+                    {
+                        _recordDataList[_recordDataList.Count - 1] = _recordData;
+                    }
+                    else
+                    {
+                        _recordDataList.Add(_recordData);
+                    }
+                }
+                else
+                {
+                    _recordDataList.Add(_recordData);
+                }
                 _saveLoad.SaveData.SetRecordList(_recordDataList);
                 _saveLoad.Save();
 
