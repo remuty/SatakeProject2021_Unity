@@ -231,6 +231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titlePrefab: {fileID: 1768188833378574012, guid: 166b7a273cd15b545a750bf0912735e0, type: 3}
   homePrefab: {fileID: 1768188833378574012, guid: a66e8d0625a165c47825a3272139cba3, type: 3}
+  recordPrefab: {fileID: 7120435604372662544, guid: ff3fafaef5575492886ea3031f6c99d8, type: 3}
+  cardPrefab: {fileID: 7318392975496235585, guid: 4023d6e574371405e8efe479807006b4, type: 3}
   mainPrefab: {fileID: 4714890826344772398, guid: a3da378fa08b83f4a87a62d6cf905642, type: 3}
 --- !u!1 &985725285
 GameObject:

@@ -2645,12 +2645,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9227dba20c85144a39d475b889d548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuAxis: 1
+  menuAxis: 0
   menuTexts: []
   menuImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 480982122246144108}
+  - {fileID: 480982122131105442}
   defaultColor: {r: 0.627451, g: 0.627451, b: 0.627451, a: 1}
 --- !u!1 &7120435604755733920
 GameObject:
