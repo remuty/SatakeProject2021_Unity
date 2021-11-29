@@ -24,4 +24,10 @@ public class RecordData : object
         calorie = c;
         date = d;
     }
+    
+    //Debug.Log出力用
+    public override string ToString()
+    {
+        return JsonUtility.ToJson( this, true );
+    }
 }

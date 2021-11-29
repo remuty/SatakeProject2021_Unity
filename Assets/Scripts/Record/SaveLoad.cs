@@ -22,8 +22,7 @@ public class SaveLoad : MonoBehaviour
         PlayerPrefs.SetString(_key, _recordData.GetJsonData());
         PlayerPrefs.SetString(_key2, _saveData.GetJsonData());
         PlayerPrefs.Save();
-        Debug.Log($"セーブ{_recordData.hours}時間{_recordData.minutes}分" +
-                  $"{_recordData.seconds}秒{_recordData.calorie}kcal{_recordData.date}");
+        Debug.Log($"セーブ{_recordData}");
     }
     //　ロード
     public void Load()
@@ -32,8 +31,7 @@ public class SaveLoad : MonoBehaviour
         if(PlayerPrefs.HasKey(_key)) {
             var data = PlayerPrefs.GetString(_key);
             JsonUtility.FromJsonOverwrite(data, _recordData);
-            Debug.Log($"ロード{_recordData.hours}時間{_recordData.minutes}分" +
-                      $"{_recordData.seconds}秒{_recordData.calorie}kcal{_recordData.date}");
+            Debug.Log($"ロード{_recordData}");
         }
         _saveData = new SaveData();
         _saveData.recordDataList = new List<RecordData>();
@@ -41,8 +39,7 @@ public class SaveLoad : MonoBehaviour
             var data = PlayerPrefs.GetString(_key2);
             JsonUtility.FromJsonOverwrite(data, _saveData);
 
-            var list = _saveData.recordDataList[0];
-            Debug.Log(new {list.hours,list.minutes,list.seconds,list.calorie,list.date});
+            Debug.Log(_saveData);
         }
     }
 }

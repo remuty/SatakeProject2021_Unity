@@ -16,4 +16,10 @@ public class SaveData : object
     {
         recordDataList = r;
     }
+    
+    //Debug.Log出力用
+    public override string ToString()
+    {
+        return JsonUtility.ToJson( this, true );
+    }
 }

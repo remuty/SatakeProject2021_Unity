@@ -24,7 +24,6 @@ public class Joycontest : MonoBehaviour
         //Debug.Log(_stick.j.GetStick()[1]);
         if (_stick.j.GetStick()[1] > 0f)
         {
-            Debug.Log("卍");
             _scrollbar.value += 0.01f;
         }
         else if (_stick.j.GetStick()[1] < 0f)

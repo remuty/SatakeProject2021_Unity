@@ -11,8 +11,8 @@ public class Record : MonoBehaviour
     private RecordData _recordData;
     private List<RecordData> _recordDataList;
     private float _seconds, _secondsSum, _time;
-    private int _minutes, _minutesSum, _hours, _hoursSum, _calorie, _calorieSum, _score, _wave, _exp;
-
+    private int _minutes,  _hours,  _calorie,  _score, _wave, _exp;
+    private int _minutesSum, _hoursSum, _calorieSum;
     private bool _isSaved;
     private string _date = DateTime.Today.ToLongDateString();
 
