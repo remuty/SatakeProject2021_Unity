@@ -6,11 +6,11 @@ public class SwitchScene : MonoBehaviour
 {
     [SerializeField] private GameObject titlePrefab;
     [SerializeField] private GameObject homePrefab;
+    [SerializeField] private GameObject recordPrefab;
+    [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject mainPrefab;
     private Stick _stick;
-    private GameObject _title;
-    private GameObject _home;
-    private GameObject _main;
+    private GameObject _current;
 
     private int _menuNum;
 
@@ -23,6 +23,8 @@ public class SwitchScene : MonoBehaviour
     {
         Title,
         Home,
+        Record,
+        Card,
         Main,
         Result0,
         Result1,
@@ -41,7 +43,7 @@ public class SwitchScene : MonoBehaviour
     void Start()
     {
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
-        _title = Instantiate(titlePrefab);
+        _current = Instantiate(titlePrefab);
     }
 
     // Update is called once per frame
@@ -53,9 +55,7 @@ public class SwitchScene : MonoBehaviour
             {
                 if (_menuNum == 0)
                 {
-                    Destroy(_title);
-                    _home = Instantiate(homePrefab);
-                    _scene = Scenes.Home;
+                    Load(homePrefab,Scenes.Home);
                 }
                 else if (_menuNum == 1)
                 {
@@ -69,12 +69,19 @@ public class SwitchScene : MonoBehaviour
             }
             else if (_scene == Scenes.Home)
             {
-                if (_menuNum == 0)
+                if (_menuNum == 0)  //スタートボタン
                 {
-                    Destroy(_home);
                     LoadMain();
                 }
-                else if (_menuNum == 4)
+                else if (_menuNum == 1) //手札ボタン
+                {
+                    Load(cardPrefab,Scenes.Card);
+                }
+                else if (_menuNum == 2) //記録ボタン
+                {
+                    Load(recordPrefab,Scenes.Record);
+                }
+                else if (_menuNum == 4) //やめるボタン
                 {
                     //アプリ終了
 #if UNITY_EDITOR
@@ -82,6 +89,28 @@ public class SwitchScene : MonoBehaviour
 #else
                     Application.Quit();
 #endif
+                }
+            }
+            else if (_scene == Scenes.Record)
+            {
+                if (_menuNum == 0)  //戻るボタン
+                {
+                    Load(homePrefab,Scenes.Home);
+                }
+                else if (_menuNum == 1) //所持札一覧ボタン
+                {
+                    Load(cardPrefab,Scenes.Card);
+                }
+            }
+            else if (_scene == Scenes.Card)
+            {
+                if (_menuNum == 0)  //戻るボタン
+                {
+                    Load(homePrefab,Scenes.Home);
+                }
+                else if (_menuNum == 1) //記録一覧ボタン
+                {
+                    Load(recordPrefab,Scenes.Record);
                 }
             }
             else if (_scene == Scenes.Result0)
@@ -95,7 +124,6 @@ public class SwitchScene : MonoBehaviour
             }
             else if (_scene == Scenes.Result1)
             {
-                Destroy(_main);
                 Time.timeScale = 1;
                 if (_menuNum == 0)
                 {
@@ -103,8 +131,7 @@ public class SwitchScene : MonoBehaviour
                 }
                 else if (_menuNum == 1)
                 {
-                    _home = Instantiate(homePrefab);
-                    _scene = Scenes.Home;
+                    Load(homePrefab,Scenes.Home);
                 }
             }
             else if (_scene == Scenes.Result2)
@@ -123,13 +150,21 @@ public class SwitchScene : MonoBehaviour
 
     void LoadMain()
     {
-        _main = Instantiate(mainPrefab);
-        var canvases = _main.GetComponentsInChildren<Canvas>();
+        Destroy(_current);
+        _current = Instantiate(mainPrefab);
+        var canvases = _current.GetComponentsInChildren<Canvas>();
         foreach (var canvas in canvases)
         {
             canvas.worldCamera = Camera.main;
         }
 
         _scene = Scenes.Main;
+    }
+
+    void Load(GameObject next,Scenes scene)
+    {
+        Destroy(_current);
+        _current = Instantiate(next);
+        _scene = scene;
     }
 }
