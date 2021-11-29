@@ -12,10 +12,10 @@ public class Record : MonoBehaviour
     private List<RecordData> _recordDataList;
     private float _seconds, _time;
     private int _minutes, _hours, _calorie, _score, _wave, _exp;
-    private int _secondsToday, _minutesToday, _hoursToday, _calorieToday;   //今日のプレイ記録の合計
-    private int _minutesSum, _hoursSum, _calorieSum;    //全てのプレイ記録の合計
+    private int _secondsToday, _minutesToday, _hoursToday, _calorieToday, _scoreToday, _waveToday; //今日のプレイ記録の合計
+    private int _minutesSum, _hoursSum, _calorieSum; //全てのプレイ記録の合計
     private bool _isSaved;
-    private string _date = DateTime.Today.AddDays(0).ToLongDateString();
+    private DateTime _date = DateTime.Today.AddDays(0);
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +26,12 @@ public class Record : MonoBehaviour
         _recordData = _saveLoad.RecordData;
         _recordDataList = _saveLoad.SaveData.recordDataList;
         //最新のセーブデータの日付が今日ならロード
-        if (_recordDataList.Count > 0)
+        var c = _recordDataList.Count;
+        if (c > 0)
         {
-            if (_recordDataList[_recordDataList.Count - 1].date == _date)
+            if (_recordDataList[c - 1].day == _date.Day &&_recordDataList[c - 1].month == _date.Month)
             {
-                _recordData = _recordDataList[_recordDataList.Count - 1];
+                _recordData = _recordDataList[c - 1];
                 _secondsToday = _recordData.seconds;
                 _minutesToday = _recordData.minutes;
                 _hoursToday = _recordData.hours;
@@ -47,7 +48,7 @@ public class Record : MonoBehaviour
         if (_switchScene.Scene == SwitchScene.Scenes.Main)
         {
             //プレイ時間計測
-            _seconds += Time.deltaTime + 1f;    //ToDo:デバッグ用1fを消す
+            _seconds += Time.deltaTime + 1f; //ToDo:デバッグ用1fを消す
             if (_seconds >= 60f)
             {
                 _minutes++;
@@ -75,17 +76,21 @@ public class Record : MonoBehaviour
                 //経験値計算　得点*0.3
                 _exp = (int) (_score * 0.3);
 
-                _secondsToday += (int)_seconds;
+                _secondsToday += (int) _seconds;
                 _minutesToday += _minutes;
                 _hoursToday += _hours;
                 _calorieToday += _calorie;
-                _recordData.SetRecord(_secondsToday, _minutesToday, _hoursToday, _calorieToday, _date);
+                _scoreToday += _score;
+                _waveToday += _wave;
+                _recordData.SetRecord(_secondsToday, _minutesToday, _hoursToday,
+                    _calorieToday, _scoreToday, _waveToday, _date);
                 //セーブデータ上書きor追加
-                if (_recordDataList.Count > 0)
+                var c = _recordDataList.Count;
+                if (c > 0)
                 {
-                    if (_recordDataList[_recordDataList.Count - 1].date == _date)
+                    if (_recordDataList[c - 1].day == _date.Day &&_recordDataList[c - 1].month == _date.Month)
                     {
-                        _recordDataList[_recordDataList.Count - 1] = _recordData;
+                        _recordDataList[c - 1] = _recordData;
                     }
                     else
                     {
@@ -96,6 +101,7 @@ public class Record : MonoBehaviour
                 {
                     _recordDataList.Add(_recordData);
                 }
+
                 _saveLoad.SaveData.SetRecordList(_recordDataList);
                 _saveLoad.Save();
 
@@ -104,7 +110,7 @@ public class Record : MonoBehaviour
 
             //得点、最大波、運動時間、消費カロリー表示
             GameObject.Find("Score").GetComponent<Text>().text = $"{StringWidthConverter.IntToFull(_score)}点";
-            GameObject.Find("Wave").GetComponent<Text>().text = $"{StringWidthConverter.IntToFull(_wave)}点";
+            GameObject.Find("Wave").GetComponent<Text>().text = $"{StringWidthConverter.IntToFull(_wave)}波";
             GameObject.Find("Time").GetComponent<Text>().text = $"{StringWidthConverter.IntToFull(_minutes)}分" +
                                                                 $"{StringWidthConverter.IntToFull((int) _seconds)}秒";
             GameObject.Find("Calorie").GetComponent<Text>().text = StringWidthConverter.IntToFull(_calorie);
@@ -144,6 +150,19 @@ public class Record : MonoBehaviour
             GameObject.Find("MinutesSum").GetComponent<Text>().text = StringWidthConverter.IntToFull(_minutesSum);
             GameObject.Find("HoursSum").GetComponent<Text>().text = StringWidthConverter.IntToFull(_hoursSum);
             GameObject.Find("CalorieSum").GetComponent<Text>().text = StringWidthConverter.IntToFull(_calorieSum);
+            //記録画面：日付ごとに最新の３日間の記録表示
+            if (_recordDataList.Count >= 1)
+            {
+                RecordByDate(0);
+            }
+            if (_recordDataList.Count >= 2)
+            {
+                RecordByDate(1);
+            }
+            if (_recordDataList.Count >= 3)
+            {
+                RecordByDate(2);
+            }
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Card)
         {
@@ -172,14 +191,34 @@ public class Record : MonoBehaviour
         _minutesSum = 0;
         _hoursSum = 0;
         _calorieSum = 0;
-        foreach(var data in _recordDataList)
+        foreach (var data in _recordDataList)
         {
             _minutesSum += data.minutes;
             _hoursSum += data.hours;
             _calorieSum += data.calorie;
         }
+
         _hoursSum += _minutesSum / 60;
         _minutesSum = _minutesSum % 60;
+    }
+
+    void RecordByDate(int i)
+    {
+        var c = _recordDataList.Count;
+        GameObject.Find($"Month{i}").GetComponent<Text>().text =
+            StringWidthConverter.IntToFull(_recordDataList[c - 1 - i].month);
+        GameObject.Find($"Day{i}").GetComponent<Text>().text =
+            StringWidthConverter.IntToFull(_recordDataList[c - 1 - i].day);
+        GameObject.Find($"Score{i}").GetComponent<Text>().text =
+            StringWidthConverter.IntToFull(_recordDataList[c - 1 - i].score);
+        GameObject.Find($"Wave{i}").GetComponent<Text>().text =
+            StringWidthConverter.IntToFull(_recordDataList[c - 1 - i].wave);
+        GameObject.Find($"Hours{i}").GetComponent<Text>().text =
+            StringWidthConverter.IntToFull(_recordDataList[c - 1 - i].hours);
+        GameObject.Find($"Minutes{i}").GetComponent<Text>().text =
+            StringWidthConverter.IntToFull(_recordDataList[c - 1 - i].minutes);
+        GameObject.Find($"Calorie{i}").GetComponent<Text>().text =
+            StringWidthConverter.IntToFull(_recordDataList[c - 1 - i].calorie);
     }
 
     public void AddScore(int point)
