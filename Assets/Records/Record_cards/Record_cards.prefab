@@ -3946,7 +3946,7 @@ GameObject:
   - component: {fileID: 7318392973740572310}
   - component: {fileID: 7318392973740572311}
   m_Layer: 5
-  m_Name: Minutes
+  m_Name: MinutesSum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3968,7 +3968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -130.63916, y: -36.216}
+  m_AnchoredPosition: {x: -135.4, y: -37}
   m_SizeDelta: {x: 103.1908, y: 72.4316}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7318392973740572305
@@ -4001,7 +4001,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2cfaaa259ae3eae4995af62b82d4c91d, type: 3}
-    m_FontSize: 50
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -10315,7 +10315,7 @@ GameObject:
   - component: {fileID: 7318392974292466366}
   - component: {fileID: 7318392974292466367}
   m_Layer: 5
-  m_Name: Calorie
+  m_Name: CalorieSum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10337,8 +10337,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 160, y: -36.718}
-  m_SizeDelta: {x: 158.8393, y: 73.436}
+  m_AnchoredPosition: {x: 131, y: -37}
+  m_SizeDelta: {x: 210.1555, y: 73.436}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7318392974292466361
 CanvasRenderer:
@@ -10370,7 +10370,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2cfaaa259ae3eae4995af62b82d4c91d, type: 3}
-    m_FontSize: 50
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -10381,7 +10381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uFF12\uFF13\uFF14"
+  m_Text: "\uFF12\uFF13\uFF14\uFF18"
 --- !u!114 &7318392974292466367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10395,7 +10395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useRichText: 0
-  m_spacing: 0
+  m_spacing: 7
 --- !u!1 &7318392974304230775
 GameObject:
   m_ObjectHideFlags: 0
@@ -18299,7 +18299,7 @@ GameObject:
   - component: {fileID: 7318392975037823730}
   - component: {fileID: 7318392975037823731}
   m_Layer: 5
-  m_Name: Hours
+  m_Name: HoursSum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18321,7 +18321,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -342.29, y: -37.22}
+  m_AnchoredPosition: {x: -347.1, y: -37}
   m_SizeDelta: {x: 145.4281, y: 72.4316}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7318392975037823741
@@ -18354,7 +18354,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2cfaaa259ae3eae4995af62b82d4c91d, type: 3}
-    m_FontSize: 50
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

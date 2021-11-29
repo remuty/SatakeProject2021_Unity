@@ -6,7 +6,7 @@ using System;
 [Serializable]
 public class RecordData : object
 {
-    public float seconds;
+    public int seconds;
     public int minutes;
     public int hours;
     public int calorie;
@@ -16,7 +16,7 @@ public class RecordData : object
         return JsonUtility.ToJson(this);
     }
 
-    public void SetRecord(float s,int m,int h,int c,string d)
+    public void SetRecord(int s,int m,int h,int c,string d)
     {
         seconds = s;
         minutes = m;
