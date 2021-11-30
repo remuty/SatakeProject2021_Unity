@@ -6,8 +6,9 @@ using UniRx;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameObject _resultCanvas;
-    [SerializeField] private Image _barrier;
+    [SerializeField] private GameObject resultCanvas;
+    [SerializeField] private Image barrierImage;
+    [SerializeField] private Image bloodImage;
     [SerializeField] private Slider hpGauge;
     [SerializeField] private int maxHp;
 
@@ -17,21 +18,21 @@ public class Player : MonoBehaviour
     private Stick _stickL;
 
     private SymbolCardDeck _symbolCardDeck;
-
     private SwitchScene _switchScene;
-
     private GameObject _target;
-
     public GameObject Target => _target;
 
+    private bool _isDamaged;
     private bool _isSelected;
     private bool _isCrouch;
     public bool IsCrouch => _isCrouch;
 
+    private float _time;
+
     // Start is called before the first frame update
     void Start()
     {
-        _resultCanvas.SetActive(false);
+        resultCanvas.SetActive(false);
         _stickR = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
         _stickL = GameObject.FindWithTag("JoyConLeft").GetComponent<Stick>();
         _symbolCardDeck = GameObject.FindWithTag("SymbolCardDeck").GetComponent<SymbolCardDeck>();
@@ -53,12 +54,12 @@ public class Player : MonoBehaviour
             if (n)
             {
                 _isCrouch = true;
-                _barrier.enabled = true;
+                barrierImage.enabled = true;
             }
             else
             {
                 _isCrouch = false;
-                _barrier.enabled = false;
+                barrierImage.enabled = false;
             }
         });
     }
@@ -85,9 +86,24 @@ public class Player : MonoBehaviour
             _isSelected = false;
         }
 
-        if (_hp <= 0)
+        if (_isDamaged)
         {
-            _resultCanvas.SetActive(true);
+            _time += Time.deltaTime;
+            if (_time < 2)
+            {
+                bloodImage.color = new Color(1, 1, 1, 1 - _time/2);
+            }
+            else
+            {
+                bloodImage.color = new Color(1, 1, 1, 0);
+                _time = 0;
+                _isDamaged = false;
+            }
+        }
+        
+        if (_hp <= 0)   //体力0でリザルトに遷移
+        {
+            resultCanvas.SetActive(true);
             _switchScene.Scene = SwitchScene.Scenes.Result0;
             Time.timeScale = 0;
             GetComponent<Player>().enabled = false;
@@ -101,6 +117,8 @@ public class Player : MonoBehaviour
         {
             _hp -= damage;
             hpGauge.value = (float) _hp / (float) maxHp;
+            _isDamaged = true;
+            bloodImage.color = new Color(1, 1, 1, 1);
         }
     }
 

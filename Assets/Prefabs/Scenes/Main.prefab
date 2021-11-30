@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5335596958227335259
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4714890826461498738}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -845,10 +845,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a3dac26c3545164cac76bced1bfe297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resultCanvas: {fileID: 4714890826558090326}
-  _barrier: {fileID: 699669932773901492}
+  resultCanvas: {fileID: 4714890826558090326}
+  barrierImage: {fileID: 699669932773901492}
+  bloodImage: {fileID: 1391425079054016222}
   hpGauge: {fileID: 5420332798510565256}
-  maxHp: 10
+  maxHp: 100
 --- !u!1 &4714890825853438483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,8 +1591,8 @@ RectTransform:
   - {fileID: 3685474404887939792}
   - {fileID: 4714890826134877818}
   - {fileID: 3986559229264280116}
-  - {fileID: 6820558228302383589}
   - {fileID: 5335596958227335259}
+  - {fileID: 6820558228302383589}
   m_Father: {fileID: 4714890826344772399}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1619,7 +1620,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: -1977842667
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &4714890826461498736
 MonoBehaviour:
@@ -2296,7 +2297,7 @@ RectTransform:
   m_Children:
   - {fileID: 5859189080015156958}
   m_Father: {fileID: 4714890826461498738}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
