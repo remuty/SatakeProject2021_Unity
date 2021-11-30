@@ -48,7 +48,7 @@ public class Record : MonoBehaviour
         if (_switchScene.Scene == SwitchScene.Scenes.Main)
         {
             //プレイ時間計測
-            _seconds += Time.deltaTime + 1f; //ToDo:デバッグ用1fを消す
+            _seconds += Time.deltaTime; //ToDo:デバッグ用1fを消す
             if (_seconds >= 60f)
             {
                 _minutes++;
