@@ -129,11 +129,6 @@ public class RhythmManager : MonoBehaviour
                 _notes[_notes.Count - 2].GetComponent<SpriteRenderer>().sprite = dangoSprite;
                 _isWarning = false;
             }
-
-            if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
-            {
-                _combo = 0;
-            }
         }
 
         if (_combo >= 2)
@@ -152,6 +147,7 @@ public class RhythmManager : MonoBehaviour
     public Beat CanBeat()
     {
         var ret = Beat.noReaction;
+        
         if (Mathf.Abs(_notes[0].transform.position.x) <= _checkRange)
         {
             if (Mathf.Abs(_notes[0].transform.position.x) <= _beatRange)
@@ -179,7 +175,7 @@ public class RhythmManager : MonoBehaviour
     {
         if (_notes.Count > 0)
         {
-            if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
+            if (_notes[0].GetComponent<Note>().IsMissed)
             {
                 _combo = 0;
             }

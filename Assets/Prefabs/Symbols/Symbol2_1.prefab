@@ -161,7 +161,7 @@ MonoBehaviour:
   guides:
   - {fileID: 5742750501863108073}
   - {fileID: 8813428608653889096}
-  _atk: 1
+  _atk: 2
   _knockBackPower: 1
 --- !u!1 &4580514520310342134
 GameObject:

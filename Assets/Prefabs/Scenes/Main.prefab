@@ -1114,8 +1114,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 259bfbffe677a9249b4901da55ba7093, type: 3}
   waveSwitchImage: {fileID: 5627141606688029884}
   dangoSprite: {fileID: 21300000, guid: 80413a97d4b55e54abeb0d5095a11ad9, type: 3}
-  _checkRange: 3
-  _beatRange: 2.5
+  _checkRange: 1
+  _beatRange: 0.8
   _isWarning: 0
 --- !u!82 &4714890825982525556
 AudioSource:
