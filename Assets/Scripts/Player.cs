@@ -45,7 +45,10 @@ public class Player : MonoBehaviour
             if (n && _symbolCardDeck != null)
             {
                 var symbol = _symbolCardDeck.SelectedCard.Symbol;
-                symbol.DrawSymbol();
+                if (symbol != null)
+                {
+                    symbol.DrawSymbol();
+                }
             }
         });
         //しゃがんだor立った瞬間実行される
@@ -136,7 +139,11 @@ public class Player : MonoBehaviour
             }
         }
 
-        _target.tag = "Target";
+        if (_target != null)
+        {
+            _target.tag = "Target";
+        }
+        
         // SwitchOutline(true);
     }
 

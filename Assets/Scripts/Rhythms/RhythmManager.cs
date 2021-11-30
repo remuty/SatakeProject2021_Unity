@@ -14,18 +14,22 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] private Text comboText;
     [SerializeField] private Text comboSubText;
     [SerializeField] private Text waveText;
+
     [SerializeField] private double[] bpm;
+
     //BGM
-    [SerializeField] private AudioClip[] bgm; 
+    [SerializeField] private AudioClip[] bgm;
+
     //Wave切り替え時カットイン画像(Canvasの子オブジェクトに用意してあるものが割り当てられる想定)
     [SerializeField] private Image waveSwitchImage;
+
     //団子飛んでくるときのノーツスプライト
     [SerializeField] private Sprite dangoSprite;
 
 
     // [SerializeField] private GameObject[] _notes;
     private List<GameObject> _notes = new List<GameObject>();
-    
+
     private AudioSource _audio;
     public AudioSource Audio => _audio;
 
@@ -38,9 +42,9 @@ public class RhythmManager : MonoBehaviour
     private double _time;
 
     private double _oldTime;
-    
+
     [SerializeField] private float _checkRange = 0.8f;
-    
+
     [SerializeField] private float _beatRange = 0.4f;
 
     private int _combo;
@@ -48,13 +52,17 @@ public class RhythmManager : MonoBehaviour
 
     //Wave数
     private int _wave = 1;
+
     public int Wave => _wave;
+
     //Wave切り替え中かどうか
     private bool _isSwitching;
+
     public bool IsSwitching => _isSwitching;
+
     //次のノーツを団子にするかどうか（デバッグ用にSelializeField）
-    [SerializeField]
-    private bool _isWarning;
+    [SerializeField] private bool _isWarning;
+
     public bool IsWarning
     {
         set => _isWarning = value;
@@ -92,28 +100,36 @@ public class RhythmManager : MonoBehaviour
             //Wave切り替え中はNoteを生成しない
             if (!_isSwitching)
             {
-                GameObject.FindWithTag("Target").GetComponent<NormalEnemy>().IsAttacking = true;
+                if (GameObject.FindWithTag("Target") != null)
+                {
+                    GameObject.FindWithTag("Target").GetComponent<NormalEnemy>().IsAttacking = true;
+                }
+
                 var generatedNote = Instantiate(notePrefab,
-                transform.position, Quaternion.identity, this.transform);
+                    transform.position, Quaternion.identity, this.transform);
                 generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[0], beatPosition);
-               
+
                 _notes.Add(generatedNote);
                 generatedNote = Instantiate(notePrefab, transform.position, Quaternion.identity, this.transform);
                 generatedNote.GetComponent<Note>().SetTransform(noteGeneratePositions[1], beatPosition);
-                
+
                 _notes.Add(generatedNote);
             }
+
             _buffer = _time - _interval;
             _oldTime += _time - _buffer;
         }
-        
+
         if (_notes.Count > 0)
         {
-            if (_isWarning) {    //泥団子に切り替える
+            if (_isWarning)
+            {
+                //泥団子に切り替える
                 _notes[_notes.Count - 1].GetComponent<SpriteRenderer>().sprite = dangoSprite;
                 _notes[_notes.Count - 2].GetComponent<SpriteRenderer>().sprite = dangoSprite;
                 _isWarning = false;
             }
+
             if (Mathf.Abs(_notes[0].transform.position.x) <= 0.001f)
             {
                 _combo = 0;
@@ -131,7 +147,7 @@ public class RhythmManager : MonoBehaviour
             comboSubText.text = "";
         }
     }
-    
+
 
     public Beat CanBeat()
     {
@@ -150,14 +166,16 @@ public class RhythmManager : MonoBehaviour
                 _combo = 0;
                 ret = Beat.miss;
             }
+
             Destroy(_notes[0]);
             Destroy(_notes[1]);
-            _notes.RemoveRange(0,2);
+            _notes.RemoveRange(0, 2);
         }
+
         return ret;
     }
 
-    public void NotesCheck()    //ノーツを見逃したらコンボリセット
+    public void NotesCheck() //ノーツを見逃したらコンボリセット
     {
         if (_notes.Count > 0)
         {
@@ -167,12 +185,12 @@ public class RhythmManager : MonoBehaviour
             }
         }
     }
-    
+
     public void RemoveNote()
     {
         _notes.RemoveAt(0);
     }
-    
+
     IEnumerator SwitchWave()
     {
         _wave++;

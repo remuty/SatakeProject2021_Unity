@@ -68,6 +68,10 @@ public class Symbol : MonoBehaviour
                             effect.GetComponent<AttackEffect>().SetPower(_atk,_knockBackPower);
                         }
                     }
+                    else
+                    {
+                        Destroy(this.gameObject);
+                    }
                     _isSymbolDrawing = false;
                     _symbolCardDeck.DrawCard();
                 }
