@@ -11,7 +11,7 @@ public class Record : MonoBehaviour
     private RecordData _recordData;
     private List<RecordData> _recordDataList;
     private float _seconds, _time;
-    private int _minutes, _hours, _calorie, _score, _wave, _exp;
+    private int _minutes, _hours, _calorie, _score, _wave, _exp, _kill;
     private int _secondsToday, _minutesToday, _hoursToday, _calorieToday, _scoreToday, _waveToday; //今日のプレイ記録の合計
     private int _minutesSum, _hoursSum, _calorieSum; //全てのプレイ記録の合計
     private bool _isSaved;
@@ -29,7 +29,7 @@ public class Record : MonoBehaviour
         var c = _recordDataList.Count;
         if (c > 0)
         {
-            if (_recordDataList[c - 1].day == _date.Day &&_recordDataList[c - 1].month == _date.Month)
+            if (_recordDataList[c - 1].day == _date.Day && _recordDataList[c - 1].month == _date.Month)
             {
                 _recordData = _recordDataList[c - 1];
                 _secondsToday = _recordData.seconds;
@@ -48,7 +48,7 @@ public class Record : MonoBehaviour
         if (_switchScene.Scene == SwitchScene.Scenes.Main)
         {
             //プレイ時間計測
-            _seconds += Time.deltaTime + 1f; //ToDo:デバッグ用1fを消す
+            _seconds += Time.deltaTime;
             if (_seconds >= 60f)
             {
                 _minutes++;
@@ -76,9 +76,10 @@ public class Record : MonoBehaviour
                 //経験値計算　得点*0.3
                 _exp = (int) (_score * 0.3);
 
-                _secondsToday += (int) _seconds;
-                _minutesToday += _minutes;
-                _hoursToday += _hours;
+                //今日の合計計算
+                _secondsToday += (int) _seconds % 60;
+                _minutesToday += (_minutes + _secondsToday / 60) % 60;
+                _hoursToday += _hours + _minutesToday / 60;
                 _calorieToday += _calorie;
                 _scoreToday += _score;
                 _waveToday += _wave;
@@ -88,7 +89,7 @@ public class Record : MonoBehaviour
                 var c = _recordDataList.Count;
                 if (c > 0)
                 {
-                    if (_recordDataList[c - 1].day == _date.Day &&_recordDataList[c - 1].month == _date.Month)
+                    if (_recordDataList[c - 1].day == _date.Day && _recordDataList[c - 1].month == _date.Month)
                     {
                         _recordDataList[c - 1] = _recordData;
                     }
@@ -143,6 +144,39 @@ public class Record : MonoBehaviour
             GameObject.Find("Minutes").GetComponent<Text>().text = StringWidthConverter.IntToFull(_minutesToday);
             GameObject.Find("Hours").GetComponent<Text>().text = StringWidthConverter.IntToFull(_hoursToday);
             GameObject.Find("Calorie").GetComponent<Text>().text = StringWidthConverter.IntToFull(_calorieToday);
+            //ホーム画面：デイリーチャレンジ
+            if (_kill >= 8)
+            {
+                GameObject.Find("Challeng0").GetComponent<Image>().enabled = false;
+                GameObject.Find("Achieved0").GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                GameObject.Find("Challeng0").GetComponent<Image>().enabled = true;
+                GameObject.Find("Achieved0").GetComponent<Image>().enabled = false;
+            }
+
+            if (_minutesToday >= 20 || _hoursToday >= 1)
+            {
+                GameObject.Find("Challeng1").GetComponent<Image>().enabled = false;
+                GameObject.Find("Achieved1").GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                GameObject.Find("Challeng1").GetComponent<Image>().enabled = true;
+                GameObject.Find("Achieved1").GetComponent<Image>().enabled = false;
+            }
+
+            if (_waveToday >= 8)
+            {
+                GameObject.Find("Challeng2").GetComponent<Image>().enabled = false;
+                GameObject.Find("Achieved2").GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                GameObject.Find("Challeng2").GetComponent<Image>().enabled = true;
+                GameObject.Find("Achieved2").GetComponent<Image>().enabled = false;
+            }
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Record)
         {
@@ -155,10 +189,12 @@ public class Record : MonoBehaviour
             {
                 RecordByDate(0);
             }
+
             if (_recordDataList.Count >= 2)
             {
                 RecordByDate(1);
             }
+
             if (_recordDataList.Count >= 3)
             {
                 RecordByDate(2);
@@ -224,5 +260,6 @@ public class Record : MonoBehaviour
     public void AddScore(int point)
     {
         _score += point;
+        _kill++;
     }
 }

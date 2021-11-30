@@ -15,5 +15,5 @@ MonoBehaviour:
   enemyName: "\u91D1\u5E73\u7CD6"
   maxHp: 3
   atk: 7
-  speed: 7
+  speed: 12
   point: 70

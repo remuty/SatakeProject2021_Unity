@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy6
   m_EditorClassIdentifier: 
   enemyName: "\u5E7D\u970A"
-  maxHp: 5
+  maxHp: 8
   atk: 9
-  speed: 9
+  speed: 18
   point: 80

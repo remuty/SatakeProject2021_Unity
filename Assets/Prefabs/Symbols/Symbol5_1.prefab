@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: 1
-  attackEffect: {fileID: 4249106495264295941, guid: b79630cead40c4a17bab49e656bae3a8, type: 3}
+  attackEffect: {fileID: 7334634060791433924, guid: ae338c2819ebe264a89fb3f31a58e1af, type: 3}
   sides:
   - {fileID: 209308678341356548}
   - {fileID: 5364513236151957270}
@@ -470,7 +470,7 @@ MonoBehaviour:
   - {fileID: 4878917697688920844}
   - {fileID: 1375753259730789833}
   - {fileID: 7709208397927353540}
-  _atk: 4
+  _atk: 5
   _knockBackPower: 2.8
 --- !u!1 &5364513236151957288
 GameObject:

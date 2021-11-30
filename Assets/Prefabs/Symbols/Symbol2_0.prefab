@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9000957096090413820
 RectTransform:
   m_ObjectHideFlags: 0
@@ -378,15 +378,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76aa1bd8e26a6484a9fa48e6be0b16b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  element: 1
-  attackEffect: {fileID: 2358543995055293079, guid: e05c10765a4504f22868d9d8533d6de3, type: 3}
+  element: 0
+  attackEffect: {fileID: 0}
   sides:
   - {fileID: 9000957096799456099}
   - {fileID: 9000957096090413821}
   guides:
   - {fileID: 7290137088702349675}
   - {fileID: 2820535845438069342}
-  _atk: 1
+  _atk: 2
   _knockBackPower: 1
 --- !u!1 &9000957097004704113
 GameObject:

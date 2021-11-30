@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 36}
+  m_AnchoredPosition: {x: 0, y: 36}
   m_SizeDelta: {x: 650, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8833448822054948993
@@ -608,20 +608,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: 1
-  attackEffect: {fileID: 4249106495264295941, guid: b79630cead40c4a17bab49e656bae3a8, type: 3}
+  attackEffect: {fileID: 7334634060791433924, guid: ae338c2819ebe264a89fb3f31a58e1af, type: 3}
   sides:
   - {fileID: 209308678341356548}
   - {fileID: 5364513236151957270}
   - {fileID: 5364513237061899912}
   - {fileID: 5308837843605982375}
   - {fileID: 5128061514198582873}
+  - {fileID: 7997499919010290272}
   guides:
   - {fileID: 3982515933612351399}
   - {fileID: 5757612483988705603}
   - {fileID: 8905190335270734717}
   - {fileID: 4453189957814957201}
   - {fileID: 1228109217238840879}
-  _atk: 4
+  - {fileID: 6338682286960592804}
+  _atk: 6
   _knockBackPower: 3.5
 --- !u!1 &5364513236151957288
 GameObject:
@@ -954,7 +956,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 36}
+  m_AnchoredPosition: {x: 0, y: 36}
   m_SizeDelta: {x: 650, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5467452880623835896
@@ -1595,6 +1597,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
+--- !u!1 &6338682286960592804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 247284133167570926, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}
+  m_PrefabInstance: {fileID: 6095906247164549194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4827925423390112030 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1700459573366579540, guid: 980b076baf35d564fbe63af1007a8b61, type: 3}

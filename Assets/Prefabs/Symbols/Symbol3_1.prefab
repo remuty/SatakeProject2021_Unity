@@ -464,7 +464,7 @@ MonoBehaviour:
   - {fileID: 3851457988859589578}
   - {fileID: 3878892406263218792}
   - {fileID: 2404181552976377017}
-  _atk: 2
+  _atk: 3
   _knockBackPower: 2
 --- !u!1 &5809170767670458432
 GameObject:
