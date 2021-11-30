@@ -11,7 +11,7 @@ public class Record : MonoBehaviour
     private RecordData _recordData;
     private List<RecordData> _recordDataList;
     private float _seconds, _time;
-    private int _minutes, _hours, _calorie, _score, _wave, _exp;
+    private int _minutes, _hours, _calorie, _score, _wave, _exp, _kill;
     private int _secondsToday, _minutesToday, _hoursToday, _calorieToday, _scoreToday, _waveToday; //今日のプレイ記録の合計
     private int _minutesSum, _hoursSum, _calorieSum; //全てのプレイ記録の合計
     private bool _isSaved;
@@ -143,6 +143,19 @@ public class Record : MonoBehaviour
             GameObject.Find("Minutes").GetComponent<Text>().text = StringWidthConverter.IntToFull(_minutesToday);
             GameObject.Find("Hours").GetComponent<Text>().text = StringWidthConverter.IntToFull(_hoursToday);
             GameObject.Find("Calorie").GetComponent<Text>().text = StringWidthConverter.IntToFull(_calorieToday);
+            //ホーム画面：デイリーチャレンジ
+            if (_kill >= 8)
+            {
+                GameObject.Find("Challeng0").GetComponent<Text>().text = "達成済み";
+            }
+            if (_minutesToday >= 20 || _hoursToday >= 1)
+            {
+                GameObject.Find("Challeng1").GetComponent<Text>().text = "達成済み";
+            }
+            if (_waveToday >= 8)
+            {
+                GameObject.Find("Challeng2").GetComponent<Text>().text = "達成済み";
+            }
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Record)
         {
@@ -224,5 +237,6 @@ public class Record : MonoBehaviour
     public void AddScore(int point)
     {
         _score += point;
+        _kill++;
     }
 }
