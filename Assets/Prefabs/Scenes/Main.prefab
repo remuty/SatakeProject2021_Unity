@@ -849,7 +849,7 @@ MonoBehaviour:
   barrierImage: {fileID: 699669932773901492}
   bloodImage: {fileID: 1391425079054016222}
   hpGauge: {fileID: 5420332798510565256}
-  maxHp: 100
+  maxHp: 1000
 --- !u!1 &4714890825853438483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,7 +1265,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 277
+  m_Text: 15
 --- !u!1 &4714890826239196972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,8 +1300,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 405, y: -118.11}
-  m_SizeDelta: {x: 163.78, y: 163.78}
+  m_AnchoredPosition: {x: 407, y: -135.81996}
+  m_SizeDelta: {x: 128.3601, y: 128.3601}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4714890826239196975
 CanvasRenderer:

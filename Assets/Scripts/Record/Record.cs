@@ -29,7 +29,7 @@ public class Record : MonoBehaviour
         var c = _recordDataList.Count;
         if (c > 0)
         {
-            if (_recordDataList[c - 1].day == _date.Day &&_recordDataList[c - 1].month == _date.Month)
+            if (_recordDataList[c - 1].day == _date.Day && _recordDataList[c - 1].month == _date.Month)
             {
                 _recordData = _recordDataList[c - 1];
                 _secondsToday = _recordData.seconds;
@@ -48,7 +48,7 @@ public class Record : MonoBehaviour
         if (_switchScene.Scene == SwitchScene.Scenes.Main)
         {
             //プレイ時間計測
-            _seconds += Time.deltaTime + 0.1f; //ToDo:デバッグ用1fを消す
+            _seconds += Time.deltaTime + 1f; //ToDo:デバッグ用1fを消す
             if (_seconds >= 60f)
             {
                 _minutes++;
@@ -76,9 +76,10 @@ public class Record : MonoBehaviour
                 //経験値計算　得点*0.3
                 _exp = (int) (_score * 0.3);
 
-                _secondsToday += (int) _seconds;
-                _minutesToday += _minutes;
-                _hoursToday += _hours;
+                //今日の合計計算
+                _secondsToday += (int) _seconds % 60;
+                _minutesToday += (_minutes + _secondsToday / 60) % 60;
+                _hoursToday += _hours + _minutesToday / 60;
                 _calorieToday += _calorie;
                 _scoreToday += _score;
                 _waveToday += _wave;
@@ -88,7 +89,7 @@ public class Record : MonoBehaviour
                 var c = _recordDataList.Count;
                 if (c > 0)
                 {
-                    if (_recordDataList[c - 1].day == _date.Day &&_recordDataList[c - 1].month == _date.Month)
+                    if (_recordDataList[c - 1].day == _date.Day && _recordDataList[c - 1].month == _date.Month)
                     {
                         _recordDataList[c - 1] = _recordData;
                     }
@@ -148,10 +149,12 @@ public class Record : MonoBehaviour
             {
                 GameObject.Find("Challeng0").GetComponent<Text>().text = "達成済み";
             }
+
             if (_minutesToday >= 20 || _hoursToday >= 1)
             {
                 GameObject.Find("Challeng1").GetComponent<Text>().text = "達成済み";
             }
+
             if (_waveToday >= 8)
             {
                 GameObject.Find("Challeng2").GetComponent<Text>().text = "達成済み";
@@ -168,10 +171,12 @@ public class Record : MonoBehaviour
             {
                 RecordByDate(0);
             }
+
             if (_recordDataList.Count >= 2)
             {
                 RecordByDate(1);
             }
+
             if (_recordDataList.Count >= 3)
             {
                 RecordByDate(2);
