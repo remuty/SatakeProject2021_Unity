@@ -48,7 +48,7 @@ public class Record : MonoBehaviour
         if (_switchScene.Scene == SwitchScene.Scenes.Main)
         {
             //プレイ時間計測
-            _seconds += Time.deltaTime; //ToDo:デバッグ用1fを消す
+            _seconds += Time.deltaTime;
             if (_seconds >= 60f)
             {
                 _minutes++;
@@ -147,17 +147,35 @@ public class Record : MonoBehaviour
             //ホーム画面：デイリーチャレンジ
             if (_kill >= 8)
             {
-                GameObject.Find("Challeng0").GetComponent<Text>().text = "達成済み";
+                GameObject.Find("Challeng0").GetComponent<Image>().enabled = false;
+                GameObject.Find("Achieved0").GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                GameObject.Find("Challeng0").GetComponent<Image>().enabled = true;
+                GameObject.Find("Achieved0").GetComponent<Image>().enabled = false;
             }
 
             if (_minutesToday >= 20 || _hoursToday >= 1)
             {
-                GameObject.Find("Challeng1").GetComponent<Text>().text = "達成済み";
+                GameObject.Find("Challeng1").GetComponent<Image>().enabled = false;
+                GameObject.Find("Achieved1").GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                GameObject.Find("Challeng1").GetComponent<Image>().enabled = true;
+                GameObject.Find("Achieved1").GetComponent<Image>().enabled = false;
             }
 
             if (_waveToday >= 8)
             {
-                GameObject.Find("Challeng2").GetComponent<Text>().text = "達成済み";
+                GameObject.Find("Challeng2").GetComponent<Image>().enabled = false;
+                GameObject.Find("Achieved2").GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                GameObject.Find("Challeng2").GetComponent<Image>().enabled = true;
+                GameObject.Find("Achieved2").GetComponent<Image>().enabled = false;
             }
         }
         else if (_switchScene.Scene == SwitchScene.Scenes.Record)
