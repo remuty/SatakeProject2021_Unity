@@ -17,7 +17,7 @@ TagManager:
   - SaveLoad
   - hassei
   - Record
-  - SEManager
+  - SoundManager
   layers:
   - Default
   - TransparentFX

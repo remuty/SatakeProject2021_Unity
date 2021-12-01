@@ -11,6 +11,7 @@ public class SwitchScene : MonoBehaviour
     [SerializeField] private GameObject mainPrefab;
     private Stick _stick;
     private GameObject _current;
+    private SoundManager _sound;
 
     private int _menuNum;
 
@@ -43,6 +44,7 @@ public class SwitchScene : MonoBehaviour
     void Start()
     {
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         _current = Instantiate(titlePrefab);
     }
 
@@ -55,7 +57,7 @@ public class SwitchScene : MonoBehaviour
             {
                 if (_menuNum == 0)
                 {
-                    Load(homePrefab,Scenes.Home);
+                    Load(homePrefab, Scenes.Home);
                 }
                 else if (_menuNum == 1)
                 {
@@ -69,17 +71,18 @@ public class SwitchScene : MonoBehaviour
             }
             else if (_scene == Scenes.Home)
             {
-                if (_menuNum == 0)  //スタートボタン
+                if (_menuNum == 0) //スタートボタン
                 {
+                    _sound.StopBGM();
                     LoadMain();
                 }
                 else if (_menuNum == 1) //手札ボタン
                 {
-                    Load(cardPrefab,Scenes.Card);
+                    Load(cardPrefab, Scenes.Card);
                 }
                 else if (_menuNum == 2) //記録ボタン
                 {
-                    Load(recordPrefab,Scenes.Record);
+                    Load(recordPrefab, Scenes.Record);
                 }
                 else if (_menuNum == 4) //やめるボタン
                 {
@@ -93,24 +96,24 @@ public class SwitchScene : MonoBehaviour
             }
             else if (_scene == Scenes.Record)
             {
-                if (_menuNum == 0)  //戻るボタン
+                if (_menuNum == 0) //戻るボタン
                 {
-                    Load(homePrefab,Scenes.Home);
+                    Load(homePrefab, Scenes.Home);
                 }
                 else if (_menuNum == 1) //所持札一覧ボタン
                 {
-                    Load(cardPrefab,Scenes.Card);
+                    Load(cardPrefab, Scenes.Card);
                 }
             }
             else if (_scene == Scenes.Card)
             {
-                if (_menuNum == 0)  //戻るボタン
+                if (_menuNum == 0) //戻るボタン
                 {
-                    Load(homePrefab,Scenes.Home);
+                    Load(homePrefab, Scenes.Home);
                 }
                 else if (_menuNum == 1) //記録一覧ボタン
                 {
-                    Load(recordPrefab,Scenes.Record);
+                    Load(recordPrefab, Scenes.Record);
                 }
             }
             else if (_scene == Scenes.Result0)
@@ -131,7 +134,8 @@ public class SwitchScene : MonoBehaviour
                 }
                 else if (_menuNum == 1)
                 {
-                    Load(homePrefab,Scenes.Home);
+                    Load(homePrefab, Scenes.Home);
+                    _sound.PlayBGM();
                 }
             }
             else if (_scene == Scenes.Result2)
@@ -161,7 +165,7 @@ public class SwitchScene : MonoBehaviour
         _scene = Scenes.Main;
     }
 
-    void Load(GameObject next,Scenes scene)
+    void Load(GameObject next, Scenes scene)
     {
         Destroy(_current);
         _current = Instantiate(next);

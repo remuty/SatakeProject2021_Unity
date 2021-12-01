@@ -7,7 +7,7 @@ using System;
 public class Record : MonoBehaviour
 {
     private SwitchScene _switchScene;
-    private SEManager _seManager;
+    private SoundManager _sound;
     private SaveLoad _saveLoad;
     private RecordData _recordData;
     private List<RecordData> _recordDataList;
@@ -22,7 +22,7 @@ public class Record : MonoBehaviour
     void Start()
     {
         _switchScene = GameObject.FindWithTag("SwitchScene").GetComponent<SwitchScene>();
-        _seManager = GameObject.FindWithTag("SEManager").GetComponent<SEManager>();
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         _saveLoad = GameObject.FindWithTag("SaveLoad").GetComponent<SaveLoad>();
         _saveLoad.Load();
         _recordData = _saveLoad.RecordData;
@@ -204,7 +204,7 @@ public class Record : MonoBehaviour
             //経験値表示
             GameObject.Find("EXP").GetComponent<Text>().text = StringWidthConverter.IntToFull(_exp);
             var bar = GameObject.Find("EXPBar").GetComponent<Image>();
-            _seManager.ExpUp();
+            _sound.ExpUp();
             if (_time < 0.8f)
             {
                 _time += Time.unscaledDeltaTime;
@@ -212,16 +212,14 @@ public class Record : MonoBehaviour
             }
             else
             {
-                _seManager.LevelUp();
+                _sound.LevelUp();
                 bar.fillAmount = 0.2f;
                 GameObject.Find("ResultPanel").transform.Find("Result2").gameObject.SetActive(true);
                 _switchScene.Scene = SwitchScene.Scenes.Result2;
                 GameObject.Find("Result1").SetActive(false);
-                _seManager.GettingCard();
+                _sound.GettingCard();
                 Reset();
             }
-
-            
         }
     }
 
