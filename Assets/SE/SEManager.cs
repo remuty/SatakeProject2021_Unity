@@ -4,19 +4,41 @@ using UnityEngine;
 
 public class SEManager : MonoBehaviour
 {
-    AudioSource[] sounds;
+    public enum Audio
+    {
+        Attack,
+        Enemy,
+        Battle,
+        Result,
+        UI
+    }
+
+    [SerializeField] private AudioClip[] _attackClips;
+    [SerializeField] private AudioClip[] _enemyClips;
+    [SerializeField] private AudioClip[] _battleClips;
+    [SerializeField] private AudioClip[] _resultClips;
+    [SerializeField] private AudioClip[] _uiClips;
+
+    AudioSource[] _audio;
+    private bool[] _isPlaying = {false, false, false, false, false};
+
+    public bool[] IsPlaying
+    {
+        get => _isPlaying;
+        set => _isPlaying = value;
+    }
 
     // Use this for initialization
     void Start()
     {
-        sounds = GetComponents<AudioSource>();
+        _audio = GetComponents<AudioSource>();
     }
 
     // Battle Screen
     // Attack
     void SE(int num)
     {
-        sounds[num].PlayOneShot(sounds[num].clip);
+        _audio[num].PlayOneShot(_audio[num].clip);
     }
 
     public void Lightning()
@@ -84,17 +106,28 @@ public class SEManager : MonoBehaviour
     // Result Screen
     public void ExpUp()
     {
-        SE(10);
+        var i = (int) Audio.Result;
+        if (!_isPlaying[i])
+        {
+            _isPlaying[i] = true;
+            _audio[i].clip = _resultClips[0];
+            _audio[i].Play();
+        }
     }
 
     public void LevelUp()
     {
-        SE(11);
+        var i = (int) Audio.Result;
+        _isPlaying[i] = true;
+        _audio[i].clip = _resultClips[2];
+        _audio[i].Play();
     }
 
     public void GettingCard()
     {
-        SE(17);
+        //遅らせて再生するために他のAudioSourceを適用
+        _audio[0].clip = _resultClips[1];
+        _audio[0].PlayDelayed(0.3f);
     }
 
     // UI Control
