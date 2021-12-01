@@ -7,16 +7,24 @@ public class Note : MonoBehaviour
 {
     private Transform _startTransform;
     private Transform _endTransform;
-    
+
     private RhythmManager _rhythmManager;
     private SpriteRenderer _renderer;
-    
+    private SoundManager _sound;
+
     private float _time;
     private float _speed = 1.5f;
 
     private bool _isMissed;
 
     public bool IsMissed => _isMissed;
+
+    private bool _isWarning;
+
+    public bool IsWarning
+    {
+        set => _isWarning = value;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,18 +33,29 @@ public class Note : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         transform.position = _startTransform.position;
         transform.localScale = _startTransform.localScale;
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         _time += Time.deltaTime;
-        if (_time <= _speed + 0.2f)
+        if (_time <= _speed)
         {
+            //ノーツが両端から中央に移動する
             var rate = _time / _speed;
             transform.position = Vector3.Lerp(_startTransform.position, _endTransform.position, rate);
             transform.localScale = Vector3.Lerp(_startTransform.localScale, _endTransform.localScale, rate);
             _renderer.color = new Color(1, 1, 1, rate);
+        }
+        else if (_time < _speed + 0.2f)
+        {
+            //敵の攻撃中は警告音をタイミングよく鳴らす
+            if (_isWarning)
+            {
+                _sound.Alert();
+                _isWarning = false;
+            }
         }
         else if (_time < _speed + 0.22f)
         {
@@ -49,7 +68,7 @@ public class Note : MonoBehaviour
         }
     }
 
-    public void SetTransform(Transform start,Transform end)
+    public void SetTransform(Transform start, Transform end)
     {
         _startTransform = start;
         _endTransform = end;

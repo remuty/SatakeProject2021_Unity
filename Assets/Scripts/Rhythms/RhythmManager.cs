@@ -29,6 +29,7 @@ public class RhythmManager : MonoBehaviour
 
     // [SerializeField] private GameObject[] _notes;
     private List<GameObject> _notes = new List<GameObject>();
+    private GameObject _alertNote;
 
     private AudioSource _audio;
     public AudioSource Audio => _audio;
@@ -69,6 +70,8 @@ public class RhythmManager : MonoBehaviour
     {
         set => _isWarning = value;
     }
+
+    private bool _isNoteChanged;
 
     public enum Beat
     {
@@ -127,10 +130,25 @@ public class RhythmManager : MonoBehaviour
         {
             if (_isWarning)
             {
-                //泥団子に切り替える
-                _notes[_notes.Count - 1].GetComponent<SpriteRenderer>().sprite = dangoSprite;
-                _notes[_notes.Count - 2].GetComponent<SpriteRenderer>().sprite = dangoSprite;
-                _isWarning = false;
+                if (!_isNoteChanged)
+                {
+                    _alertNote = _notes[_notes.Count - 1];
+                    //泥団子に切り替える
+                    _notes[_notes.Count - 1].GetComponent<SpriteRenderer>().sprite = dangoSprite;
+                    _notes[_notes.Count - 2].GetComponent<SpriteRenderer>().sprite = dangoSprite;
+                    _isNoteChanged = true;
+                }
+
+                if (_alertNote != null)
+                {
+                    //敵の攻撃中は警告音をタイミングよく鳴らす
+                    _notes[0].GetComponent<Note>().IsWarning = true;
+                }
+                else
+                {
+                    _isWarning = false;
+                    _isNoteChanged = false;
+                }
             }
         }
 
