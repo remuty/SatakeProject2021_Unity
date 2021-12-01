@@ -54,6 +54,7 @@ public class Note : MonoBehaviour
             if (_isWarning)
             {
                 _sound.Alert();
+                Debug.Log("al");
                 _isWarning = false;
             }
         }

@@ -16,6 +16,7 @@ public class Symbol : MonoBehaviour
     private RhythmManager _rhythmManager;
     private SymbolCardDeck _symbolCardDeck;
     private Player _player;
+    private SoundManager _sound;
 
     private int _sideCount;
     private float _drawTime = 0.05f;
@@ -34,6 +35,7 @@ public class Symbol : MonoBehaviour
         _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
         _symbolCardDeck = GameObject.FindWithTag("SymbolCardDeck").GetComponent<SymbolCardDeck>();
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         _initialPosition = this.transform.position;
         _initialScale = this.transform.localScale;
         SwitchGuide();
@@ -59,6 +61,7 @@ public class Symbol : MonoBehaviour
                         _isAttacking = true;
                         if (_element != SymbolCard.Element.Default)
                         {
+                            _sound.AttackEffect(_element);
                             var effect = Instantiate(_attackEffect);
                             effect.GetComponent<AttackEffect>().SetPower(_atk, _knockBackPower);
                         }
@@ -101,6 +104,7 @@ public class Symbol : MonoBehaviour
             {
                 if (_time < 0.3f)
                 {
+                    _sound.AttackNormal();
                     _time += Time.deltaTime;
                     var rate = _time / 0.3f;
                     transform.position = Vector2.Lerp(_initialPosition,
@@ -110,6 +114,7 @@ public class Symbol : MonoBehaviour
                 }
                 else
                 {
+                    _sound.StopAttack();
                     _player.Target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
                     Destroy(this.gameObject);
                 }

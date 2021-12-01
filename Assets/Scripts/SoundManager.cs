@@ -31,71 +31,86 @@ public class SoundManager : MonoBehaviour
 
     // Battle Screen
     // Attack
-    void SE(int num)
+    public void AttackEffect(SymbolCard.Element element)
     {
-        _audio[num].PlayOneShot(_audio[num].clip);
+        var i = (int) Audio.Attack;
+        if (!_isPlayed[i])
+        {
+            _isPlayed[i] = true;
+            switch (element)
+            {
+                case SymbolCard.Element.Ice:
+                    _audio[i].clip = _attackClips[1];
+                    _audio[i].Play();
+                    break;
+                case SymbolCard.Element.Lightning:
+                    _audio[i].clip = _attackClips[2];
+                    _audio[i].Play();
+                    break;
+                case SymbolCard.Element.Rock:
+                    _audio[i].clip = _attackClips[3];
+                    _audio[i].Play();
+                    break;
+                case SymbolCard.Element.Wind:
+                    _audio[i].clip = _attackClips[4];
+                    _audio[i].Play();
+                    break;
+                default:
+                    _audio[i].clip = _attackClips[0];
+                    _audio[i].Play();
+                    break;
+            }
+        }
+        
     }
 
-    public void Lightning()
+    public void AttackNormal()
     {
-        SE(0);
+        var i = (int) Audio.Attack;
+        if (!_isPlayed[i])
+        {
+            _isPlayed[i] = true;
+            _audio[i].PlayOneShot(_attackClips[0]);
+        }
     }
 
-    public void Astro()
+    public void StopAttack()
     {
-        SE(1);
-    }
-
-    public void Ice()
-    {
-        SE(2);
-    }
-
-    public void Normal()
-    {
-        SE(3);
-    }
-
-    public void Rock()
-    {
-        SE(4);
-    }
-
-    public void Wind()
-    {
-        SE(5);
+        var i = (int) Audio.Attack;
+        _isPlayed[i] = false;
+        _audio[i].Stop();
     }
 
     // Enemy
     public void Spawn()
     {
-        _audio[(int)Audio.Enemy].PlayOneShot(_enemyClips[0]);
+        _audio[(int) Audio.Enemy].PlayOneShot(_enemyClips[0]);
     }
 
     public void Kill()
     {
-        _audio[(int)Audio.Enemy].PlayOneShot(_enemyClips[1]);
+        _audio[(int) Audio.Enemy].PlayOneShot(_enemyClips[1]);
     }
 
     // Battle
     public void Alert()
     {
-        _audio[(int)Audio.Battle].PlayOneShot(_battleClips[0]);
+        _audio[(int) Audio.Battle].PlayOneShot(_battleClips[0]);
     }
 
     public void Damage()
     {
-        _audio[(int)Audio.Battle].PlayOneShot(_battleClips[1]);
+        _audio[(int) Audio.Battle].PlayOneShot(_battleClips[1]);
     }
 
     public void PhaseUp()
     {
-        _audio[(int)Audio.Battle].PlayOneShot(_battleClips[2]);
+        _audio[(int) Audio.Battle].PlayOneShot(_battleClips[2]);
     }
-    
+
     public void Ult()
     {
-        _audio[(int)Audio.Battle].PlayOneShot(_battleClips[3]);
+        _audio[(int) Audio.Battle].PlayOneShot(_battleClips[3]);
     }
 
     // Result Screen
@@ -113,7 +128,7 @@ public class SoundManager : MonoBehaviour
     public void LevelUp()
     {
         var i = (int) Audio.Result;
-        _isPlayed[i] = true;
+        _isPlayed[i] = false;
         _audio[i].clip = _resultClips[1];
         _audio[i].Play();
     }
@@ -129,17 +144,17 @@ public class SoundManager : MonoBehaviour
     //focus
     public void Cancel()
     {
-        _audio[(int)Audio.UI].PlayOneShot(_uiClips[0]);
+        _audio[(int) Audio.UI].PlayOneShot(_uiClips[0]);
     }
 
     public void Focus()
     {
-        _audio[(int)Audio.UI].PlayOneShot(_uiClips[1]);
+        _audio[(int) Audio.UI].PlayOneShot(_uiClips[1]);
     }
 
     public void Select()
     {
-        _audio[(int)Audio.UI].PlayOneShot(_uiClips[2]);
+        _audio[(int) Audio.UI].PlayOneShot(_uiClips[2]);
     }
 
     //BGM
