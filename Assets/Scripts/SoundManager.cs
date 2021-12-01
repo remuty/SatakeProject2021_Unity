@@ -69,12 +69,12 @@ public class SoundManager : MonoBehaviour
     // Enemy
     public void Spawn()
     {
-        SE(6);
+        _audio[(int)Audio.Enemy].PlayOneShot(_enemyClips[0]);
     }
 
     public void Kill()
     {
-        SE(7);
+        _audio[(int)Audio.Enemy].PlayOneShot(_enemyClips[1]);
     }
 
     // Battle
