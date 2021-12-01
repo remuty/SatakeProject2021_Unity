@@ -18,6 +18,7 @@ public class SelectMenu : MonoBehaviour
 
     private Stick _stick;
     private SwitchScene _switchScene;
+    private SoundManager _sound;
 
     private int _menuNum = -1;
     private bool _isSelected;
@@ -29,6 +30,7 @@ public class SelectMenu : MonoBehaviour
     {
         _stick = GameObject.FindWithTag("JoyConRight").GetComponent<Stick>();
         _switchScene = GameObject.FindWithTag("SwitchScene").GetComponent<SwitchScene>();
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         _switchScene.MenuNum = _menuNum;
         ChangeColor();
     }
@@ -50,6 +52,7 @@ public class SelectMenu : MonoBehaviour
     {
         if (Mathf.Abs(f) > 0.6f && !_isSelected) //joyconのスティックを傾けたとき
         {
+            _sound.Focus();
             if (_menuNum == -1)
             {
                 _menuNum = 0;

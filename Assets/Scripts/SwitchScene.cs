@@ -98,7 +98,7 @@ public class SwitchScene : MonoBehaviour
             {
                 if (_menuNum == 0) //戻るボタン
                 {
-                    Load(homePrefab, Scenes.Home);
+                    Load(homePrefab, Scenes.Home, true);
                 }
                 else if (_menuNum == 1) //所持札一覧ボタン
                 {
@@ -109,7 +109,7 @@ public class SwitchScene : MonoBehaviour
             {
                 if (_menuNum == 0) //戻るボタン
                 {
-                    Load(homePrefab, Scenes.Home);
+                    Load(homePrefab, Scenes.Home, true);
                 }
                 else if (_menuNum == 1) //記録一覧ボタン
                 {
@@ -118,8 +118,9 @@ public class SwitchScene : MonoBehaviour
             }
             else if (_scene == Scenes.Result0)
             {
-                if (_menuNum == 0)
+                if (_menuNum == 0) //次へボタン
                 {
+                    _sound.Select();
                     GameObject.Find("ResultPanel").transform.Find("Result1").gameObject.SetActive(true);
                     _scene = Scenes.Result1;
                     GameObject.Find("Result0").SetActive(false);
@@ -128,11 +129,11 @@ public class SwitchScene : MonoBehaviour
             else if (_scene == Scenes.Result1)
             {
                 Time.timeScale = 1;
-                if (_menuNum == 0)
+                if (_menuNum == 0) //リスタートボタン
                 {
                     LoadMain();
                 }
-                else if (_menuNum == 1)
+                else if (_menuNum == 1) //ホームへボタン
                 {
                     Load(homePrefab, Scenes.Home);
                     _sound.PlayBGM();
@@ -140,8 +141,9 @@ public class SwitchScene : MonoBehaviour
             }
             else if (_scene == Scenes.Result2)
             {
-                if (_menuNum == 0)
+                if (_menuNum == 0) //次へボタン
                 {
+                    _sound.Select();
                     GameObject.Find("ResultPanel").transform.Find("Result1").gameObject.SetActive(true);
                     _scene = Scenes.Result1;
                     GameObject.Find("Result2").SetActive(false);
@@ -154,6 +156,7 @@ public class SwitchScene : MonoBehaviour
 
     void LoadMain()
     {
+        _sound.Select();
         Destroy(_current);
         _current = Instantiate(mainPrefab);
         var canvases = _current.GetComponentsInChildren<Canvas>();
@@ -165,8 +168,17 @@ public class SwitchScene : MonoBehaviour
         _scene = Scenes.Main;
     }
 
-    void Load(GameObject next, Scenes scene)
+    void Load(GameObject next, Scenes scene, bool isCancel = false)
     {
+        if (isCancel) //戻るボタンのとき
+        {
+            _sound.Cancel();
+        }
+        else
+        {
+            _sound.Select();
+        }
+
         Destroy(_current);
         _current = Instantiate(next);
         _scene = scene;

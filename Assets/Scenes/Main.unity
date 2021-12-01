@@ -1168,7 +1168,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f3ba9c4e3604b8746a77c06c023382b0, type: 3}
   - {fileID: 8300000, guid: 542def8d1c6e7c442a0fb1cd30c60d91, type: 3}
   - {fileID: 8300000, guid: 48e2e803a4df494498502ae3ad75aedf, type: 3}
-  _uiClips: []
+  _uiClips:
+  - {fileID: 8300000, guid: 99b296a680e951c4ea013bf3052c90ce, type: 3}
+  - {fileID: 8300000, guid: 024ec8efc07bc49489fa7173c622c8f9, type: 3}
+  - {fileID: 8300000, guid: a20792be128b7c142b5b3860597a8c0e, type: 3}
 --- !u!1 &1883143035
 GameObject:
   m_ObjectHideFlags: 0

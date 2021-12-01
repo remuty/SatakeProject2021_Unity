@@ -129,17 +129,17 @@ public class SoundManager : MonoBehaviour
     //focus
     public void Cancel()
     {
-        SE(14);
+        _audio[(int)Audio.UI].PlayOneShot(_uiClips[0]);
     }
 
     public void Focus()
     {
-        SE(8);
+        _audio[(int)Audio.UI].PlayOneShot(_uiClips[1]);
     }
 
     public void Select()
     {
-        SE(9);
+        _audio[(int)Audio.UI].PlayOneShot(_uiClips[2]);
     }
 
     //BGM
