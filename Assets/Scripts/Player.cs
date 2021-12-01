@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 
     private SymbolCardDeck _symbolCardDeck;
     private SwitchScene _switchScene;
+    private SoundManager _sound;
     private GameObject _target;
     public GameObject Target => _target;
 
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
         _stickL = GameObject.FindWithTag("JoyConLeft").GetComponent<Stick>();
         _symbolCardDeck = GameObject.FindWithTag("SymbolCardDeck").GetComponent<SymbolCardDeck>();
         _switchScene = GameObject.FindWithTag("SwitchScene").GetComponent<SwitchScene>();
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         hpGauge.value = 1;
         _hp = maxHp;
         _stickR.isShaked.Subscribe(n =>
@@ -118,6 +120,7 @@ public class Player : MonoBehaviour
         //敵の攻撃オブジェクトをしゃがみで避けたときだけダメージを受けない
         if (tag != "EnemyAttackObject" || !_isCrouch)
         {
+            _sound.Damage();
             _hp -= damage;
             hpGauge.value = (float) _hp / (float) maxHp;
             _isDamaged = true;

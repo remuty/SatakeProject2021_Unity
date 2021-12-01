@@ -77,25 +77,25 @@ public class SoundManager : MonoBehaviour
         SE(7);
     }
 
-    // Other
-    public void Ult()
-    {
-        SE(15);
-    }
-
+    // Battle
     public void Alert()
     {
-        SE(12);
+        _audio[(int)Audio.Battle].PlayOneShot(_battleClips[0]);
     }
 
     public void Damage()
     {
-        SE(13);
+        _audio[(int)Audio.Battle].PlayOneShot(_battleClips[1]);
     }
 
     public void PhaseUp()
     {
-        SE(16);
+        _audio[(int)Audio.Battle].PlayOneShot(_battleClips[2]);
+    }
+    
+    public void Ult()
+    {
+        _audio[(int)Audio.Battle].PlayOneShot(_battleClips[3]);
     }
 
     // Result Screen

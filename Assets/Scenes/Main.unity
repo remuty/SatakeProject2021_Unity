@@ -1163,7 +1163,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackClips: []
   _enemyClips: []
-  _battleClips: []
+  _battleClips:
+  - {fileID: 8300000, guid: 728997d29c10c0b4488a48d106622be2, type: 3}
+  - {fileID: 8300000, guid: d7e108e4bba56d540be8e8cb23cbf984, type: 3}
+  - {fileID: 8300000, guid: abd775b035cf7cd4cbc09748d00ecdd7, type: 3}
+  - {fileID: 8300000, guid: 5987b0fad67a0364d941b336ccb1002c, type: 3}
   _resultClips:
   - {fileID: 8300000, guid: f3ba9c4e3604b8746a77c06c023382b0, type: 3}
   - {fileID: 8300000, guid: 542def8d1c6e7c442a0fb1cd30c60d91, type: 3}

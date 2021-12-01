@@ -32,6 +32,8 @@ public class RhythmManager : MonoBehaviour
 
     private AudioSource _audio;
     public AudioSource Audio => _audio;
+    
+    private SoundManager _sound;
 
     private double _metronomeStartDspTime;
 
@@ -78,6 +80,7 @@ public class RhythmManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         _audio = this.GetComponent<AudioSource>();
         _audio.clip = bgm[0];
         _audio.Play();
@@ -194,6 +197,7 @@ public class RhythmManager : MonoBehaviour
         waveText.text = StringWidthConverter.IntToFull(_wave);
         waveText.enabled = true;
         _isSwitching = true;
+        _sound.PhaseUp();
         yield return new WaitForSeconds(5f);
         waveText.enabled = false;
         waveSwitchImage.enabled = false;
