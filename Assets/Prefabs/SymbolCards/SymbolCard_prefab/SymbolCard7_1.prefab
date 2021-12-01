@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   symbolPrefab: {fileID: 5364513236142394862, guid: a2cbabd72282f764099c1291bf535b17, type: 3}
+  element: 3
+  attackEffect: {fileID: 7334634060791433924, guid: ae338c2819ebe264a89fb3f31a58e1af, type: 3}
 --- !u!1 &1846739304768699746
 GameObject:
   m_ObjectHideFlags: 0
