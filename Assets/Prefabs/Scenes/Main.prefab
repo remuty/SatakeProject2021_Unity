@@ -1862,7 +1862,7 @@ GameObject:
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4714890826558090314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2140,7 +2140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ultGauge: {fileID: 65879627612655568}
-  _countMax: 1000
+  _countMax: 10
 --- !u!1 &5268422444158998776
 GameObject:
   m_ObjectHideFlags: 0
