@@ -59,11 +59,12 @@ public class Symbol : MonoBehaviour
                     if (_player.Target != null)
                     {
                         _isAttacking = true;
+                        //属性エフェクト生成
                         if (_element != SymbolCard.Element.Default)
                         {
                             _sound.AttackEffect(_element);
                             var effect = Instantiate(_attackEffect);
-                            effect.GetComponent<AttackEffect>().SetPower(_atk, _knockBackPower);
+                            effect.GetComponent<AttackEffect>().SetPower(_element,_atk, _knockBackPower);
                         }
                     }
                     else

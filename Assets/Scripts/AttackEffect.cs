@@ -10,6 +10,7 @@ public class AttackEffect : MonoBehaviour
     private Vector2 _initialScale;
     private Player _player;
     private SoundManager _sound;
+    private SymbolCard.Element _element;
     private int _atk;
     private float _knockBackPower;
 
@@ -29,21 +30,24 @@ public class AttackEffect : MonoBehaviour
         if (_time < 0.6f)
         {
             _time += Time.deltaTime;
-            if (isFly)
+            if (_element != SymbolCard.Element.Wind)
             {
-                var rate = _time / 0.6f;
-                transform.position = Vector2.Lerp(_initialPosition,
-                    target.transform.position, rate);
-                transform.localScale = Vector2.Lerp(_initialScale,
-                    target.transform.localScale / 4, rate);
-                var pos = transform.position;
-                pos.z = -1;
-                transform.position = pos;
-            }
-            else
-            {
-                transform.position = new Vector3(target.transform.position.x, target.transform.position.y, -1);
-                transform.localScale = target.transform.localScale;
+                if (isFly)
+                {
+                    var rate = _time / 0.6f;
+                    transform.position = Vector2.Lerp(_initialPosition,
+                        target.transform.position, rate);
+                    transform.localScale = Vector2.Lerp(_initialScale,
+                        target.transform.localScale / 4, rate);
+                    var pos = transform.position;
+                    pos.z = -1;
+                    transform.position = pos;
+                }
+                else
+                {
+                    transform.position = new Vector3(target.transform.position.x, target.transform.position.y, -1);
+                    transform.localScale = target.transform.localScale;
+                }
             }
         }
         else
@@ -52,14 +56,23 @@ public class AttackEffect : MonoBehaviour
             if (target != null)
             {
                 target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
+                if (_element == SymbolCard.Element.Wind) //全体攻撃
+                {
+                    var enemies = GameObject.FindGameObjectsWithTag("NormalEnemy");
+                    foreach (var enemy in enemies)
+                    {
+                        enemy.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);
+                    }
+                }
             }
 
             Destroy(this.gameObject);
         }
     }
 
-    public void SetPower(int atk, float knockBackPower)
+    public void SetPower(SymbolCard.Element element, int atk, float knockBackPower)
     {
+        _element = element;
         _atk = atk;
         _knockBackPower = knockBackPower;
     }
