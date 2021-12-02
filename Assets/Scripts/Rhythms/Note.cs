@@ -64,8 +64,8 @@ public class Note : MonoBehaviour
             {
                 _sound.Alert();
                 _isAlerted = true;
-                transform.position = _endTransform.position;
             }
+            transform.position = _endTransform.position;
         }
         else if (_time < _speed + 0.22f)
         {
