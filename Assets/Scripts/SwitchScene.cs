@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwitchScene : MonoBehaviour
 {
@@ -159,10 +160,18 @@ public class SwitchScene : MonoBehaviour
         _sound.Select();
         Destroy(_current);
         _current = Instantiate(mainPrefab);
+        //canvasにカメラを適用
         var canvases = _current.GetComponentsInChildren<Canvas>();
         foreach (var canvas in canvases)
         {
             canvas.worldCamera = Camera.main;
+        }
+        //canvasを縦幅に合わせる
+        var scalers = _current.GetComponentsInChildren<CanvasScaler>();
+        foreach (var scaler in scalers)
+        {
+            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+            scaler.matchWidthOrHeight = 1;
         }
 
         _scene = Scenes.Main;
@@ -182,5 +191,10 @@ public class SwitchScene : MonoBehaviour
         Destroy(_current);
         _current = Instantiate(next);
         _scene = scene;
+        //canvasを縦幅に合わせる
+        var scaler = _current.GetComponent<CanvasScaler>();
+        scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+        scaler.matchWidthOrHeight = 1;
     }
+
 }

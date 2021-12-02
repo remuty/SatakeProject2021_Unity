@@ -1381,7 +1381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uFF12\uFF13\uFF18\uFF19"
+  m_Text: "\uFF10"
 --- !u!114 &7320429550956524574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1663,7 +1663,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uFF14\uFF18"
+  m_Text: "\uFF10"
 --- !u!114 &2564488563195689531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2996,7 +2996,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uFF14\uFF18"
+  m_Text: "\uFF10"
 --- !u!114 &1480555738244417972
 MonoBehaviour:
   m_ObjectHideFlags: 0

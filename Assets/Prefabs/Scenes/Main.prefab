@@ -1026,7 +1026,7 @@ MonoBehaviour:
   bloodImage: {fileID: 1391425079054016222}
   ult: {fileID: 4598007650350974704}
   hpGauge: {fileID: 5420332798510565256}
-  maxHp: 140
+  maxHp: 100
 --- !u!1 &4714890825853438483
 GameObject:
   m_ObjectHideFlags: 0
