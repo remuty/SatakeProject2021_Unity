@@ -184,8 +184,11 @@ public class RhythmManager : MonoBehaviour
                 ret = Beat.miss;
             }
 
-            Destroy(_notes[0]);
-            Destroy(_notes[1]);
+            //叩いたノーツを非表示にしてリストから削除
+            _notes[0].GetComponent<SpriteRenderer>().enabled = false;
+            _notes[1].GetComponent<SpriteRenderer>().enabled = false;
+            _notes[0].GetComponent<Note>().IsBeated = true;
+            _notes[1].GetComponent<Note>().IsBeated = true;
             _notes.RemoveRange(0, 2);
         }
 

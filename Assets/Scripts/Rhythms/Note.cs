@@ -25,6 +25,15 @@ public class Note : MonoBehaviour
     {
         set => _isWarning = value;
     }
+    
+    private bool _isAlerted;
+    
+    private bool _isBeated;
+
+    public bool IsBeated
+    {
+        set => _isBeated = value;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -51,11 +60,10 @@ public class Note : MonoBehaviour
         else if (_time < _speed + 0.2f)
         {
             //敵の攻撃中は警告音をタイミングよく鳴らす
-            if (_isWarning)
+            if (_isWarning && !_isAlerted)
             {
                 _sound.Alert();
-                Debug.Log("al");
-                _isWarning = false;
+                _isAlerted = true;
             }
         }
         else if (_time < _speed + 0.22f)
@@ -64,7 +72,10 @@ public class Note : MonoBehaviour
         }
         else
         {
-            _rhythmManager.RemoveNote();
+            if (!_isBeated)
+            {
+                _rhythmManager.RemoveNote();
+            }
             Destroy(this.gameObject);
         }
     }
