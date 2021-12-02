@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class SymbolCard : MonoBehaviour
 {
+    public enum Element
+    {
+        Default,
+        Fire,
+        Ice,
+        Lightning,
+        Rock,
+        Wind
+    }
     [SerializeField] private GameObject symbolPrefab;
+    [SerializeField] private Element element;
+    [SerializeField] private GameObject attackEffect;
     
     private GameObject _symbolObject;
     public GameObject SymbolObject => _symbolObject;
@@ -39,6 +50,7 @@ public class SymbolCard : MonoBehaviour
         _symbolObject = Instantiate(symbolPrefab,canvas.transform);
         _symbolObject.transform.SetSiblingIndex(1);
         _symbol = _symbolObject.GetComponent<Symbol>();
+        _symbol.SetElement(element,attackEffect);
         _isGenerated = false;
     }
 }

@@ -9,6 +9,7 @@ public class AttackEffect : MonoBehaviour
     private Vector2 _initialPosition;
     private Vector2 _initialScale;
     private Player _player;
+    private SoundManager _sound;
     private int _atk;
     private float _knockBackPower;
 
@@ -16,6 +17,7 @@ public class AttackEffect : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         _initialPosition = this.transform.position;
         _initialScale = this.transform.localScale;
     }
@@ -46,6 +48,7 @@ public class AttackEffect : MonoBehaviour
         }
         else
         {
+            _sound.StopAttack();
             if (target != null)
             {
                 target.GetComponent<NormalEnemy>().AddDamage(_atk, _knockBackPower);

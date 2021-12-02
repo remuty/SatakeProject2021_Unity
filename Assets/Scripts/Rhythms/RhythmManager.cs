@@ -29,9 +29,12 @@ public class RhythmManager : MonoBehaviour
 
     // [SerializeField] private GameObject[] _notes;
     private List<GameObject> _notes = new List<GameObject>();
+    private GameObject _alertNote;
 
     private AudioSource _audio;
     public AudioSource Audio => _audio;
+    
+    private SoundManager _sound;
 
     private double _metronomeStartDspTime;
 
@@ -68,6 +71,8 @@ public class RhythmManager : MonoBehaviour
         set => _isWarning = value;
     }
 
+    private bool _isNoteChanged;
+
     public enum Beat
     {
         noReaction,
@@ -78,6 +83,7 @@ public class RhythmManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         _audio = this.GetComponent<AudioSource>();
         _audio.clip = bgm[0];
         _audio.Play();
@@ -124,10 +130,25 @@ public class RhythmManager : MonoBehaviour
         {
             if (_isWarning)
             {
-                //泥団子に切り替える
-                _notes[_notes.Count - 1].GetComponent<SpriteRenderer>().sprite = dangoSprite;
-                _notes[_notes.Count - 2].GetComponent<SpriteRenderer>().sprite = dangoSprite;
-                _isWarning = false;
+                if (!_isNoteChanged)
+                {
+                    _alertNote = _notes[_notes.Count - 1];
+                    //泥団子に切り替える
+                    _notes[_notes.Count - 1].GetComponent<SpriteRenderer>().sprite = dangoSprite;
+                    _notes[_notes.Count - 2].GetComponent<SpriteRenderer>().sprite = dangoSprite;
+                    _isNoteChanged = true;
+                }
+
+                if (_alertNote != null)
+                {
+                    //敵の攻撃中は警告音をタイミングよく鳴らす
+                    _notes[0].GetComponent<Note>().IsWarning = true;
+                }
+                else
+                {
+                    _isWarning = false;
+                    _isNoteChanged = false;
+                }
             }
         }
 
@@ -163,8 +184,11 @@ public class RhythmManager : MonoBehaviour
                 ret = Beat.miss;
             }
 
-            Destroy(_notes[0]);
-            Destroy(_notes[1]);
+            //叩いたノーツを非表示にしてリストから削除
+            _notes[0].GetComponent<SpriteRenderer>().enabled = false;
+            _notes[1].GetComponent<SpriteRenderer>().enabled = false;
+            _notes[0].GetComponent<Note>().IsBeated = true;
+            _notes[1].GetComponent<Note>().IsBeated = true;
             _notes.RemoveRange(0, 2);
         }
 
@@ -194,6 +218,7 @@ public class RhythmManager : MonoBehaviour
         waveText.text = StringWidthConverter.IntToFull(_wave);
         waveText.enabled = true;
         _isSwitching = true;
+        _sound.PhaseUp();
         yield return new WaitForSeconds(5f);
         waveText.enabled = false;
         waveSwitchImage.enabled = false;

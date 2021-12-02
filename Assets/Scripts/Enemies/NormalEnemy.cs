@@ -13,6 +13,7 @@ public class NormalEnemy : MonoBehaviour
     private RhythmManager _rhythmManager;
     private Player _player;
     private Record _record;
+    private SoundManager _sound;
     private int _lane;
 
     public int Lane
@@ -37,9 +38,11 @@ public class NormalEnemy : MonoBehaviour
         _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _record = GameObject.FindWithTag("Record").GetComponent<Record>();
+        _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         transform.position = transformData.initialPosition[_lane];
         transform.localScale = transformData.initialScale;
         _hp = enemyData.maxHp;
+        _sound.Spawn();
         _attackTime = Random.Range(1, enemyData.speed * 2);
         //近距離から攻撃できないようにする
         if (_attackTime >= enemyData.speed - 3 && _attackTime <= enemyData.speed)
@@ -64,6 +67,7 @@ public class NormalEnemy : MonoBehaviour
         else
         {
             //到達したらプレイヤーに攻撃
+            _sound.Kill();
             _player.AddDamage(enemyData.atk, this.tag);
             _enemyGenerator.AddLane(_lane);
             Destroy(this.gameObject);
