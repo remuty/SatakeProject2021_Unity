@@ -27,24 +27,31 @@ public class EnemyGenerator : MonoBehaviour
     void Update()
     {
         //waveが切り替わる間際では生成しない
-        if (_rhythmManager.Audio.time < _rhythmManager.Audio.clip.length - 10)
+        if (_rhythmManager != null)
         {
-            _time += Time.deltaTime;
-            if (_time > _generateTime)
+            if (_rhythmManager.Audio.time < _rhythmManager.Audio.clip.length - 10)
             {
-                if (_laneList.Count > 0)
+                _time += Time.deltaTime;
+                if (_time > _generateTime)
                 {
-                    var i = Random.Range(0, enemyPrefabs.Length);
-                    var generatedEnemy = Instantiate(enemyPrefabs[i],
-                        transform.position, Quaternion.identity, this.transform);
-                    i = Random.Range(0, _laneList.Count);
-                    generatedEnemy.GetComponent<NormalEnemy>().Lane = _laneList[i];
-                    _laneList.RemoveAt(i);
+                    if (_laneList.Count > 0)
+                    {
+                        var i = Random.Range(0, enemyPrefabs.Length);
+                        var generatedEnemy = Instantiate(enemyPrefabs[i],
+                            transform.position, Quaternion.identity, this.transform);
+                        i = Random.Range(0, _laneList.Count);
+                        generatedEnemy.GetComponent<NormalEnemy>().Lane = _laneList[i];
+                        _laneList.RemoveAt(i);
+                    }
+                    _time = 0;
+                    //waveが増えるごとに生成時間が早くなる
+                    _generateTime = Random.Range(timeMin, timeMax) - _rhythmManager.Wave;
                 }
-                _time = 0;
-                //waveが増えるごとに生成時間が早くなる
-                _generateTime = Random.Range(timeMin, timeMax) - _rhythmManager.Wave;
             }
+        }
+        else
+        {
+            _rhythmManager = GameObject.FindWithTag("RhythmManager").GetComponent<RhythmManager>();
         }
     }
 

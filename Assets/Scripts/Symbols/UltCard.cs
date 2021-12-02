@@ -81,7 +81,10 @@ public class UltCard : MonoBehaviour
                 background.sprite = ultSprite;
             }
 
-            ultGauge.fillAmount = _count / _countMax;
+            if (ultGauge != null)
+            {
+                ultGauge.fillAmount = _count / _countMax;
+            }
         }
     }
 
