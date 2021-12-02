@@ -40,24 +40,29 @@ public class SoundManager : MonoBehaviour
             switch (element)
             {
                 case SymbolCard.Element.Ice:
-                    _audio[i].clip = _attackClips[1];
-                    _audio[i].Play();
+                    _audio[i].PlayOneShot(_attackClips[1]);
+                    // _audio[i].clip = _attackClips[1];
+                    // _audio[i].Play();
                     break;
                 case SymbolCard.Element.Lightning:
-                    _audio[i].clip = _attackClips[2];
-                    _audio[i].Play();
+                    _audio[i].PlayOneShot(_attackClips[2]);
+                    // _audio[i].clip = _attackClips[2];
+                    // _audio[i].Play();
                     break;
                 case SymbolCard.Element.Rock:
-                    _audio[i].clip = _attackClips[3];
-                    _audio[i].Play();
+                    _audio[i].PlayOneShot(_attackClips[3]);
+                    // _audio[i].clip = _attackClips[3];
+                    // _audio[i].Play();
                     break;
                 case SymbolCard.Element.Wind:
-                    _audio[i].clip = _attackClips[4];
-                    _audio[i].Play();
+                    _audio[i].PlayOneShot(_attackClips[4]);
+                    // _audio[i].clip = _attackClips[4];
+                    // _audio[i].Play();
                     break;
                 default:
-                    _audio[i].clip = _attackClips[0];
-                    _audio[i].Play();
+                    _audio[i].PlayOneShot(_attackClips[0]);
+                    // _audio[i].clip = _attackClips[0];
+                    // _audio[i].Play();
                     break;
             }
         }
@@ -78,7 +83,7 @@ public class SoundManager : MonoBehaviour
     {
         var i = (int) Audio.Attack;
         _isPlayed[i] = false;
-        _audio[i].Stop();
+        // _audio[i].Stop();
     }
 
     // Enemy
