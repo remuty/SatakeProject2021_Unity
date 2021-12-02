@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject resultCanvas;
     [SerializeField] private Image barrierImage;
     [SerializeField] private Image bloodImage;
+    [SerializeField] private UltCard ult;
     [SerializeField] private Slider hpGauge;
     [SerializeField] private int maxHp;
 
@@ -77,12 +78,19 @@ public class Player : MonoBehaviour
             SelectTarget();
         }
 
+        if (_stickR.j.GetButtonDown(Joycon.Button.DPAD_UP))
+        {
+            //Ult発動
+            ult.Activate(_target);
+        }
+
         if (Mathf.Abs(_stickR.j.GetStick()[0]) > 0.6f && !_isSelected) //joyconのスティックを左右に傾けたとき
         {
             if (_symbolCardDeck == null)
             {
                 _symbolCardDeck = GameObject.FindWithTag("SymbolCardDeck").GetComponent<SymbolCardDeck>();
             }
+
             _symbolCardDeck.SelectCard(_stickR.j.GetStick()[0]);
             _isSelected = true;
         }
@@ -96,7 +104,7 @@ public class Player : MonoBehaviour
             _time += Time.deltaTime;
             if (_time < 2)
             {
-                bloodImage.color = new Color(1, 1, 1, 1 - _time/2);
+                bloodImage.color = new Color(1, 1, 1, 1 - _time / 2);
             }
             else
             {
@@ -105,8 +113,8 @@ public class Player : MonoBehaviour
                 _isDamaged = false;
             }
         }
-        
-        if (_hp <= 0)   //体力0でリザルトに遷移
+
+        if (_hp <= 0) //体力0でリザルトに遷移
         {
             resultCanvas.SetActive(true);
             _switchScene.Scene = SwitchScene.Scenes.Result0;
@@ -115,7 +123,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AddDamage(int damage,string tag)
+    public void AddDamage(int damage, string tag)
     {
         //敵の攻撃オブジェクトをしゃがみで避けたときだけダメージを受けない
         if (tag != "EnemyAttackObject" || !_isCrouch)
@@ -146,7 +154,7 @@ public class Player : MonoBehaviour
         {
             _target.tag = "Target";
         }
-        
+
         // SwitchOutline(true);
     }
 

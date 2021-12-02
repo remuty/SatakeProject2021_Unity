@@ -26,6 +26,7 @@ public class RhythmManager : MonoBehaviour
     //団子飛んでくるときのノーツスプライト
     [SerializeField] private Sprite dangoSprite;
 
+    private UltCard _ult;
 
     // [SerializeField] private GameObject[] _notes;
     private List<GameObject> _notes = new List<GameObject>();
@@ -84,6 +85,7 @@ public class RhythmManager : MonoBehaviour
     void Start()
     {
         _sound = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
+        _ult = GameObject.FindWithTag("UltCard").GetComponent<UltCard>();
         _audio = this.GetComponent<AudioSource>();
         _audio.clip = bgm[0];
         _audio.Play();
@@ -175,6 +177,7 @@ public class RhythmManager : MonoBehaviour
             {
                 // Debug.Log("成功:" + "pos:" + _notes[0].transform.position.x);
                 _combo++;
+                _ult.AddCount(_combo);
                 ret = Beat.good;
             }
             else

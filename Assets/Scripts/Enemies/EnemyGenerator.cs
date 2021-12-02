@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private float timeMin;
+    [SerializeField] private float timeMax;
 
     private RhythmManager _rhythmManager;
     private float _generateTime;
@@ -41,7 +43,7 @@ public class EnemyGenerator : MonoBehaviour
                 }
                 _time = 0;
                 //waveが増えるごとに生成時間が早くなる
-                _generateTime = Random.Range(7f, 10f) - _rhythmManager.Wave;
+                _generateTime = Random.Range(timeMin, timeMax) - _rhythmManager.Wave;
             }
         }
     }

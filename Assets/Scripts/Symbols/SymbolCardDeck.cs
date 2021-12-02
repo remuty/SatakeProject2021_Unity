@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SymbolCardDeck : MonoBehaviour
 {
-    [SerializeField] private Vector2[] cardPositions;
+    [SerializeField] private Vector3[] cardPositions;
     [SerializeField] private Vector2 deckPosition;
 
     [SerializeField] private GameObject[] symbolCardPrefabs;

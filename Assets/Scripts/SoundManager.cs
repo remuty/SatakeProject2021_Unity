@@ -86,6 +86,11 @@ public class SoundManager : MonoBehaviour
         // _audio[i].Stop();
     }
 
+    public void Astro()
+    {
+        _audio[(int) Audio.Attack].PlayOneShot(_attackClips[5]);
+    }
+    
     // Enemy
     public void Spawn()
     {

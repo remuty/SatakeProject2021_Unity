@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1977842667
-  m_SortingLayer: 0
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d08dfe06d6f6d5a49892c9e187b6e325, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -97,6 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   symbolPrefab: {fileID: 5809170767661056646, guid: 896ff63ff773d084980989fe5ee38961, type: 3}
+  element: 0
+  attackEffect: {fileID: 0}
+  _atk: 20
+  _knockBackPower: 2
 --- !u!1 &3247573029611101040
 GameObject:
   m_ObjectHideFlags: 0
