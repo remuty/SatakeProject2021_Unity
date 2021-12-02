@@ -1026,7 +1026,7 @@ MonoBehaviour:
   bloodImage: {fileID: 1391425079054016222}
   ult: {fileID: 4598007650350974704}
   hpGauge: {fileID: 5420332798510565256}
-  maxHp: 100
+  maxHp: 200
 --- !u!1 &4714890825853438483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,6 +1816,8 @@ MonoBehaviour:
   - {fileID: 8518707897991883406, guid: b4ed8930a01967a4597a08d230deb5dd, type: 3}
   - {fileID: 8518707897991883406, guid: 59b7894a7f5976a4fa9fd63019a1ae51, type: 3}
   - {fileID: 8518707897991883406, guid: ccdedf2150a325948aaccdca129a17d9, type: 3}
+  timeMin: 7
+  timeMax: 10
 --- !u!1 &4714890826555797508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1864,7 +1866,7 @@ GameObject:
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4714890826558090314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2146,7 +2148,7 @@ MonoBehaviour:
   background: {fileID: 4714890826249721773}
   ultSprite: {fileID: 21300000, guid: 4e483f7d07db6cd4fb294f56c4c3f63e, type: 3}
   backgroundSprite: {fileID: 21300000, guid: a4f01c2fce1488e4ab27c796eabfa4f1, type: 3}
-  _countMax: 10
+  _countMax: 1000
 --- !u!1 &5268422444158998776
 GameObject:
   m_ObjectHideFlags: 0

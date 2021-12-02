@@ -16,6 +16,8 @@ public class SymbolCard : MonoBehaviour
     [SerializeField] private GameObject symbolPrefab;
     [SerializeField] private Element element;
     [SerializeField] private GameObject attackEffect;
+    [SerializeField] private int _atk;
+    [SerializeField] private float _knockBackPower;
     
     private GameObject _symbolObject;
     public GameObject SymbolObject => _symbolObject;
@@ -50,7 +52,7 @@ public class SymbolCard : MonoBehaviour
         _symbolObject = Instantiate(symbolPrefab,canvas.transform);
         _symbolObject.transform.SetSiblingIndex(1);
         _symbol = _symbolObject.GetComponent<Symbol>();
-        _symbol.SetElement(element,attackEffect);
+        _symbol.SetStatus(element,attackEffect,_atk,_knockBackPower);
         _isGenerated = false;
     }
 }

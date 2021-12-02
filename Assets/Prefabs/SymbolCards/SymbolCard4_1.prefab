@@ -99,6 +99,8 @@ MonoBehaviour:
   symbolPrefab: {fileID: 9061012333807850401, guid: 324ec8d9d8feadb4da5582fe39f40372, type: 3}
   element: 3
   attackEffect: {fileID: 7334634060791433924, guid: ae338c2819ebe264a89fb3f31a58e1af, type: 3}
+  _atk: 30
+  _knockBackPower: 3
 --- !u!1 &1846739304768699746
 GameObject:
   m_ObjectHideFlags: 0

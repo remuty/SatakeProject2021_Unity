@@ -1167,6 +1167,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 78a14faef637884418bdd049b15a0a28, type: 3}
   - {fileID: 8300000, guid: 7224d85c99db1724ebc6cb5379db63a9, type: 3}
   - {fileID: 8300000, guid: c91b5c5eda393c3478e1fcc8f0f6a18b, type: 3}
+  - {fileID: 8300000, guid: 3aeb0ef13d26e3544a57475770955aee, type: 3}
   _enemyClips:
   - {fileID: 8300000, guid: 62ee11d419c1d0c439dcdeef1ed77605, type: 3}
   - {fileID: 8300000, guid: c9873f2e5ad725347a9c1de914353cac, type: 3}

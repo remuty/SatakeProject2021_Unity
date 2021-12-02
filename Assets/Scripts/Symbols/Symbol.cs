@@ -7,11 +7,11 @@ public class Symbol : MonoBehaviour
 {
     [SerializeField] private Image[] sides;
     [SerializeField] private GameObject[] guides;
-    [SerializeField] private int _atk;
-    [SerializeField] private float _knockBackPower;
-
+    
     private SymbolCard.Element _element;
     private GameObject _attackEffect;
+    private int _atk;
+    private float _knockBackPower;
 
     private RhythmManager _rhythmManager;
     private SymbolCardDeck _symbolCardDeck;
@@ -149,9 +149,11 @@ public class Symbol : MonoBehaviour
         }
     }
 
-    public void SetElement(SymbolCard.Element element, GameObject attackEffect)
+    public void SetStatus(SymbolCard.Element element, GameObject effect,int atk,float knockBack)
     {
         _element = element;
-        _attackEffect = attackEffect;
+        _attackEffect = effect;
+        _atk = atk;
+        _knockBackPower = knockBack;
     }
 }
