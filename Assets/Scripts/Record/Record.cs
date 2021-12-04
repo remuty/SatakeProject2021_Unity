@@ -18,6 +18,8 @@ public class Record : MonoBehaviour
     private bool _isSaved;
     private DateTime _date = DateTime.Today.AddDays(0);
 
+    private int _waveThisTime;//動画用：デイリーチャレンジ
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,9 +89,9 @@ public class Record : MonoBehaviour
     void Sum()
     {
         //全てのプレイ記録の合計
-        _minutesSum = 0;
-        _hoursSum = 0;
-        _calorieSum = 0;
+        _minutesSum = 3;    //ToDo:動画用、初期値を0に戻す
+        _hoursSum = 3;
+        _calorieSum = 850;
         foreach (var data in _recordDataList)
         {
             _minutesSum += data.minutes;
@@ -152,6 +154,7 @@ public class Record : MonoBehaviour
             _calorieToday += _calorie;
             _scoreToday += _score;
             _waveToday += _wave;
+            _waveThisTime += _wave;//ToDo:動画用、削除する
             _recordData.SetRecord(_secondsToday, _minutesToday, _hoursToday,
                 _calorieToday, _scoreToday, _waveToday, _date);
             //セーブデータ上書きor追加
@@ -241,7 +244,7 @@ public class Record : MonoBehaviour
             GameObject.Find("Achieved1").GetComponent<Image>().enabled = false;
         }
 
-        if (_waveToday >= 8)
+        if (_waveThisTime >= 8)//ToDo:動画用、_waveTodayに戻す
         {
             GameObject.Find("Challeng2").GetComponent<Image>().enabled = false;
             GameObject.Find("Achieved2").GetComponent<Image>().enabled = true;

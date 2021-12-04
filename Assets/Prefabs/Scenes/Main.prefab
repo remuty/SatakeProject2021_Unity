@@ -1026,7 +1026,7 @@ MonoBehaviour:
   bloodImage: {fileID: 1391425079054016222}
   ult: {fileID: 4598007650350974704}
   hpGauge: {fileID: 5420332798510565256}
-  maxHp: 100
+  maxHp: 200
 --- !u!1 &4714890825853438483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,8 +1183,8 @@ MonoBehaviour:
   bgm:
   - {fileID: 8300000, guid: 74a6d61c5488e2d4884fe459b862ab65, type: 3}
   - {fileID: 8300000, guid: fa096c0ba98afc140b8bde644ddac2ac, type: 3}
-  - {fileID: 8300000, guid: 171feb330392d5f498fb86e6c9a36626, type: 3}
   - {fileID: 8300000, guid: 2cd4b00416aaef54bb40f477e22c0d08, type: 3}
+  - {fileID: 8300000, guid: 171feb330392d5f498fb86e6c9a36626, type: 3}
   - {fileID: 8300000, guid: 1f8f01438d9360a4d85dac3c65f19a17, type: 3}
   - {fileID: 8300000, guid: 259bfbffe677a9249b4901da55ba7093, type: 3}
   waveSwitchImage: {fileID: 5627141606688029884}

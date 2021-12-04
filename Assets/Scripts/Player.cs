@@ -84,6 +84,11 @@ public class Player : MonoBehaviour
             ult.Activate(_target);
         }
 
+        if (_stickR.j.GetButtonDown(Joycon.Button.DPAD_LEFT))//デバッグ用自滅ボタン
+        {
+            _hp -= 10;
+        }
+
         if (Mathf.Abs(_stickR.j.GetStick()[0]) > 0.6f && !_isSelected) //joyconのスティックを左右に傾けたとき
         {
             if (_symbolCardDeck == null)
@@ -116,6 +121,7 @@ public class Player : MonoBehaviour
 
         if (_hp <= 0) //体力0でリザルトに遷移
         {
+            hpGauge.value = 0;
             resultCanvas.SetActive(true);
             _switchScene.Scene = SwitchScene.Scenes.Result0;
             Time.timeScale = 0;
@@ -130,7 +136,7 @@ public class Player : MonoBehaviour
         {
             _sound.Damage();
             _hp -= damage;
-            hpGauge.value = (float) _hp / (float) maxHp;
+            hpGauge.value = (float)_hp / (float)maxHp;
             _isDamaged = true;
             bloodImage.color = new Color(1, 1, 1, 1);
         }
